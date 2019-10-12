@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Logger, Param, ParseIntPipe, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { ProjectService } from './project.service';
@@ -16,12 +16,18 @@ export class ProjectController {
   constructor(private projectsService: ProjectService) {
   }
 
+  private logData(data: any) {
+    data.user && this.logger.log('USER ' + JSON.stringify(data.user));
+    data.data && this.logger.log('DATA ' + JSON.stringify(data.data));
+    data.id && this.logger.log('PROJECT ' + JSON.stringify(data.id));
+  }
+
   @Get()
   getProjects(
     @Query(ValidationPipe) filterDTO: GetProjectsFilterDTO,
     @GetUser() user: UserEntity,
   ) {
-    this.logger.verbose(`User "${user.username}" retrieving all projects. Filter: ${JSON.stringify(filterDTO)}`);
+    this.logger.verbose(`User "${user.username}" retrieving all projects. Filter: ${JSON.stringify(filterDTO)}.`);
     return this.projectsService.getProjects(filterDTO, user);
   }
 
@@ -30,6 +36,7 @@ export class ProjectController {
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: UserEntity,
   ): Promise<ProjectEntity> {
+    this.logger.verbose(`User ${user.username} is getting project by id: ${id}.`);
     return this.projectsService.getProjectById(id, user);
   }
 
@@ -39,8 +46,18 @@ export class ProjectController {
     @Body() createProjectDTO: CreateProjectDTO,
     @GetUser() user: UserEntity,
   ): Promise<ProjectEntity> {
-    this.logger.verbose(`User "${user.username}" creating a new project. Data: ${JSON.stringify(createProjectDTO)}`);
+    this.logger.verbose(`User "${user.username}" creating a new project. Data: ${JSON.stringify(createProjectDTO)}.`);
     return this.projectsService.createProject(createProjectDTO, user);
+  }
+
+  @Put(':id')
+  @UsePipes(ValidationPipe)
+  updateProject(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createProjectDTO: CreateProjectDTO,
+    @GetUser() user: UserEntity,
+  ): Promise<ProjectEntity> {
+    return this.projectsService.updateProject(id, createProjectDTO, user);
   }
 
   @Delete('/:id')
@@ -48,6 +65,7 @@ export class ProjectController {
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: UserEntity,
   ): Promise<void> {
+    this.logger.verbose(`User ${user.username} is deleting a project by id: ${id}.`);
     return this.projectsService.deleteProject(id, user);
   }
 }

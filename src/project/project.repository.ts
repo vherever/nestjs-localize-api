@@ -19,10 +19,6 @@ export class ProjectRepository extends Repository<ProjectEntity> {
 
     query.where('project.userId = :userId', { userId: user.id });
 
-    if (status) {
-      query.andWhere('project.status = :status', { status });
-    }
-
     if (search) {
       query.andWhere('(project.title LIKE :search OR project.description LIKE :search)', { search: `%${search}%` });
     }
@@ -56,5 +52,14 @@ export class ProjectRepository extends Repository<ProjectEntity> {
 
     delete project.user;
     return project;
+  }
+
+  async updateProject(
+    id: number,
+    createProjectDTO: CreateProjectDTO,
+    user: UserEntity,
+  ): Promise<any> {
+    // let project = await this.projectRepository.findOne({ where: { id }, relations: ['author'] });
+    return 'test';
   }
 }

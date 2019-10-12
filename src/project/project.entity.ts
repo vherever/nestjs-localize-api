@@ -2,7 +2,7 @@ import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 't
 
 import { UserEntity } from '../auth/user.entity';
 
-@Entity()
+@Entity('project')
 export class ProjectEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;

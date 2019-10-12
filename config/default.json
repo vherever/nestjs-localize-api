@@ -8,6 +8,6 @@
     "database": "LOCALIZE_API"
   },
   "jwt": {
-    "expiresIn": 3600
+    "expiresIn": 604800
   }
 }

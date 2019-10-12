@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProjectRepository } from './project.repository';
 import { ProjectEntity } from './project.entity';
@@ -24,13 +24,13 @@ export class ProjectService {
     id: number,
     user: UserEntity,
   ): Promise<ProjectEntity> {
-    const found = await this.projectRepository.findOne({ where: { id, userId: user.id } });
+    const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
 
-    if (!found) {
+    if (!project) {
       throw new NotFoundException(`Project with ID "${id}" not found`);
     }
 
-    return found;
+    return project;
   }
 
   async createProject(
@@ -38,6 +38,20 @@ export class ProjectService {
     user: UserEntity,
   ): Promise<ProjectEntity> {
     return this.projectRepository.createProject(createProjectDTO, user);
+  }
+
+  async updateProject(
+    @Param('id') id: number,
+    createProjectDTO,
+    user: UserEntity,
+  ): Promise<ProjectEntity> {
+    let project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
+    if (!project) {
+      throw new NotFoundException(`Project with ID "${id}" not found`);
+    }
+    await this.projectRepository.update({ id }, createProjectDTO);
+    project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
+    return project;
   }
 
   async deleteProject(
