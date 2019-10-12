@@ -1,0 +1,11 @@
+{
+  "server": {
+    "origin": "http://nestjs-taskmanager-frontend.s3-website.eu-central-1.amazonaws.com"
+  },
+  "db": {
+    "synchronize": true
+  },
+  "jwt": {
+    "expiresIn": 86400
+  }
+}
