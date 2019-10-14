@@ -1,8 +1,8 @@
+import { InternalServerErrorException, Logger } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
 import { ProjectEntity } from './project.entity';
 import { UserEntity } from '../auth/user.entity';
-import { InternalServerErrorException, Logger } from '@nestjs/common';
 import { CreateProjectDTO } from './dto/create-project.dto';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
 
@@ -38,9 +38,10 @@ export class ProjectRepository extends Repository<ProjectEntity> {
   ): Promise<ProjectEntity> {
     const project = new ProjectEntity();
 
-    const { title, description } = createProjectDTO;
+    const { title, description, defaultLocale } = createProjectDTO;
     project.title = title;
     project.description = description;
+    project.defaultLocale = defaultLocale;
     project.user = user;
 
     try {
@@ -52,14 +53,5 @@ export class ProjectRepository extends Repository<ProjectEntity> {
 
     delete project.user;
     return project;
-  }
-
-  async updateProject(
-    id: number,
-    createProjectDTO: CreateProjectDTO,
-    user: UserEntity,
-  ): Promise<any> {
-    // let project = await this.projectRepository.findOne({ where: { id }, relations: ['author'] });
-    return 'test';
   }
 }
