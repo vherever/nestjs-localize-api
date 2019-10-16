@@ -1,6 +1,7 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { UserEntity } from '../auth/user.entity';
+import { TranslationEntity } from '../translation/translation.entity';
 
 @Entity('project')
 export class ProjectEntity extends BaseEntity {
@@ -18,6 +19,9 @@ export class ProjectEntity extends BaseEntity {
 
   @ManyToOne(type => UserEntity, user => user.projects, { eager: false })
   user: UserEntity;
+
+  @OneToMany(type => TranslationEntity, translation => translation.project, { cascade: true })
+  translations: TranslationEntity[];
 
   @Column()
   userId: number;

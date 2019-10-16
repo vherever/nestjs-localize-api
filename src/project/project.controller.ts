@@ -16,12 +16,6 @@ export class ProjectController {
   constructor(private projectsService: ProjectService) {
   }
 
-  private logData(data: any) {
-    data.user && this.logger.log('USER ' + JSON.stringify(data.user));
-    data.data && this.logger.log('DATA ' + JSON.stringify(data.data));
-    data.id && this.logger.log('PROJECT ' + JSON.stringify(data.id));
-  }
-
   @Get()
   getProjects(
     @Query(ValidationPipe) filterDTO: GetProjectsFilterDTO,

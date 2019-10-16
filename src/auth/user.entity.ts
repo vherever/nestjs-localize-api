@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { ProjectEntity } from '../project/project.entity';
+import { TranslationEntity } from '../translation/translation.entity';
 
 @Entity('user')
 @Unique(['username'])
