@@ -4,6 +4,7 @@ import { ProjectEntity } from './project.entity';
 import { UserEntity } from '../auth/user.entity';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
 import { Repository } from 'typeorm';
+import { CreateProjectDTO } from './dto/create-project.dto';
 
 @Injectable()
 export class ProjectService {
@@ -63,7 +64,7 @@ export class ProjectService {
     try {
       await project.save();
     } catch (error) {
-      this.logger.error(`Failed to create project for user "${user.username}". Data: ${JSON.stringify(createProjectDTO)}.`, error.stack);
+      this.logger.error(`Failed to create project for user: "${user.username}". Data: ${JSON.stringify(createProjectDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
 
@@ -73,15 +74,20 @@ export class ProjectService {
 
   async updateProject(
     @Param('id') id: number,
-    createProjectDTO,
+    updateProjectDTO: CreateProjectDTO,
     user: UserEntity,
   ): Promise<ProjectEntity> {
     let project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
     if (!project) {
-      this.logger.error(`Project with id "${id}" not found.`);
-      throw new NotFoundException(`Project with id "${id}" not found.`);
+      this.logger.error(`Project with id: "${id}" not found.`);
+      throw new NotFoundException(`Project with id: "${id}" not found.`);
     }
-    await this.projectRepository.update({ id }, createProjectDTO);
+    try {
+      await this.projectRepository.update({ id }, updateProjectDTO);
+    } catch (error) {
+      this.logger.error(`Failed to update project for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(updateProjectDTO)}.`, error.stack);
+      throw new InternalServerErrorException();
+    }
     project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
     return project;
   }
@@ -93,8 +99,8 @@ export class ProjectService {
     const result = await this.projectRepository.delete({ id, userId: user.id });
 
     if (result.affected === 0) {
-      this.logger.error(`Project with id "${id}" not found`);
-      throw new NotFoundException(`Project with id "${id}" not found.`);
+      this.logger.error(`Project with id: "${id}" not found`);
+      throw new NotFoundException(`Project with id: "${id}" not found.`);
     }
   }
 }

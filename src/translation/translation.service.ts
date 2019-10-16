@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { UserEntity } from '../auth/user.entity';
@@ -34,12 +34,12 @@ export class TranslationService {
   }
 
   async getTranslationsByProject(
-    id: string,
+    projectId: string,
   ): Promise<GetTranslationResponseDTO[]> {
-    const project = await this.projectRepository.findOne({ where: { id }, relations: ['translations', 'translations.project'] });
+    const project = await this.projectRepository.findOne({ where: { id: projectId }, relations: ['translations', 'translations.project'] });
     if (!project) {
-      this.logger.error(`Project with id ${id} not found.`);
-      throw new NotFoundException(`Project with id "${id}" not found.`);
+      this.logger.error(`Project with id "${projectId}" not found.`);
+      throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
     return this.getTranslationsRO(project.translations);
   }
@@ -53,7 +53,8 @@ export class TranslationService {
     const project = await this.projectRepository.findOne({ where: { id: projectId } });
 
     if (!project) {
-      throw new NotFoundException(`Project with ID "${projectId}" not found`);
+      this.logger.error(`Project with id "${projectId}" not found.`);
+      throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
 
     const translation = await this.translationRepository.create({
@@ -61,7 +62,13 @@ export class TranslationService {
       ...createTranslationDTO,
     });
 
-    await this.translationRepository.save(translation);
+    try {
+      await this.translationRepository.save(translation);
+    } catch (error) {
+      this.logger.error(`Failed to create translation for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(createTranslationDTO)}.`, error.stack);
+      throw new InternalServerErrorException();
+    }
+
     return translation;
   }
 }

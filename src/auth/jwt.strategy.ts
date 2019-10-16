@@ -4,14 +4,14 @@ import { UnauthorizedException } from '@nestjs/common';
 
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { JwtPayload } from './jwt-payload.interface';
-import { UserRepository } from './user.repository';
 import { UserEntity } from './user.entity';
 import * as config from 'config';
+import { Repository } from 'typeorm';
 
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    @InjectRepository(UserRepository)
-    private userRepository: UserRepository,
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

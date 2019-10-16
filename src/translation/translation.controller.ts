@@ -20,7 +20,7 @@ export class TranslationController {
     @GetUser() user: UserEntity,
     @Param('id') projectId: string,
   ) {
-    this.logger.verbose(`User "${user.username}" retrieving all translations.`);
+    this.logger.verbose(`User "${user.username}" is retrieving all translations.`);
     return this.translationItemService.getTranslationsByProject(projectId);
   }
 
@@ -31,7 +31,7 @@ export class TranslationController {
     @Param('id') projectId: string,
     @GetUser() user: UserEntity,
   ): Promise<TranslationEntity> {
-    this.logger.verbose(`User "${user.username}" creating a new translation.`);
+    this.logger.verbose(`User "${user.username}" is creating a new translation.`);
     return this.translationItemService.createTranslation(createTranslationDTO, user, projectId);
   }
 }

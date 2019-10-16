@@ -5,9 +5,9 @@ import { PassportModule } from '@nestjs/passport';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { UserRepository } from './user.repository';
 import { JwtStrategy } from './jwt.strategy';
 import * as config from 'config';
+import { UserEntity } from './user.entity';
 
 const jwtConfig = config.get('jwt');
 
@@ -20,7 +20,7 @@ const jwtConfig = config.get('jwt');
         expiresIn: jwtConfig.expiresIn,
       },
     }),
-    TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([UserEntity]),
   ],
   controllers: [AuthController],
   providers: [
