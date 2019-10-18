@@ -22,8 +22,7 @@ export class TranslationEntity extends BaseEntity {
   @Column({ nullable: true })
   notes: string;
 
-  @ManyToOne(type => UserEntity)
-  @JoinTable()
+  @ManyToOne(type => UserEntity, author => author.projects)
   author: UserEntity;
 
   @ManyToOne(type => ProjectEntity, project => project.translations, { eager: false })

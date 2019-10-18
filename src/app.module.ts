@@ -8,6 +8,7 @@ import { ProjectModule } from './project/project.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './shared/logging.interceptor';
 import { TranslationModule } from './translation/translation.module';
+import { HttpErrorFilter } from './shared/http-error.filter';
 
 @Module({
   imports: [
@@ -18,10 +19,10 @@ import { TranslationModule } from './translation/translation.module';
   ],
   controllers: [AppController],
   providers: [
-    // {
-    //   provide: APP_FILTER,
-    //   useClass: HttpErrorFilter,
-    // },
+    {
+      provide: APP_FILTER,
+      useClass: HttpErrorFilter,
+    },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,

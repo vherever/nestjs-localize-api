@@ -7,6 +7,7 @@ import { CreateTranslationDTO } from './dto/create-translation.dto';
 import { GetTranslationResponseDTO } from './dto/get-translation-response.dto';
 import { Repository } from 'typeorm';
 import { ProjectEntity } from '../project/project.entity';
+import { GetUser } from '../auth/get-user.decorator';
 
 @Injectable()
 export class TranslationService {
@@ -24,6 +25,7 @@ export class TranslationService {
   private getTranslationsRO(translations: TranslationEntity[]): GetTranslationResponseDTO[] {
     return translations.map((translation: TranslationEntity) => {
       return {
+        id: translation.id,
         sourceText: translation.sourceText,
         assetId: translation.assetId,
         context: translation.context,
@@ -35,8 +37,9 @@ export class TranslationService {
 
   async getTranslationsByProject(
     projectId: string,
+    @GetUser() user: UserEntity,
   ): Promise<GetTranslationResponseDTO[]> {
-    const project = await this.projectRepository.findOne({ where: { id: projectId }, relations: ['translations', 'translations.project'] });
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.project'] });
     if (!project) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
@@ -47,28 +50,53 @@ export class TranslationService {
   async createTranslation(
     createTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
-    projectId: string,
+    projectId: number,
   ): Promise<TranslationEntity> {
-
-    const project = await this.projectRepository.findOne({ where: { id: projectId } });
-
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
     if (!project) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
-
     const translation = await this.translationRepository.create({
       project,
       ...createTranslationDTO,
+      author: user,
     });
-
     try {
       await this.translationRepository.save(translation);
     } catch (error) {
       this.logger.error(`Failed to create translation for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(createTranslationDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
+    return translation;
+  }
 
+  async updateTranslation(
+    updateTranslationDTO: CreateTranslationDTO,
+    user: UserEntity,
+    projectId: number,
+    translationId: number,
+  ): Promise<TranslationEntity> {
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
+
+    let translation = await this.translationRepository.findOne({ where: { id: translationId, userId: user.id } });
+
+    if (!project) {
+      this.logger.error(`Project with id "${projectId}" not found.`);
+      throw new NotFoundException(`Project with id "${projectId}" not found.`);
+    }
+
+    if (!translation) {
+      this.logger.error(`Translation with id "${translationId}" not found.`);
+      throw new NotFoundException(`Translation with id "${translationId}" not found.`);
+    }
+    try {
+      await this.translationRepository.update({id: translationId}, updateTranslationDTO);
+    } catch (error) {
+      this.logger.error(`Failed to update translation for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(updateTranslationDTO)}.`, error.stack);
+      throw new InternalServerErrorException();
+    }
+    translation = await this.translationRepository.findOne({ where: { id: translationId } });
     return translation;
   }
 }
