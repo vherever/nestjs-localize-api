@@ -55,10 +55,11 @@ export class ProjectService {
     user: UserEntity,
   ): Promise<ProjectEntity> {
     const project = new ProjectEntity();
-    const { title, description, defaultLocale } = createProjectDTO;
+    const { title, description, defaultLocale, translationsLocales } = createProjectDTO;
     project.title = title;
     project.description = description;
     project.defaultLocale = defaultLocale;
+    project.translationsLocales = translationsLocales;
     project.user = user;
 
     try {

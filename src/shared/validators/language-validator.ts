@@ -12,7 +12,7 @@ export class LanguageValidator implements ValidatorConstraintInterface {
     })();
   }
 
-  async loadLanguages(): Promise<LanguageModel[]> {
+  private async loadLanguages(): Promise<LanguageModel[]> {
     return await this.loadJson('src/data/languages.json');
   }
 
@@ -25,13 +25,23 @@ export class LanguageValidator implements ValidatorConstraintInterface {
     return Promise.resolve(this.languagesCached);
   }
 
-  async getLanguages(): Promise<LanguageModel[]> {
+  private async getLanguages(): Promise<LanguageModel[]> {
     return await this._getLanguages();
   }
 
-  validate(locale: string) {
+  validate(locales: string) {
+    const splitted = locales.split(',');
     return this.getLanguages().then(languages => {
-      return !!languages.find(language => locale === language.key);
+      if (splitted.length > 1) {
+        const temp = [];
+        splitted.forEach(l => {
+          const found = languages.find(language => l === language.key);
+          temp.push(found);
+        });
+        return !!!temp.filter(f => f === undefined).length;
+      } else {
+        return !!languages.find(language => locales === language.key);
+      }
     });
   }
 }

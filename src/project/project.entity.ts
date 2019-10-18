@@ -17,6 +17,9 @@ export class ProjectEntity extends BaseEntity {
   @Column()
   defaultLocale: string;
 
+  @Column({ nullable: true })
+  translationsLocales: string;
+
   @ManyToOne(type => UserEntity, user => user.projects, { eager: false })
   user: UserEntity;
 

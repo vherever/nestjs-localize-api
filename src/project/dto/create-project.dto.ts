@@ -1,4 +1,4 @@
-import { IsNotEmpty, Validate } from 'class-validator';
+import { IsNotEmpty, IsOptional, Validate } from 'class-validator';
 import { LanguageValidator } from '../../shared/validators/language-validator';
 
 export class CreateProjectDTO {
@@ -11,4 +11,8 @@ export class CreateProjectDTO {
   @IsNotEmpty()
   @Validate(LanguageValidator, {message: 'Invalid defaultLocale'})
   defaultLocale: string;
+
+  @IsOptional()
+  @Validate(LanguageValidator, {message: 'Invalid translationsLocales'})
+  translationsLocales: string;
 }
