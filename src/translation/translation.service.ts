@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Logger, NotFoundException, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { UserEntity } from '../auth/user.entity';
@@ -22,7 +22,7 @@ export class TranslationService {
   ) {
   }
 
-  private getTranslationsRO(translations: TranslationEntity[]): GetTranslationResponseDTO[] {
+  private async getTranslationsRO(translations: TranslationEntity[]): Promise<GetTranslationResponseDTO[]> {
     return translations.map((translation: TranslationEntity) => {
       return {
         id: translation.id,
@@ -31,8 +31,23 @@ export class TranslationService {
         context: translation.context,
         labels: translation.labels,
         notes: translation.notes,
+        projectId: translation.project.id,
+        authorId: translation.project.userId,
       };
     });
+  }
+
+  private getTranslationRO(translation: TranslationEntity): GetTranslationResponseDTO {
+    return {
+      id: translation.id,
+      sourceText: translation.sourceText,
+      assetId: translation.assetId,
+      context: translation.context,
+      labels: translation.labels,
+      notes: translation.notes,
+      projectId: translation.project.id,
+      authorId: translation.user.id,
+    };
   }
 
   async getTranslationsByProject(
@@ -44,23 +59,24 @@ export class TranslationService {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
-    return this.getTranslationsRO(project.translations);
+    return await this.getTranslationsRO(project.translations);
   }
 
   async createTranslation(
     createTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
     projectId: number,
-  ): Promise<TranslationEntity> {
+  ): Promise<GetTranslationResponseDTO> {
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
     if (!project) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
+
     const translation = await this.translationRepository.create({
       project,
       ...createTranslationDTO,
-      author: user,
+      user,
     });
     try {
       await this.translationRepository.save(translation);
@@ -68,7 +84,7 @@ export class TranslationService {
       this.logger.error(`Failed to create translation for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(createTranslationDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
-    return translation;
+    return this.getTranslationRO(translation);
   }
 
   async updateTranslation(
@@ -98,5 +114,26 @@ export class TranslationService {
     }
     translation = await this.translationRepository.findOne({ where: { id: translationId } });
     return translation;
+  }
+
+  async deleteTranslation(
+    @Param('id') projectId: number,
+    @Param('translationId') translationId: number,
+    @GetUser() user: UserEntity,
+  ): Promise<void> {
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
+    const translation = await this.translationRepository.findOne({ where: { id: translationId, userId: user.id } });
+
+    if (!project) {
+      this.logger.error(`Project with id "${projectId}" not found.`);
+      throw new NotFoundException(`Project with id "${projectId}" not found.`);
+    }
+
+    if (!translation) {
+      this.logger.error(`Translation with id "${translationId}" not found.`);
+      throw new NotFoundException(`Translation with id "${translationId}" not found.`);
+    }
+
+    await this.translationRepository.delete({ id: translationId, user });
   }
 }

@@ -19,10 +19,10 @@ import { HttpErrorFilter } from './shared/http-error.filter';
   ],
   controllers: [AppController],
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: HttpErrorFilter,
-    },
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: HttpErrorFilter,
+    // },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,

@@ -22,9 +22,15 @@ export class TranslationEntity extends BaseEntity {
   @Column({ nullable: true })
   notes: string;
 
-  @ManyToOne(type => UserEntity, author => author.projects)
-  author: UserEntity;
+  @ManyToOne(type => UserEntity, user => user.projects)
+  user: UserEntity;
 
   @ManyToOne(type => ProjectEntity, project => project.translations, { eager: false })
   project: ProjectEntity;
+
+  // @ManyToOne(type => ProjectEntity, project => project.id)
+  // projectId: number;
+  //
+  // @ManyToOne(type => UserEntity, author => author.id)
+  // authorId: number;
 }

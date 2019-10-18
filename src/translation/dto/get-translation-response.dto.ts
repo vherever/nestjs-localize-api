@@ -10,4 +10,8 @@ export class GetTranslationResponseDTO {
   labels: string;
 
   notes: string;
+
+  projectId: number;
+
+  authorId: number;
 }
