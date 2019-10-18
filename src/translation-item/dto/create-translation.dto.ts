@@ -16,7 +16,6 @@ export class CreateTranslationDTO {
   @IsOptional()
   notes: string;
 
-  // projectId: number;
-  //
-  // authorId: number;
+  @IsOptional()
+  status: string;
 }

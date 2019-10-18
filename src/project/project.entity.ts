@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { UserEntity } from '../auth/user.entity';
-import { TranslationEntity } from '../translation/translation.entity';
+import { TranslationEntity } from '../translation-item/translation.entity';
 
 @Entity('project')
 export class ProjectEntity extends BaseEntity {

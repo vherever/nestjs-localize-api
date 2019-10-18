@@ -6,7 +6,7 @@ import { GetUser } from '../auth/get-user.decorator';
 import { UserEntity } from '../auth/user.entity';
 import { CreateTranslationDTO } from './dto/create-translation.dto';
 import { TranslationEntity } from './translation.entity';
-import { GetTranslationResponseDTO } from './dto/get-translation-response.dto';
+import { GetTranslationRO } from './dto/get-translation-response';
 
 @Controller('projects/:id')
 @UseGuards(AuthGuard())
@@ -31,7 +31,7 @@ export class TranslationController {
     @Body() createTranslationDTO: CreateTranslationDTO,
     @Param('id') projectId: number,
     @GetUser() user: UserEntity,
-  ): Promise<GetTranslationResponseDTO> {
+  ): Promise<GetTranslationRO> {
     this.logger.verbose(`User "${user.username}" is creating a new translation. Data: ${JSON.stringify(createTranslationDTO)}.`);
     return this.translationItemService.createTranslation(createTranslationDTO, user, projectId);
   }

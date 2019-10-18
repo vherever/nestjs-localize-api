@@ -1,4 +1,4 @@
-export class GetTranslationResponseDTO {
+export class GetTranslationRO {
   id: number;
 
   sourceText: string;
@@ -10,6 +10,8 @@ export class GetTranslationResponseDTO {
   labels: string;
 
   notes: string;
+
+  status: string;
 
   projectId: number;
 
