@@ -55,7 +55,9 @@ export class ProjectService {
     user: UserEntity,
   ): Promise<ProjectEntity> {
     const project = new ProjectEntity();
-    const { title, description, defaultLocale, translationsLocales } = createProjectDTO;
+    const { created, updated, title, description, defaultLocale, translationsLocales } = createProjectDTO;
+    project.created = created;
+    project.updated = updated;
     project.title = title;
     project.description = description;
     project.defaultLocale = defaultLocale;

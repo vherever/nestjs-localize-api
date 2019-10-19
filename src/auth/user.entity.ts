@@ -1,13 +1,18 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { ProjectEntity } from '../project/project.entity';
-import { TranslationEntity } from '../translation-item/translation.entity';
 
 @Entity('user')
 @Unique(['username'])
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @CreateDateColumn()
+  created: Date;
+
+  @UpdateDateColumn()
+  updated: Date;
 
   @Column()
   username: string;

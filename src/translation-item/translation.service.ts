@@ -26,6 +26,8 @@ export class TranslationService {
     return translations.map((translation: TranslationEntity) => {
       return {
         id: translation.id,
+        created: translation.created,
+        updated: translation.updated,
         sourceText: translation.sourceText,
         assetId: translation.assetId,
         context: translation.context,
@@ -41,6 +43,8 @@ export class TranslationService {
   private getTranslationRO(translation: TranslationEntity): GetTranslationRO {
     return {
       id: translation.id,
+      created: translation.created,
+      updated: translation.updated,
       sourceText: translation.sourceText,
       assetId: translation.assetId,
       context: translation.context,

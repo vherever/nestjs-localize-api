@@ -1,6 +1,10 @@
 export class GetTranslationRO {
   id: number;
 
+  created: Date;
+
+  updated: Date;
+
   sourceText: string;
 
   assetId: string;
