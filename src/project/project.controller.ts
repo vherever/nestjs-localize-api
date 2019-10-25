@@ -63,4 +63,14 @@ export class ProjectController {
     this.logger.verbose(`User "${user.username}" is deleting a project by id: ${id}.`);
     return this.projectsService.deleteProject(id, user);
   }
+
+  // Share project
+  @Post('/invite')
+  inviteUserToProject(
+    @Body('projectId', ParseIntPipe) projectId: number,
+    @Body('targetId', ParseIntPipe) userIdToInvite: number,
+    @GetUser() user: UserEntity,
+  ): Promise<any> {
+    return this.projectsService.inviteUserToProject(projectId, userIdToInvite, user);
+  }
 }

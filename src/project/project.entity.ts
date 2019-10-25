@@ -1,7 +1,20 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable, ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { UserEntity } from '../auth/user.entity';
 import { TranslationEntity } from '../translation-item/translation.entity';
+import { RoleEnum } from '../shared/enums/role.enum';
+import { SharedProjectEntity } from './shared-project.entity';
 
 @Entity('project')
 export class ProjectEntity extends BaseEntity {
@@ -34,4 +47,16 @@ export class ProjectEntity extends BaseEntity {
 
   @Column()
   userId: number;
+
+  @Column({ nullable: true })
+  role: RoleEnum;
+
+  @Column({ nullable: true })
+  ownerId: number;
+  @ManyToOne(() => UserEntity, user => user.projects)
+  @JoinColumn({ name: 'ownerId' })
+  owner: UserEntity;
+
+  @OneToMany(() => SharedProjectEntity, sharedProject => sharedProject.project)
+  shares: SharedProjectEntity[];
 }

@@ -19,5 +19,5 @@ export class GetTranslationRO {
 
   projectId: number;
 
-  authorId: number;
+  authorId?: number;
 }

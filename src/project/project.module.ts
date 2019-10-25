@@ -5,10 +5,11 @@ import { ProjectController } from './project.controller';
 import { ProjectService } from './project.service';
 import { AuthModule } from '../auth/auth.module';
 import { ProjectEntity } from './project.entity';
+import { UserEntity } from '../auth/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProjectEntity]),
+    TypeOrmModule.forFeature([ProjectEntity, UserEntity]),
     AuthModule,
   ],
   controllers: [ProjectController],
