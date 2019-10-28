@@ -1,9 +1,8 @@
 import { IsIn, IsNotEmpty, IsOptional, Validate } from 'class-validator';
 import { LanguageValidator } from '../../shared/validators/language-validator';
 import { RoleEnum } from '../../shared/enums/role.enum';
-import { BaseEntity } from 'typeorm';
 
-export class CreateProjectDTO extends BaseEntity {
+export class CreateProjectDTO {
   @IsNotEmpty()
   title: string;
 

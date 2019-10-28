@@ -10,6 +10,7 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
 import { TranslationModule } from './translation-item/translation.module';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { UserModule } from './user/user.module';
+import { SharedProjectModule } from './shared-project/shared-project.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
     ProjectModule,
     TranslationModule,
     UserModule,
+    SharedProjectModule,
   ],
   controllers: [AppController],
   providers: [

@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { ProjectEntity } from '../project/project.entity';
-import { SharedProjectEntity } from '../project/shared-project.entity';
+import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 import * as ts from 'typescript/lib/tsserverlibrary';
 import Project = ts.server.Project;
 

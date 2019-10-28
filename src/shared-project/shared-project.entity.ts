@@ -1,6 +1,6 @@
 import { BaseEntity, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { UserEntity } from '../auth/user.entity';
-import { ProjectEntity } from './project.entity';
+import { ProjectEntity } from '../project/project.entity';
 
 @Entity('shared-project')
 export class SharedProjectEntity extends BaseEntity {
