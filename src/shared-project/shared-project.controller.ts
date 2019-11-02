@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Logger, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { GetUser } from '../auth/get-user.decorator';
@@ -22,4 +22,12 @@ export class SharedProjectController {
   ): Promise<any> {
     return this.sharedProjectService.inviteUserToProject(shareProjectDTO, user);
   }
+
+  // @Get(':/id')
+  // getSharedProjects(
+  //   @GetUser() user: UserEntity,
+  // ): Promise<any> {
+  //   this.logger.verbose(`User "${user.username}" is retrieving shared projects.`);
+  //   return this.sharedProjectService.getSharedProjects();
+  // }
 }

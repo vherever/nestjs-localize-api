@@ -1,10 +1,14 @@
 import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import { ProjectEntity } from './project.entity';
 import { UserEntity } from '../auth/user.entity';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
 import { Repository } from 'typeorm';
 import { CreateProjectDTO } from './dto/create-project.dto';
+import { SharedProjectEntity } from '../shared-project/shared-project.entity';
+import { RoleEnum } from '../shared/enums/role.enum';
+import { GetSharedProjectResponse } from './dto/get-shared-project-response';
 
 @Injectable()
 export class ProjectService {
@@ -22,18 +26,25 @@ export class ProjectService {
   async getProjects(
     filterDTO: GetProjectsFilterDTO,
     user: UserEntity,
-  ): Promise<ProjectEntity[]> {
+  ): Promise<{owned: ProjectEntity[], shared: GetSharedProjectResponse[]}> {
     const { search } = filterDTO;
     const query = this.projectRepository.createQueryBuilder('project');
 
     query.where('project.userId = :userId', { userId: user.id });
+
+    const shared = await SharedProjectEntity.find({ where: { targetId: user.id }, relations: ['project'] });
 
     if (search) {
       query.andWhere('(project.title LIKE :search OR project.description LIKE :search)', { search: `%${search}%` });
     }
 
     try {
-      return await query.getMany();
+      return Promise.all([await query.getMany(), await shared]).then(r => {
+        return {
+          owned: r[0], // created projects by this user
+          shared: r[1], // shared projects with this user
+        };
+      });
     } catch (error) {
       this.logger.error(`Failed to get projects for user "${user.username}", DTO: ${JSON.stringify(filterDTO)}.`, error.stack);
       throw new InternalServerErrorException();
@@ -54,19 +65,18 @@ export class ProjectService {
   }
 
   async createProject(
-    createProjectDTO,
+    createProjectDTO: CreateProjectDTO,
     user: UserEntity,
   ): Promise<ProjectEntity> {
     const project = new ProjectEntity();
-    const { created, updated, title, description, defaultLocale, translationsLocales } = createProjectDTO;
-    project.created = created;
-    project.updated = updated;
+    const { title, description, defaultLocale, translationsLocales } = createProjectDTO;
     project.title = title;
     project.description = description;
     project.defaultLocale = defaultLocale;
     project.translationsLocales = translationsLocales;
     project.user = user;
     project.ownerId = user.id;
+    project.role = RoleEnum.ADMINISTRATOR;
 
     try {
       await project.save();
