@@ -6,6 +6,7 @@ import { UserEntity } from '../auth/user.entity';
 import { SharedProjectEntity } from './shared-project.entity';
 import { ProjectEntity } from '../project/project.entity';
 import { ShareProjectDTO } from './dto/share-project.dto';
+import { RoleEnum } from '../shared/enums/role.enum';
 
 @Injectable()
 export class SharedProjectService {
@@ -23,13 +24,15 @@ export class SharedProjectService {
     shareProjectDTO: ShareProjectDTO,
     user: UserEntity,
   ): Promise<any> {
-    const project = await this.projectRepository.findOne({ where: { id: shareProjectDTO.projectId, userId: user.id } });
+    const { projectId, targetId, role } = shareProjectDTO;
 
-    const targetUser = await this.userRepository.findOne({ where: { id: shareProjectDTO.targetId } });
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
+
+    const targetUser = await this.userRepository.findOne({ where: { id: targetId } });
 
     if (!targetUser) {
-      this.logger.error(`User with id: "${shareProjectDTO.targetId}" not found`);
-      throw new NotFoundException(`User with id: "${shareProjectDTO.targetId}" not found.`);
+      this.logger.error(`User with id: "${targetId}" not found`);
+      throw new NotFoundException(`User with id: "${targetId}" not found.`);
     }
 
     if (targetUser.id === user.id) {
@@ -38,20 +41,23 @@ export class SharedProjectService {
     }
 
     if (!project) {
-      this.logger.error(`Project with id: "${shareProjectDTO.projectId}" not found`);
-      throw new NotFoundException(`Project with id: "${shareProjectDTO.projectId}" not found.`);
+      this.logger.error(`Project with id: "${projectId}" not found`);
+      throw new NotFoundException(`Project with id: "${projectId}" not found.`);
     }
 
     const sharedProject = new SharedProjectEntity();
     sharedProject.senderId = user.id;
-    sharedProject.targetId = shareProjectDTO.targetId;
-    sharedProject.projectId = shareProjectDTO.projectId;
+    sharedProject.targetId = targetId;
+    sharedProject.projectId = projectId;
+    if (!role) {
+      sharedProject.role = RoleEnum.TRANSLATOR;
+    }
 
     let shared;
 
     try {
       await sharedProject.save();
-      shared = await SharedProjectEntity.find({ where: { targetId: targetUser.id }, relations: ['project'] });
+      shared = await SharedProjectEntity.findOne({ where: { projectId, targetId: targetUser.id }, relations: ['project'] });
     } catch (error) {
       if (error.code === '23505') {
         this.logger.error(`You already shared this project with this user.`);

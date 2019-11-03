@@ -49,9 +49,6 @@ export class ProjectEntity extends BaseEntity {
   userId: number;
 
   @Column({ nullable: true })
-  role: RoleEnum;
-
-  @Column({ nullable: true })
   ownerId: number;
   @ManyToOne(() => UserEntity, user => user.projects)
   @JoinColumn({ name: 'ownerId' })

@@ -6,10 +6,11 @@ import { ProjectService } from './project.service';
 import { AuthModule } from '../auth/auth.module';
 import { ProjectEntity } from './project.entity';
 import { UserEntity } from '../auth/user.entity';
+import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProjectEntity, UserEntity]),
+    TypeOrmModule.forFeature([ProjectEntity, SharedProjectEntity, UserEntity]),
     AuthModule,
   ],
   controllers: [ProjectController],

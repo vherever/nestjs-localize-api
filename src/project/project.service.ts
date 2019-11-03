@@ -9,6 +9,7 @@ import { CreateProjectDTO } from './dto/create-project.dto';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 import { RoleEnum } from '../shared/enums/role.enum';
 import { GetSharedProjectResponse } from './dto/get-shared-project-response';
+import { share } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectService {
@@ -17,6 +18,9 @@ export class ProjectService {
   constructor(
     @InjectRepository(ProjectEntity)
     private projectRepository: Repository<ProjectEntity>,
+
+    @InjectRepository(SharedProjectEntity)
+    private sharedProjectRepository: Repository<SharedProjectEntity>,
 
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
@@ -54,14 +58,16 @@ export class ProjectService {
   async getProjectById(
     id: number,
     user: UserEntity,
-  ): Promise<ProjectEntity> {
+  ): Promise<ProjectEntity | SharedProjectEntity> {
     const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
 
-    if (!project) {
+    const shared = await SharedProjectEntity.findOne({ where: { projectId: id, targetId: user.id }, relations: ['project'] });
+
+    if (!project && !shared) {
       throw new NotFoundException(`Project with ID "${id}" not found.`);
     }
 
-    return project;
+    return project ? project : shared;
   }
 
   async createProject(
@@ -76,7 +82,6 @@ export class ProjectService {
     project.translationsLocales = translationsLocales;
     project.user = user;
     project.ownerId = user.id;
-    project.role = RoleEnum.ADMINISTRATOR;
 
     try {
       await project.save();
@@ -113,11 +118,20 @@ export class ProjectService {
     id: number,
     user: UserEntity,
   ): Promise<void> {
-    const result = await this.projectRepository.delete({ id});
+    const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
+    const shared: GetSharedProjectResponse = await SharedProjectEntity.findOne({ where: { projectId: id, senderId: user.id }, relations: ['project'] });
 
-    if (result.affected === 0) {
+    if (!project) {
       this.logger.error(`Project with id: "${id}" not found`);
       throw new NotFoundException(`Project with id: "${id}" not found.`);
+    }
+
+    if (shared) {
+      await this.sharedProjectRepository.delete({ projectId: id });
+    }
+
+    if (project) {
+      await this.projectRepository.delete({ id });
     }
   }
 }

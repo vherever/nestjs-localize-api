@@ -7,6 +7,7 @@ import { UserEntity } from '../auth/user.entity';
 import { GetUser } from '../auth/get-user.decorator';
 import { CreateProjectDTO } from './dto/create-project.dto';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
+import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 
 @Controller('projects')
 @UseGuards(AuthGuard())
@@ -29,7 +30,7 @@ export class ProjectController {
   getProjectById(
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: UserEntity,
-  ): Promise<ProjectEntity> {
+  ): Promise<ProjectEntity | SharedProjectEntity> {
     this.logger.verbose(`User "${user.username} is getting project by id: ${id}.`);
     return this.projectsService.getProjectById(id, user);
   }
