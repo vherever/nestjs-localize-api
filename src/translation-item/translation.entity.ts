@@ -31,6 +31,9 @@ export class TranslationEntity extends BaseEntity {
   @Column({ nullable: true })
   status: string;
 
+  @Column()
+  language: string;
+
   @ManyToOne(type => UserEntity, user => user.projects)
   user: UserEntity;
 

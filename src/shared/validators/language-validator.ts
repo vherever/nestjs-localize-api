@@ -30,18 +30,21 @@ export class LanguageValidator implements ValidatorConstraintInterface {
   }
 
   validate(locales: string) {
-    const splitted = locales.split(',');
-    return this.getLanguages().then(languages => {
-      if (splitted.length > 1) {
-        const temp = [];
-        splitted.forEach(l => {
-          const found = languages.find(language => l === language.key);
-          temp.push(found);
-        });
-        return !!!temp.filter(f => f === undefined).length;
-      } else {
-        return !!languages.find(language => locales === language.key);
-      }
-    });
+    if (locales) {
+      const splitted = locales.split(',');
+      return this.getLanguages().then(languages => {
+        if (splitted.length > 1) {
+          const temp = [];
+          splitted.forEach(l => {
+            const found = languages.find(language => l === language.key);
+            temp.push(found);
+          });
+          return !!!temp.filter(f => f === undefined).length;
+        } else {
+          return !!languages.find(language => locales === language.key);
+        }
+      });
+    }
+    return false;
   }
 }

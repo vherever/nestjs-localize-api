@@ -17,6 +17,8 @@ export class GetTranslationRO {
 
   status: string;
 
+  language: string;
+
   projectId: number;
 
   authorId?: number;

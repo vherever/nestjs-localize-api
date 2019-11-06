@@ -18,4 +18,7 @@ export class CreateTranslationDTO {
 
   @IsOptional()
   status: string;
+
+  @IsNotEmpty()
+  language: string;
 }

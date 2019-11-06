@@ -21,7 +21,7 @@ export class ProjectController {
   getProjects(
     @Query(ValidationPipe) filterDTO: GetProjectsFilterDTO,
     @GetUser() user: UserEntity,
-  ) {
+  ): Promise<{owned: ProjectEntity[], shared: SharedProjectEntity[]}> {
     this.logger.verbose(`User "${user.username}" is retrieving all projects. Filter: ${JSON.stringify(filterDTO)}.`);
     return this.projectsService.getProjects(filterDTO, user);
   }

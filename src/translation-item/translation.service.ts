@@ -34,6 +34,7 @@ export class TranslationService {
         labels: translation.labels,
         notes: translation.notes,
         status: translation.status,
+        language: translation.language,
         projectId: translation.project.id,
         authorId: translation.project.userId,
       };
@@ -51,6 +52,7 @@ export class TranslationService {
       labels: translation.labels,
       notes: translation.notes,
       status: translation.status,
+      language: translation.language,
       projectId: translation.project.id,
       authorId: translation.user.id,
     };

@@ -7,9 +7,6 @@ import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
 import { Repository } from 'typeorm';
 import { CreateProjectDTO } from './dto/create-project.dto';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
-import { RoleEnum } from '../shared/enums/role.enum';
-import { GetSharedProjectResponse } from './dto/get-shared-project-response';
-import { share } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectService {
@@ -30,7 +27,7 @@ export class ProjectService {
   async getProjects(
     filterDTO: GetProjectsFilterDTO,
     user: UserEntity,
-  ): Promise<{owned: ProjectEntity[], shared: GetSharedProjectResponse[]}> {
+  ): Promise<{owned: ProjectEntity[], shared: SharedProjectEntity[]}> {
     const { search } = filterDTO;
     const query = this.projectRepository.createQueryBuilder('project');
 
@@ -119,7 +116,7 @@ export class ProjectService {
     user: UserEntity,
   ): Promise<void> {
     const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
-    const shared: GetSharedProjectResponse = await SharedProjectEntity.findOne({ where: { projectId: id, senderId: user.id }, relations: ['project'] });
+    const shared: SharedProjectEntity = await SharedProjectEntity.findOne({ where: { projectId: id, senderId: user.id }, relations: ['project'] });
 
     if (!project) {
       this.logger.error(`Project with id: "${id}" not found`);
