@@ -16,8 +16,11 @@ export class TranslationEntity extends BaseEntity {
   @Column()
   sourceText: string;
 
-  @Column()
+  @Column({ unique: true, nullable: true })
   assetId: string;
+
+  @Column()
+  assetIdLocale: string;
 
   @Column({ nullable: true })
   context: string;
@@ -31,7 +34,7 @@ export class TranslationEntity extends BaseEntity {
   @Column({ nullable: true })
   status: string;
 
-  @Column()
+  @Column({ readonly: true })
   language: string;
 
   @ManyToOne(type => UserEntity, user => user.projects)

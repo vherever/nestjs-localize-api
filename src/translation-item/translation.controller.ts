@@ -31,9 +31,11 @@ export class TranslationController {
     @Body() createTranslationDTO: CreateTranslationDTO,
     @Param('id') projectId: number,
     @GetUser() user: UserEntity,
-  ): Promise<GetTranslationRO> {
+    @Body('defaultLanguage') defaultLanguage: string,
+    @Body('languages') languages: string,
+  ): Promise<GetTranslationRO[]> {
     this.logger.verbose(`User "${user.username}" is creating a new translation. Data: ${JSON.stringify(createTranslationDTO)}.`);
-    return this.translationItemService.createTranslation(createTranslationDTO, user, projectId);
+    return this.translationItemService.createTranslation(createTranslationDTO, user, projectId, defaultLanguage, languages);
   }
 
   @Put('translations/:translationId')

@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, Logger, NotFoundException, Param } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { UserEntity } from '../auth/user.entity';
@@ -74,25 +74,52 @@ export class TranslationService {
     createTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
     projectId: number,
-  ): Promise<GetTranslationRO> {
+    defaultLanguage: string,
+    languages: string,
+  ): Promise<GetTranslationRO[]> {
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
     if (!project) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
 
-    const translation = await this.translationRepository.create({
+    createTranslationDTO.language = defaultLanguage;
+    createTranslationDTO.assetIdLocale = createTranslationDTO.assetId;
+    const translationDefault = await this.translationRepository.create({
       project,
       ...createTranslationDTO,
       user,
     });
+
+    const translations = JSON.parse(languages).reduce((acc: any, lang) => {
+      let translation: TranslationEntity;
+
+      createTranslationDTO.sourceText = '';
+      createTranslationDTO.language = lang;
+      createTranslationDTO.assetId = null;
+
+      translation = this.translationRepository.create({
+        project,
+        ...createTranslationDTO,
+        user,
+      });
+
+      acc.push(translation);
+      return acc;
+    }, []);
+
     try {
-      await this.translationRepository.save(translation);
+      await this.translationRepository.save([translationDefault, ...translations]);
     } catch (error) {
-      this.logger.error(`Failed to create translation for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(createTranslationDTO)}.`, error.stack);
-      throw new InternalServerErrorException();
+      if (error.code === '23505') {
+        this.logger.error(`Translation with id ${createTranslationDTO.assetId} already exists.`);
+        throw new ConflictException(`Translation with this ID already exists.`);
+      } else {
+        this.logger.error('Can not create translation.');
+        throw new InternalServerErrorException();
+      }
     }
-    return this.getTranslationRO(translation);
+    return this.getTranslationsRO([translationDefault, ...translations]);
   }
 
   async updateTranslation(

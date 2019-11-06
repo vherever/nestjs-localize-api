@@ -7,6 +7,8 @@ export class CreateTranslationDTO {
   @IsNotEmpty()
   assetId: string;
 
+  assetIdLocale: string;
+
   @IsOptional()
   context: string;
 
@@ -21,4 +23,7 @@ export class CreateTranslationDTO {
 
   @IsNotEmpty()
   language: string;
+
+  @IsNotEmpty()
+  defaultLanguage: string;
 }
