@@ -16,9 +16,6 @@ export class TranslationEntity extends BaseEntity {
   @Column()
   sourceText: string;
 
-  @Column({ unique: true, nullable: true })
-  assetId: string;
-
   @Column({ nullable: true })
   assetCode: string;
 

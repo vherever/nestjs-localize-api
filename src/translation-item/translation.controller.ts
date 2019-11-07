@@ -16,13 +16,22 @@ export class TranslationController {
   constructor(private translationItemService: TranslationService) {
   }
 
-  @Get('translations')
-  getTranslationsByProject(
+  @Get('translationsAll')
+  getAllTranslationsByProject(
     @GetUser() user: UserEntity,
     @Param('id') projectId: string,
-  ) {
+  ): Promise<GetTranslationRO[]> {
     this.logger.verbose(`User "${user.username}" is retrieving all translations.`);
-    return this.translationItemService.getTranslationsByProject(projectId, user);
+    return this.translationItemService.getAllTranslationsByProject(projectId, user);
+  }
+
+  @Get('translations')
+  getUserTranslationsByProject(
+    @GetUser() user: UserEntity,
+    @Param('id') projectId: string,
+  ): Promise<GetTranslationRO[]> {
+    this.logger.verbose(`User "${user.username}" is retrieving his translations.`);
+    return this.translationItemService.getUserTranslationsByProject(projectId, user);
   }
 
   @Post('translations')
@@ -31,11 +40,9 @@ export class TranslationController {
     @Body() createTranslationDTO: CreateTranslationDTO,
     @Param('id') projectId: number,
     @GetUser() user: UserEntity,
-    @Body('defaultLanguage') defaultLanguage: string,
-    @Body('languages') languages: string,
   ): Promise<GetTranslationRO[]> {
     this.logger.verbose(`User "${user.username}" is creating a new translation. Data: ${JSON.stringify(createTranslationDTO)}.`);
-    return this.translationItemService.createTranslation(createTranslationDTO, user, projectId, defaultLanguage, languages);
+    return this.translationItemService.createTranslation(createTranslationDTO, user, projectId);
   }
 
   @Put('translations/:assetGroupId/:translationId')

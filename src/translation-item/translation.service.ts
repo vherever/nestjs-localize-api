@@ -43,25 +43,19 @@ export class TranslationService {
     });
   }
 
-  private getTranslationRO(translation: TranslationEntity): GetTranslationRO {
-    return {
-      id: translation.id,
-      created: translation.created,
-      updated: translation.updated,
-      sourceText: translation.sourceText,
-      assetCode: translation.assetCode,
-      assetCodeSrc: translation.assetCodeSrc,
-      context: translation.context,
-      labels: translation.labels,
-      notes: translation.notes,
-      status: translation.status,
-      language: translation.language,
-      projectId: translation.project.id,
-      authorId: translation.user.id,
-    };
+  async getAllTranslationsByProject(
+    projectId: string,
+    user: UserEntity,
+  ): Promise<GetTranslationRO[]> {
+    const project = await this.projectRepository.findOne({ where: { id: projectId }, relations: ['translations', 'translations.project'] });
+    if (!project) {
+      this.logger.error(`Project with id "${projectId}" not found.`);
+      throw new NotFoundException(`Project with id "${projectId}" not found.`);
+    }
+    return this.getTranslationsRO(project.translations);
   }
 
-  async getTranslationsByProject(
+  async getUserTranslationsByProject(
     projectId: string,
     user: UserEntity,
   ): Promise<GetTranslationRO[]> {
@@ -77,8 +71,6 @@ export class TranslationService {
     createTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
     projectId: number,
-    defaultLanguage: string,
-    languages: string,
   ): Promise<GetTranslationRO[]> {
     const uuid = uuidv1();
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
@@ -92,9 +84,10 @@ export class TranslationService {
       ...createTranslationDTO,
       user,
     });
-    translationDefault.assetId = uuidv1();
 
-    const translations = JSON.parse(languages).reduce((acc: any, lang) => {
+    const translationsLocales = project.translationsLocales.split(',');
+
+    const translations = translationsLocales.reduce((acc: any, lang) => {
       let translation: TranslationEntity;
 
       createTranslationDTO.sourceText = '';
@@ -107,9 +100,8 @@ export class TranslationService {
 
       translationDefault.assetGroupId = uuid;
       translation.assetGroupId = uuid;
-      translationDefault.language = defaultLanguage;
+      translationDefault.language = project.defaultLocale;
       translation.language = lang;
-      translation.assetId = null;
       translationDefault.assetCodeSrc = projectId + '-' + createTranslationDTO.assetCode;
       translation.assetCodeSrc = null;
       acc.push(translation);
