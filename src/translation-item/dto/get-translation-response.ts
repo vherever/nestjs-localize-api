@@ -7,7 +7,9 @@ export class GetTranslationRO {
 
   sourceText: string;
 
-  assetId: string;
+  assetCode: string;
+
+  assetCodeSrc: string;
 
   context: string;
 

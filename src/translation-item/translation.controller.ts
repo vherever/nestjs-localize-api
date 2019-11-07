@@ -38,25 +38,26 @@ export class TranslationController {
     return this.translationItemService.createTranslation(createTranslationDTO, user, projectId, defaultLanguage, languages);
   }
 
-  @Put('translations/:translationId')
+  @Put('translations/:assetGroupId/:translationId')
   @UsePipes(ValidationPipe)
   updateTranslation(
     @Body() updateTranslationDTO: CreateTranslationDTO,
     @Param('id') projectId: number,
-    @Param('translationId') translationId: number,
+    @Param('assetGroupId') assetGroupId: string,
+    @Param('translationId') translationId: string,
     @GetUser() user: UserEntity,
   ): Promise<TranslationEntity> {
     this.logger.verbose(`User "${user.username}" is updating translation. Data: ${JSON.stringify(updateTranslationDTO)}.`);
-    return this.translationItemService.updateTranslation(updateTranslationDTO, user, projectId, translationId);
+    return this.translationItemService.updateTranslation(updateTranslationDTO, user, projectId, assetGroupId, translationId);
   }
 
-  @Delete('translations/:translationId')
+  @Delete('translations/:assetGroupId')
   @UsePipes(ValidationPipe)
   deleteTranslation(
     @Param('id') projectId: number,
-    @Param('translationId') translationId: number,
+    @Param('assetGroupId') assetGroupId: string,
     @GetUser() user: UserEntity,
-  ): any {
-    return this.translationItemService.deleteTranslation(projectId, translationId, user);
+  ): Promise<void> {
+    return this.translationItemService.deleteTranslation(projectId, assetGroupId, user);
   }
 }
