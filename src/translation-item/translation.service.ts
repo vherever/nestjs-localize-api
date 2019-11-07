@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { ProjectEntity } from '../project/project.entity';
 
 import * as uuidv1 from 'uuid/v1';
+import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 
 @Injectable()
 export class TranslationService {
@@ -20,6 +21,9 @@ export class TranslationService {
 
     @InjectRepository(ProjectEntity)
     private projectRepository: Repository<ProjectEntity>,
+
+    @InjectRepository(SharedProjectEntity)
+    private sharedProjectRepository: Repository<SharedProjectEntity>,
   ) {
   }
 
@@ -74,18 +78,26 @@ export class TranslationService {
   ): Promise<GetTranslationRO[]> {
     const uuid = uuidv1();
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
-    if (!project) {
+
+    // const shared = await this.sharedProjectRepository.findOne({ where: { targetId: user.id, projectId } });
+
+    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectId }, relations: ['project'] });
+
+    console.log('___ shared', shared); // todo
+    if (!project && !shared) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
 
+    const projectToUse: ProjectEntity = shared ? shared.project : project;
+
     const translationDefault: TranslationEntity = await this.translationRepository.create({
-      project,
+      project: projectToUse,
       ...createTranslationDTO,
       user,
     });
 
-    const translationsLocales = project.translationsLocales.split(',');
+    const translationsLocales = projectToUse.translationsLocales.split(',');
 
     const translations = translationsLocales.reduce((acc: any, lang) => {
       let translation: TranslationEntity;
@@ -93,14 +105,14 @@ export class TranslationService {
       createTranslationDTO.sourceText = '';
 
       translation = this.translationRepository.create({
-        project,
+        project: projectToUse,
         ...createTranslationDTO,
         user,
       });
 
       translationDefault.assetGroupId = uuid;
       translation.assetGroupId = uuid;
-      translationDefault.language = project.defaultLocale;
+      translationDefault.language = projectToUse.defaultLocale;
       translation.language = lang;
       translationDefault.assetCodeSrc = projectId + '-' + createTranslationDTO.assetCode;
       translation.assetCodeSrc = null;

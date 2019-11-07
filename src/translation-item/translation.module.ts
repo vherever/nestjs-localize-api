@@ -6,10 +6,11 @@ import { TranslationService } from './translation.service';
 import { AuthModule } from '../auth/auth.module';
 import { TranslationEntity } from './translation.entity';
 import { ProjectEntity } from '../project/project.entity';
+import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([TranslationEntity, ProjectEntity]),
+    TypeOrmModule.forFeature([TranslationEntity, ProjectEntity, SharedProjectEntity]),
     AuthModule,
   ],
   controllers: [TranslationController],
