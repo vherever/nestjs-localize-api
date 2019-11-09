@@ -4,7 +4,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable, ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,7 +12,6 @@ import {
 
 import { UserEntity } from '../auth/user.entity';
 import { TranslationEntity } from '../translation-item/translation.entity';
-import { RoleEnum } from '../shared/enums/role.enum';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 
 @Entity('project')

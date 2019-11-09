@@ -23,7 +23,7 @@ export class SharedProjectService {
   async inviteUserToProject(
     shareProjectDTO: ShareProjectDTO,
     user: UserEntity,
-  ): Promise<any> {
+  ): Promise<SharedProjectEntity> {
     const { projectId, targetId, role } = shareProjectDTO;
 
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
@@ -67,5 +67,17 @@ export class SharedProjectService {
       throw new InternalServerErrorException();
     }
     return shared;
+  }
+
+  async excludeUserFromProject(
+    shareProjectDTO: ShareProjectDTO,
+  ): Promise<void> {
+    const { targetId, projectId } = shareProjectDTO;
+    const shared = await SharedProjectEntity.findOne({ where: { targetId, projectId }, relations: ['project'] });
+    if (!shared) {
+      this.logger.error(`There is no shared projectId "${projectId}" with user "${targetId}"`);
+      throw new NotFoundException(`There is no shared projectId "${projectId}" with user "${targetId}"`);
+    }
+    await SharedProjectEntity.delete({ projectId });
   }
 }
