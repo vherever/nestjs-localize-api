@@ -1,9 +1,10 @@
-import { IsIn, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { RoleEnum } from '../../shared/enums/role.enum';
 
 export class ShareProjectDTO {
+  @IsString()
   @IsNotEmpty()
-  targetId: number;
+  targetEmail: string;
 
   @IsNotEmpty()
   projectId: number;

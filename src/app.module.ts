@@ -23,10 +23,10 @@ import { SharedProjectModule } from './shared-project/shared-project.module';
   ],
   controllers: [AppController],
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: HttpErrorFilter,
-    },
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: HttpErrorFilter,
+    // },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,

@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { GetUser } from '../auth/get-user.decorator';
@@ -17,12 +17,21 @@ export class SharedProjectController {
 
   // Share project
   @Post('/add')
-  inviteUserToProject(
+  generateInviteLink(
     @Body() shareProjectDTO: ShareProjectDTO,
     @GetUser() user: UserEntity,
+  ): Promise<string> {
+    const { targetEmail, projectId } = shareProjectDTO;
+    this.logger.verbose(`The user "${user.email}" sending to the user "${targetEmail}" the project invite with projectId "${projectId}".`);
+    return this.sharedProjectService.generateInvitationLink(shareProjectDTO, user);
+  }
+
+  @Get('/:token')
+  inviteUserToProject(
+    @Param('token') token: string,
   ): Promise<SharedProjectEntity> {
-    this.logger.verbose(`The user "${user.id}" inviting the user "${shareProjectDTO.targetId}" a project with id "${shareProjectDTO.projectId}"`);
-    return this.sharedProjectService.inviteUserToProject(shareProjectDTO, user);
+    this.logger.verbose(`Invitation token has been processed.`);
+    return this.sharedProjectService.processingInvitationToken(token);
   }
 
   @Post('/remove')
@@ -30,7 +39,7 @@ export class SharedProjectController {
     @Body() shareProjectDTO: ShareProjectDTO,
     @GetUser() user: UserEntity,
   ): Promise<void> {
-    this.logger.verbose(`The user "${user.id} excluding the user ${shareProjectDTO.targetId}" from the project with id "${shareProjectDTO.projectId}"`);
+    this.logger.verbose(`The user "${user.id} excluding the user ${shareProjectDTO.targetEmail}" from the project with id "${shareProjectDTO.projectId}"`);
     return this.sharedProjectService.excludeUserFromProject(shareProjectDTO);
   }
 }

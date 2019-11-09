@@ -30,7 +30,7 @@ export class UserEntity extends BaseEntity {
   @Column({ nullable: true })
   name: string;
 
-  @Column({ nullable: true, unique: true })
+  @Column({ unique: true })
   email: string;
 
   @Column()
