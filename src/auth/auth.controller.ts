@@ -12,13 +12,13 @@ export class AuthController {
 
   @Post('/signup')
   signUp(@Body(ValidationPipe) authCredentialsDTO: AuthCredentialsDTO): Promise<void> {
-    this.logger.verbose(`Registering a new user with username: ${authCredentialsDTO.username}.`);
+    this.logger.verbose(`Registering a new user with email: ${authCredentialsDTO.email}.`);
     return this.authService.signUp(authCredentialsDTO);
   }
 
   @Post('/signin')
   signIn(@Body(ValidationPipe) authCredentialsDTO: AuthCredentialsDTO): Promise<{ accessToken: string }> {
-    this.logger.verbose(`Logging a user with username: ${authCredentialsDTO.username}.`);
+    this.logger.verbose(`Logging a user with email: ${authCredentialsDTO.email}.`);
     return this.authService.signIn(authCredentialsDTO);
   }
 }

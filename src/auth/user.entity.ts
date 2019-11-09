@@ -16,7 +16,7 @@ import * as ts from 'typescript/lib/tsserverlibrary';
 import Project = ts.server.Project;
 
 @Entity('user')
-@Unique(['username'])
+@Unique(['email'])
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -26,9 +26,6 @@ export class UserEntity extends BaseEntity {
 
   @UpdateDateColumn()
   updated: Date;
-
-  @Column({ readonly: true, unique: true })
-  username: string;
 
   @Column({ nullable: true })
   name: string;

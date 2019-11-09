@@ -25,21 +25,21 @@ export class AuthService {
   }
 
   private async validateUserPassword(authCredentialsDTO: AuthCredentialsDTO): Promise<string> {
-    const { username, password } = authCredentialsDTO;
-    const user = await this.userRepository.findOne({ username });
+    const { email, password } = authCredentialsDTO;
+    const user = await this.userRepository.findOne({ email });
 
     if (user && await user.validatePassword(password)) {
-      return user.username;
+      return user.email;
     } else {
       return null;
     }
   }
 
   async signUp(authCredentialsDTO: AuthCredentialsDTO): Promise<void> {
-    const { username, password } = authCredentialsDTO;
+    const { email, password } = authCredentialsDTO;
 
     const user = this.userRepository.create();
-    user.username = username;
+    user.email = email;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password, user.salt);
 
@@ -47,8 +47,8 @@ export class AuthService {
       await user.save();
     } catch (error) {
       if (error.code === '23505') {
-        this.logger.error(`Username ${user.username} already exists.`);
-        throw new ConflictException(`Username already exists.`);
+        this.logger.error(`Email ${user.email} already exists.`);
+        throw new ConflictException(`Email already exists.`);
       } else {
         this.logger.error('Can not login.');
         throw new InternalServerErrorException();
@@ -57,14 +57,14 @@ export class AuthService {
   }
 
   async signIn(authCredentialsDTO: AuthCredentialsDTO): Promise<{ accessToken: string }> {
-    const username = await this.validateUserPassword(authCredentialsDTO);
+    const email = await this.validateUserPassword(authCredentialsDTO);
 
-    if (!username) {
+    if (!email) {
       this.logger.error('Invalid credentials.');
       throw new UnauthorizedException('Invalid credentials.');
     }
 
-    const payload: JwtPayload = { username };
+    const payload: JwtPayload = { email };
     const accessToken = await this.jwtService.sign(payload);
     this.logger.debug(`Generated JWT token with payload ${JSON.stringify(payload)}`);
 

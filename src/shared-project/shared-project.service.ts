@@ -63,7 +63,7 @@ export class SharedProjectService {
         this.logger.error(`You already shared this project with this user.`);
         throw new ConflictException(`You already shared this project with this user.`);
       }
-      this.logger.error(`Failed to create shared project for user: "${user.username}".`, error.stack);
+      this.logger.error(`Failed to create shared project for user: "${user.email}".`, error.stack);
       throw new InternalServerErrorException();
     }
     return shared;

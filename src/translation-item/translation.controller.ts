@@ -21,7 +21,7 @@ export class TranslationController {
     @GetUser() user: UserEntity,
     @Param('id') projectId: string,
   ): Promise<GetTranslationRO[]> {
-    this.logger.verbose(`User "${user.username}" is retrieving all translations.`);
+    this.logger.verbose(`User "${user.email}" is retrieving all translations.`);
     return this.translationItemService.getAllTranslationsByProject(projectId, user);
   }
 
@@ -30,7 +30,7 @@ export class TranslationController {
     @GetUser() user: UserEntity,
     @Param('id') projectId: string,
   ): Promise<GetTranslationRO[]> {
-    this.logger.verbose(`User "${user.username}" is retrieving his translations.`);
+    this.logger.verbose(`User "${user.email}" is retrieving his translations.`);
     return this.translationItemService.getUserTranslationsByProject(projectId, user);
   }
 
@@ -41,7 +41,7 @@ export class TranslationController {
     @Param('id') projectId: number,
     @GetUser() user: UserEntity,
   ): Promise<GetTranslationRO[]> {
-    this.logger.verbose(`User "${user.username}" is creating a new translation. Data: ${JSON.stringify(createTranslationDTO)}.`);
+    this.logger.verbose(`User "${user.email}" is creating a new translation. Data: ${JSON.stringify(createTranslationDTO)}.`);
     return this.translationItemService.createTranslation(createTranslationDTO, user, projectId);
   }
 
@@ -54,7 +54,7 @@ export class TranslationController {
     @Param('translationId') translationId: string,
     @GetUser() user: UserEntity,
   ): Promise<TranslationEntity> {
-    this.logger.verbose(`User "${user.username}" is updating translation. Data: ${JSON.stringify(updateTranslationDTO)}.`);
+    this.logger.verbose(`User "${user.email}" is updating translation. Data: ${JSON.stringify(updateTranslationDTO)}.`);
     return this.translationItemService.updateTranslation(updateTranslationDTO, user, projectId, assetGroupId, translationId);
   }
 

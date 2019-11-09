@@ -17,7 +17,6 @@ export class UserService {
   private getUserRO(user: UserEntity): UserModel {
     return {
       id: user.id,
-      username: user.username,
       name: user.name,
       email: user.email,
     };
@@ -29,7 +28,7 @@ export class UserService {
   ): Promise<UserModel> {
     const found = await this.userRepository.findOne({ where: { id: userId } });
 
-    if (!found || (found.username !== user.username && found.password !== user.password)) {
+    if (!found || (found.email !== user.email && found.password !== user.password)) {
       throw new NotFoundException(`User with id "${userId}" not found.`);
     }
     return this.getUserRO(found);
@@ -42,7 +41,7 @@ export class UserService {
   ): Promise<UserModel> {
     let foundUser = await this.userRepository.findOne({ where: { id: userId } });
 
-    if (!foundUser || (foundUser.username !== user.username && foundUser.password !== user.password)) {
+    if (!foundUser || (foundUser.email !== user.email && foundUser.password !== user.password)) {
       this.logger.error(`User with id ${userId} not found.`);
       throw new NotFoundException(`User with id: "${userId}" not found.`);
     }

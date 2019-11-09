@@ -47,7 +47,7 @@ export class ProjectService {
         };
       });
     } catch (error) {
-      this.logger.error(`Failed to get projects for user "${user.username}", DTO: ${JSON.stringify(filterDTO)}.`, error.stack);
+      this.logger.error(`Failed to get projects for user "${user.email}", DTO: ${JSON.stringify(filterDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
   }
@@ -83,7 +83,7 @@ export class ProjectService {
     try {
       await project.save();
     } catch (error) {
-      this.logger.error(`Failed to create project for user: "${user.username}". Data: ${JSON.stringify(createProjectDTO)}.`, error.stack);
+      this.logger.error(`Failed to create project for user: "${user.email}". Data: ${JSON.stringify(createProjectDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
 
@@ -104,7 +104,7 @@ export class ProjectService {
     try {
       await this.projectRepository.update({ id }, updateProjectDTO);
     } catch (error) {
-      this.logger.error(`Failed to update project for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(updateProjectDTO)}.`, error.stack);
+      this.logger.error(`Failed to update project for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateProjectDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
     project = await this.projectRepository.findOne({ where: { id, userId: user.id } });

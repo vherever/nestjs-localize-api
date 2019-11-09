@@ -163,7 +163,7 @@ export class TranslationService {
       await this.translationRepository.update({assetGroupId, id: parseInt(translationId, 10)}, {sourceText: updateTranslationDTO.sourceText});
       await this.translationRepository.update({assetGroupId, language: project.defaultLocale}, {assetCodeSrc: `${projectId}-${updateTranslationDTO.assetCode}`});
     } catch (error) {
-      this.logger.error(`Failed to update translation for user "${user.username}", projectId: "${project.id}". Data: ${JSON.stringify(updateTranslationDTO)}.`, error.stack);
+      this.logger.error(`Failed to update translation for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateTranslationDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
     translation = await this.translationRepository.findOne({ where: { assetGroupId, id: translationId } });
