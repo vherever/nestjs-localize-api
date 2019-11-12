@@ -41,8 +41,8 @@ export class TranslationService {
         notes: translation.notes,
         status: translation.status,
         language: translation.language,
-        projectId: translation.project.id,
-        authorId: translation.project.userId,
+        projectId: translation.projectId,
+        authorId: translation.userId,
       };
     });
   }
@@ -64,11 +64,24 @@ export class TranslationService {
     user: UserEntity,
   ): Promise<GetTranslationRO[]> {
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.project'] });
-    if (!project) {
+    const shared = await SharedProjectEntity.findOne({ where: { projectId }, relations: ['project'] });
+
+    let sharedFromProjects;
+
+    const translations: TranslationEntity[] = [];
+
+    if (!project && !shared) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
-    return this.getTranslationsRO(project.translations);
+    if (project) {
+      translations.push(...project.translations);
+    }
+    if (shared) {
+      sharedFromProjects = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['translations'] });
+      translations.push(...sharedFromProjects.translations);
+    }
+    return this.getTranslationsRO(translations);
   }
 
   async createTranslation(
@@ -79,11 +92,8 @@ export class TranslationService {
     const uuid = uuidv1();
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
 
-    // const shared = await this.sharedProjectRepository.findOne({ where: { targetId: user.id, projectId } });
-
     const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectId }, relations: ['project'] });
 
-    console.log('___ shared', shared); // todo
     if (!project && !shared) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);

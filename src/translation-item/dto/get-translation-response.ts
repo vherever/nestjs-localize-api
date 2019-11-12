@@ -13,8 +13,6 @@ export class GetTranslationRO {
 
   context: string;
 
-  labels: string;
-
   notes: string;
 
   status: string;
@@ -23,5 +21,5 @@ export class GetTranslationRO {
 
   projectId: number;
 
-  authorId?: number;
+  userId?: number;
 }

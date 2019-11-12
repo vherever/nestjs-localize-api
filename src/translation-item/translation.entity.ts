@@ -45,4 +45,10 @@ export class TranslationEntity extends BaseEntity {
 
   @ManyToOne(type => ProjectEntity, project => project.translations, { eager: false, onDelete: 'CASCADE' })
   project: ProjectEntity;
+
+  @Column()
+  userId: number;
+
+  @Column()
+  projectId: number;
 }
