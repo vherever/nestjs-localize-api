@@ -2,11 +2,12 @@ import { ConflictException, Injectable, InternalServerErrorException, Logger, Un
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 
-import { AuthCredentialsDTO } from './dto/auth-credentials.dto';
+import { AuthCredentialsRegisterDTO } from './dto/auth-credentials-register.dto';
 import { JwtPayload } from './jwt-payload.interface';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { AuthCredentialsLoginDTO } from './dto/auth-credentials-login.dto';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +25,7 @@ export class AuthService {
     return bcrypt.hash(password, salt);
   }
 
-  private async validateUserPassword(authCredentialsDTO: AuthCredentialsDTO): Promise<string> {
+  private async validateUserPassword(authCredentialsDTO: AuthCredentialsRegisterDTO): Promise<string> {
     const { email, password } = authCredentialsDTO;
     const user = await this.userRepository.findOne({ email });
 
@@ -35,7 +36,7 @@ export class AuthService {
     }
   }
 
-  async signUp(authCredentialsDTO: AuthCredentialsDTO): Promise<void> {
+  async signUp(authCredentialsDTO: AuthCredentialsRegisterDTO): Promise<void> {
     const { email, password } = authCredentialsDTO;
 
     const user = this.userRepository.create();
@@ -56,7 +57,7 @@ export class AuthService {
     }
   }
 
-  async signIn(authCredentialsDTO: AuthCredentialsDTO): Promise<{ accessToken: string }> {
+  async signIn(authCredentialsDTO: AuthCredentialsLoginDTO): Promise<{ accessToken: string }> {
     const email = await this.validateUserPassword(authCredentialsDTO);
 
     if (!email) {
