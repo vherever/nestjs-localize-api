@@ -2,8 +2,9 @@ import { Injectable, InternalServerErrorException, Logger, NotFoundException } f
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../auth/user.entity';
 import { Repository } from 'typeorm';
-import { UserModel } from './user.model';
+import { GetUserResponse } from './dto/get-user-response';
 import { UpdateUserDTO } from './dto/update-user.dto';
+import { ProjectEntity } from '../project/project.entity';
 
 @Injectable()
 export class UserService {
@@ -14,19 +15,27 @@ export class UserService {
   ) {
   }
 
-  private getUserRO(user: UserEntity): UserModel {
+  private getUserRO(user: UserEntity): GetUserResponse {
     return {
       id: user.id,
       name: user.name,
       email: user.email,
+      projects: user.projects.map((project: ProjectEntity) => {
+        return {
+          title: project.title,
+          description: project.description,
+          defaultLocale: project.defaultLocale,
+          ownerId: project.ownerId,
+        };
+      }),
     };
   }
 
   async getUser(
     userId: number,
     user: UserEntity,
-  ): Promise<UserModel> {
-    const found = await this.userRepository.findOne({ where: { id: userId } });
+  ): Promise<GetUserResponse> {
+    const found = await this.userRepository.findOne({ where: { id: userId }, relations: ['projects'] });
 
     if (!found || (found.email !== user.email && found.password !== user.password)) {
       throw new NotFoundException(`User with id "${userId}" not found.`);
@@ -38,7 +47,7 @@ export class UserService {
     userId: number,
     user: UserEntity,
     updateUserDTO: UpdateUserDTO,
-  ): Promise<UserModel> {
+  ): Promise<GetUserResponse> {
     let foundUser = await this.userRepository.findOne({ where: { id: userId } });
 
     if (!foundUser || (foundUser.email !== user.email && foundUser.password !== user.password)) {

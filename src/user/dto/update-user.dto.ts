@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsOptional } from 'class-validator';
 
 export class UpdateUserDTO {
-  @IsNotEmpty()
+  @IsOptional()
   name: string;
 
   @IsOptional()
