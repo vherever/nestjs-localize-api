@@ -22,6 +22,7 @@ export class UserService {
       email: user.email,
       projects: user.projects.map((project: ProjectEntity) => {
         return {
+          id: project.id,
           title: project.title,
           description: project.description,
           defaultLocale: project.defaultLocale,

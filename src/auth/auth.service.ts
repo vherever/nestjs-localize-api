@@ -25,12 +25,15 @@ export class AuthService {
     return bcrypt.hash(password, salt);
   }
 
-  private async validateUserPassword(authCredentialsDTO: AuthCredentialsRegisterDTO): Promise<string> {
+  private async validateUserPassword(authCredentialsDTO: AuthCredentialsRegisterDTO): Promise<any> {
     const { email, password } = authCredentialsDTO;
     const user = await this.userRepository.findOne({ email });
 
     if (user && await user.validatePassword(password)) {
-      return user.email;
+      return {
+        email: user.email,
+        id: user.id,
+      };
     } else {
       return null;
     }
@@ -58,14 +61,13 @@ export class AuthService {
   }
 
   async signIn(authCredentialsDTO: AuthCredentialsLoginDTO): Promise<{ accessToken: string }> {
-    const email = await this.validateUserPassword(authCredentialsDTO);
+    const payload: JwtPayload = await this.validateUserPassword(authCredentialsDTO);
 
-    if (!email) {
+    if (!payload) {
       this.logger.error('Invalid credentials.');
       throw new UnauthorizedException('Invalid credentials.');
     }
 
-    const payload: JwtPayload = { email };
     const accessToken = await this.jwtService.sign(payload);
     this.logger.debug(`Generated JWT token with payload ${JSON.stringify(payload)}`);
 

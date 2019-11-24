@@ -3,7 +3,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
@@ -12,8 +11,6 @@ import {
 import * as bcrypt from 'bcrypt';
 import { ProjectEntity } from '../project/project.entity';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
-import * as ts from 'typescript/lib/tsserverlibrary';
-import Project = ts.server.Project;
 
 @Entity('user')
 @Unique(['email'])
@@ -46,10 +43,10 @@ export class UserEntity extends BaseEntity {
   projects: ProjectEntity[];
 
   @OneToMany(() => SharedProjectEntity, sharedProject => sharedProject.target)
-  projectsSharedWithYou: Project[];
+  projectsSharedWithYou: ProjectEntity[];
 
   @OneToMany(() => SharedProjectEntity, sharedProject => sharedProject.sender)
-  projectsYouShared: Project[];
+  projectsYouShared: ProjectEntity[];
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
