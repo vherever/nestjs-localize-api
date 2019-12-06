@@ -5,7 +5,7 @@ export class GetTranslationRO {
 
   updated: Date;
 
-  sourceText: string;
+  sourceText: SourceText[];
 
   assetCode: string;
 
@@ -22,4 +22,10 @@ export class GetTranslationRO {
   projectId: number;
 
   userId?: number;
+
+  labels: string;
+}
+
+export interface SourceText {
+  [key: string]: string;
 }

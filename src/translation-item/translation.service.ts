@@ -33,7 +33,7 @@ export class TranslationService {
         id: translation.id,
         created: translation.created,
         updated: translation.updated,
-        sourceText: translation.sourceText,
+        sourceText: JSON.parse(translation.sourceText),
         assetCode: translation.assetCode,
         assetCodeSrc: translation.assetCodeSrc,
         context: translation.context,
@@ -101,37 +101,18 @@ export class TranslationService {
 
     const projectToUse: ProjectEntity = shared ? shared.project : project;
 
-    const translationDefault: TranslationEntity = await this.translationRepository.create({
+    const translation: TranslationEntity = await this.translationRepository.create({
       project: projectToUse,
       ...createTranslationDTO,
       user,
     });
 
-    const translationsLocales = projectToUse.translationsLocales.split(',');
-
-    const translations = translationsLocales.reduce((acc: any, lang) => {
-      let translation: TranslationEntity;
-
-      createTranslationDTO.sourceText = '';
-
-      translation = this.translationRepository.create({
-        project: projectToUse,
-        ...createTranslationDTO,
-        user,
-      });
-
-      translationDefault.assetGroupId = uuid;
-      translation.assetGroupId = uuid;
-      translationDefault.language = projectToUse.defaultLocale;
-      translation.language = lang;
-      translationDefault.assetCodeSrc = projectId + '-' + createTranslationDTO.assetCode;
-      translation.assetCodeSrc = null;
-      acc.push(translation);
-      return acc;
-    }, []);
+    translation.assetGroupId = uuid;
+    translation.language = projectToUse.defaultLocale;
+    translation.assetCodeSrc = projectId + '-' + createTranslationDTO.assetCode;
 
     try {
-      await this.translationRepository.save([translationDefault, ...translations]);
+      await this.translationRepository.save(translation);
     } catch (error) {
       if (error.code === '23505') {
         this.logger.error(`${error.detail}`);
@@ -141,7 +122,7 @@ export class TranslationService {
         throw new InternalServerErrorException();
       }
     }
-    return this.getTranslationsRO([translationDefault, ...translations]);
+    return this.getTranslationsRO([translation]);
   }
 
   async updateTranslation(
