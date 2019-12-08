@@ -33,7 +33,7 @@ export class TranslationService {
         id: translation.id,
         created: translation.created,
         updated: translation.updated,
-        sourceText: JSON.parse(translation.sourceText),
+        sourceText: JSON.parse(JSON.stringify(translation.sourceText)),
         assetCode: translation.assetCode,
         assetCodeSrc: translation.assetCodeSrc,
         context: translation.context,
