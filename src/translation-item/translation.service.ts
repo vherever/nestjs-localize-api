@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../auth/user.entity';
 import { TranslationEntity } from './translation.entity';
 import { CreateTranslationDTO } from './dto/create-translation.dto';
-import { GetTranslationRO } from './dto/get-translation-response';
+import { TranslationRO } from './dto/translation-ro';
 import { Repository } from 'typeorm';
 import { ProjectEntity } from '../project/project.entity';
 
@@ -27,30 +27,16 @@ export class TranslationService {
   ) {
   }
 
-  private async getTranslationsRO(translations: TranslationEntity[]): Promise<GetTranslationRO[]> {
+  private async getTranslationsRO(translations: TranslationEntity[]): Promise<TranslationRO[]> {
     return translations.map((translation: TranslationEntity) => {
-      return {
-        id: translation.id,
-        created: translation.created,
-        updated: translation.updated,
-        sourceText: JSON.parse(JSON.stringify(translation.sourceText)),
-        assetCode: translation.assetCode,
-        assetCodeSrc: translation.assetCodeSrc,
-        context: translation.context,
-        labels: translation.labels,
-        notes: translation.notes,
-        status: translation.status,
-        language: translation.language,
-        projectId: translation.projectId,
-        authorId: translation.userId,
-      };
+      return new TranslationRO(translation);
     });
   }
 
   async getAllTranslationsByProject(
     projectId: string,
     user: UserEntity,
-  ): Promise<GetTranslationRO[]> {
+  ): Promise<TranslationRO[]> {
     const project = await this.projectRepository.findOne({ where: { id: projectId }, relations: ['translations', 'translations.project'] });
     if (!project) {
       this.logger.error(`Project with id "${projectId}" not found.`);
@@ -62,7 +48,7 @@ export class TranslationService {
   async getUserTranslationsByProject(
     projectId: string,
     user: UserEntity,
-  ): Promise<GetTranslationRO[]> {
+  ): Promise<TranslationRO[]> {
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.project'] });
     const shared = await SharedProjectEntity.findOne({ where: { projectId }, relations: ['project'] });
 
@@ -88,7 +74,7 @@ export class TranslationService {
     createTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
     projectId: number,
-  ): Promise<GetTranslationRO[]> {
+  ): Promise<TranslationRO[]> {
     const uuid = uuidv1();
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
 

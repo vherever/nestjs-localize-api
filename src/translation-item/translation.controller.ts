@@ -6,7 +6,7 @@ import { GetUser } from '../auth/get-user.decorator';
 import { UserEntity } from '../auth/user.entity';
 import { CreateTranslationDTO } from './dto/create-translation.dto';
 import { TranslationEntity } from './translation.entity';
-import { GetTranslationRO } from './dto/get-translation-response';
+import { TranslationRO } from './dto/translation-ro';
 
 @Controller('projects/:id')
 @UseGuards(AuthGuard())
@@ -20,7 +20,7 @@ export class TranslationController {
   getAllTranslationsByProject(
     @GetUser() user: UserEntity,
     @Param('id') projectId: string,
-  ): Promise<GetTranslationRO[]> {
+  ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is retrieving all translations.`);
     return this.translationItemService.getAllTranslationsByProject(projectId, user);
   }
@@ -29,7 +29,7 @@ export class TranslationController {
   getUserTranslationsByProject(
     @GetUser() user: UserEntity,
     @Param('id') projectId: string,
-  ): Promise<GetTranslationRO[]> {
+  ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is retrieving his translations.`);
     return this.translationItemService.getUserTranslationsByProject(projectId, user);
   }
@@ -40,7 +40,7 @@ export class TranslationController {
     @Body() createTranslationDTO: CreateTranslationDTO,
     @Param('id') projectId: number,
     @GetUser() user: UserEntity,
-  ): Promise<GetTranslationRO[]> {
+  ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is creating a new translation. Data: ${JSON.stringify(createTranslationDTO)}.`);
     return this.translationItemService.createTranslation(createTranslationDTO, user, projectId);
   }
