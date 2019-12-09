@@ -93,9 +93,7 @@ export class TranslationService {
       user,
     });
 
-    translation.assetGroupId = uuid;
-    translation.language = projectToUse.defaultLocale;
-    translation.assetCodeSrc = projectId + '-' + createTranslationDTO.assetCode;
+    translation.assetProjectCode = projectId + '-' + createTranslationDTO.assetCode;
 
     try {
       await this.translationRepository.save(translation);
@@ -115,16 +113,11 @@ export class TranslationService {
     updateTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
     projectId: number,
-    assetGroupId: string,
-    translationId: string,
-  ): Promise<TranslationEntity> {
+    translationId: number,
+  ): Promise<TranslationRO[]> {
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
 
-    const translations = await this.translationRepository.find({ where: { assetGroupId, userId: user.id } });
-
-    let translation = await translations.find(t => {
-      return t.id === parseInt(translationId, 10);
-    });
+    let translation = await this.translationRepository.findOne({ where: { id: translationId, userId: user.id } });
 
     if (!project) {
       this.logger.error(`Project with id "${projectId}" not found.`);
@@ -136,25 +129,28 @@ export class TranslationService {
       throw new NotFoundException(`Translation with id "${translationId}" not found.`);
     }
     try {
-      await this.translationRepository.update({assetGroupId}, {assetCode: updateTranslationDTO.assetCode});
-      await this.translationRepository.update({assetGroupId, id: parseInt(translationId, 10)}, {sourceText: updateTranslationDTO.sourceText});
-      await this.translationRepository.update({assetGroupId, language: project.defaultLocale}, {assetCodeSrc: `${projectId}-${updateTranslationDTO.assetCode}`});
+      await this.translationRepository.update({id: translationId}, {
+        assetCode: updateTranslationDTO.assetCode,
+        translations: updateTranslationDTO.translations,
+        assetProjectCode: `${projectId}-${updateTranslationDTO.assetCode}`,
+      });
     } catch (error) {
       this.logger.error(`Failed to update translation for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateTranslationDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
-    translation = await this.translationRepository.findOne({ where: { assetGroupId, id: translationId } });
-    return translation;
+
+    translation = await this.translationRepository.findOne({ where: { id: translationId, userId: user.id } });
+    return this.getTranslationsRO([translation]);
   }
 
   async deleteTranslation(
     projectId: number,
-    assetGroupId: string,
+    translationId: number,
     user: UserEntity,
   ): Promise<void> {
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
 
-    const translations = await this.translationRepository.find({ where: { assetGroupId, userId: user.id } });
+    const translations = await this.translationRepository.find({ where: { id: translationId, userId: user.id } });
 
     if (!project) {
       this.logger.error(`Project with id "${projectId}" not found.`);
@@ -162,10 +158,10 @@ export class TranslationService {
     }
 
     if (!translations) {
-      this.logger.error(`Translation group with id "${assetGroupId}" not found.`);
-      throw new NotFoundException(`Translation group with id "${assetGroupId}" not found.`);
+      this.logger.error(`Translation with id "${translationId}" not found.`);
+      throw new NotFoundException(`Translation with id "${translationId}" not found.`);
     }
 
-    await this.translationRepository.delete({ assetGroupId, user });
+    await this.translationRepository.delete({ id: translationId, user });
   }
 }

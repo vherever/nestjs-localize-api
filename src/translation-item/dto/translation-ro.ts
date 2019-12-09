@@ -7,13 +7,12 @@ export class TranslationRO {
     this.id = translation.id;
     this.created = translation.created;
     this.updated = translation.updated;
-    this.sourceText = JSON.parse(JSON.stringify(translation.sourceText));
+    this.translations = JSON.parse(translation.translations);
     this.assetCode = translation.assetCode;
-    this.assetCodeSrc = translation.assetCodeSrc;
+    this.assetProjectCode = translation.assetProjectCode;
     this.context = translation.context;
     this.notes = translation.notes;
     this.status = translation.status;
-    this.language = translation.language;
     this.projectId = translation.projectId;
     this.authorId = translation.userId;
     this.labels = translation.labels;
@@ -22,18 +21,17 @@ export class TranslationRO {
   id: number;
   created: Date;
   updated: Date;
-  sourceText: SourceText[];
+  translations: Translations;
   assetCode: string;
-  assetCodeSrc: string;
+  assetProjectCode: string;
   context: string;
   notes: string;
   status: string;
-  language: string;
   projectId: number;
   authorId?: number;
   labels: string;
 }
 
-export interface SourceText {
+interface Translations {
   [key: string]: string;
 }

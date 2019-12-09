@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, Validate } from 'class-validator';
-import { LanguageValidator } from '../../shared/validators/language-validator';
+import { LanguageValidatorString } from '../../shared/validators/language-validator-string';
 
 export class CreateProjectDTO {
   @IsNotEmpty()
@@ -9,10 +9,10 @@ export class CreateProjectDTO {
   description: string;
 
   @IsNotEmpty()
-  @Validate(LanguageValidator, {message: 'Invalid defaultLocale'})
+  @Validate(LanguageValidatorString, {message: 'Unsupported locale key in defaultLocale'})
   defaultLocale: string;
 
   @IsOptional()
-  @Validate(LanguageValidator, {message: 'Invalid translationsLocales'})
+  @Validate(LanguageValidatorString, {message: 'Unsupported locale key in translationsLocales'})
   translationsLocales: string;
 }
