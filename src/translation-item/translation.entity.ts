@@ -19,6 +19,10 @@ export class TranslationEntity extends BaseEntity {
   @Column({ nullable: true })
   assetCode: string;
 
+  /**
+   * Unique code in format projectId-translationId
+   * determine if this asset code is already exist in the current project
+   */
   @Column({ unique: true, nullable: true })
   assetProjectCode: string;
 

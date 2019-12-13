@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../auth/user.entity';
 import { Repository } from 'typeorm';
@@ -60,11 +60,17 @@ export class UserService {
       this.logger.verbose(`The user was updated with data: "${JSON.stringify(updateUserDTO)}"`);
       await this.userRepository.update({ id: userId }, updateUserDTO);
     } catch (error) {
+
+      if (error.code === '23505') {
+        this.logger.error(`Email ${updateUserDTO.email} already exists.`);
+        throw new ConflictException(`Email already exists.`);
+      }
+
       this.logger.error(`Failed to update user with userId "${userId}". Data: ${JSON.stringify(updateUserDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
 
-    foundUser = await this.userRepository.findOne({ where: { id: userId } });
+    foundUser = await this.userRepository.findOne({ where: { id: userId }, relations: ['projects'] });
     return this.getUserRO(foundUser);
   }
 }
