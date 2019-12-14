@@ -28,7 +28,9 @@ export class TranslationService {
   }
 
   private async getTranslationsRO(translations: TranslationEntity[]): Promise<TranslationRO[]> {
-    return translations.map((translation: TranslationEntity) => {
+    return translations
+      .sort((a, b) => a.id - b.id) // sort ASC by id
+      .map((translation: TranslationEntity) => {
       return new TranslationRO(translation);
     });
   }
