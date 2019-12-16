@@ -1,7 +1,7 @@
 import {
   Body,
   Controller,
-  Get, InternalServerErrorException,
+  Get, Logger,
   Param,
   ParseIntPipe,
   Post,
@@ -14,7 +14,6 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
-import * as path from 'path';
 import { diskStorage } from 'multer';
 // app imports
 import { UserService } from './user.service';
@@ -22,23 +21,15 @@ import { GetUser } from '../auth/get-user.decorator';
 import { UserEntity } from '../auth/user.entity';
 import { UpdateUserDTO } from './dto/update-user.dto';
 import { GetUserResponse } from './dto/get-user-response';
-
-const pngFileFilter = (req, file, cb) => {
-  const fileTypes = /jpeg|jpg|png|gif/;
-  const extName = fileTypes.test(path.extname(file.originalname).toLocaleLowerCase());
-  const mimeType = fileTypes.test(file.mimetype);
-  if (mimeType && extName) {
-    return cb(null, true);
-  } else {
-    req.fileValidationError = 'Invalid file type';
-    return cb(new InternalServerErrorException('Invalid file type'), false);
-  }
-};
+import { FileUploaderHelper, fileExtensionFilter } from '../shared/file-uploader-helper';
 
 @Controller('users')
 @UseGuards(AuthGuard())
-export class UserController {
+export class UserController extends FileUploaderHelper {
+  private logger = new Logger('UserController');
+
   constructor(private userService: UserService) {
+    super();
   }
 
   @Get('/:id')
@@ -61,8 +52,8 @@ export class UserController {
 
   @Post('/:id/avatar')
   @UseInterceptors(FileInterceptor('image', {
-    fileFilter: pngFileFilter,
-    limits: {fileSize: 5242880},
+    fileFilter: fileExtensionFilter,
+    limits: {fileSize: 5242880}, // 5MB
     storage: diskStorage({
       destination: './uploads',
       filename: (req, file, cb) => {
@@ -75,6 +66,10 @@ export class UserController {
     @GetUser() user: UserEntity,
     @UploadedFile() avatar: any,
   ): Promise<string> {
+    this.compressImage(avatar.originalname).then(() => {
+      this.logger.verbose('Image was optimized.');
+    });
+
     return this.userService.uploadAvatar(userId, user, avatar.originalname);
   }
 }
