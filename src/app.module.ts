@@ -11,6 +11,7 @@ import { TranslationModule } from './translation-item/translation.module';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { UserModule } from './user/user.module';
 import { SharedProjectModule } from './shared-project/shared-project.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -23,10 +24,10 @@ import { SharedProjectModule } from './shared-project/shared-project.module';
   ],
   controllers: [AppController],
   providers: [
-    // {
-    //   provide: APP_FILTER,
-    //   useClass: HttpErrorFilter,
-    // },
+    {
+      provide: APP_FILTER,
+      useClass: HttpErrorFilter,
+    },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,

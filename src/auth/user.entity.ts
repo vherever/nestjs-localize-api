@@ -2,7 +2,7 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, Generated,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
@@ -29,6 +29,13 @@ export class UserEntity extends BaseEntity {
 
   @Column({ unique: true })
   email: string;
+
+  @Column({ nullable: true })
+  avatar: string;
+
+  @Column()
+  @Generated('uuid')
+  uuid: string;
 
   @Column()
   password: string;

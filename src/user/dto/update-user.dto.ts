@@ -6,4 +6,7 @@ export class UpdateUserDTO {
 
   @IsOptional()
   email: string;
+
+  @IsOptional()
+  avatar: string;
 }

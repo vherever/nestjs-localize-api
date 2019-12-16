@@ -1,5 +1,6 @@
 import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+// app imports
 import { UserEntity } from '../auth/user.entity';
 import { Repository } from 'typeorm';
 import { GetUserResponse } from './dto/get-user-response';
@@ -18,6 +19,7 @@ export class UserService {
   private getUserRO(user: UserEntity): GetUserResponse {
     return {
       id: user.id,
+      uuid: user.uuid,
       name: user.name,
       email: user.email,
       projects: user.projects.map((project: ProjectEntity) => {
@@ -72,5 +74,26 @@ export class UserService {
 
     foundUser = await this.userRepository.findOne({ where: { id: userId }, relations: ['projects'] });
     return this.getUserRO(foundUser);
+  }
+
+  async uploadAvatar(
+    userId: number,
+    user: UserEntity,
+    avatar: any,
+  ): Promise<string> {
+    const foundUser = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!foundUser || (foundUser.email !== user.email && foundUser.password !== user.password)) {
+      throw new NotFoundException(`User with id "${userId}" not found.`);
+    }
+
+    try {
+      await this.userRepository.update({ id: userId }, {avatar});
+    } catch (error) {
+      this.logger.error(`Failed to upload avatar for userId "${userId}".`, error.stack);
+      throw new InternalServerErrorException();
+    }
+
+    return 'success';
   }
 }
