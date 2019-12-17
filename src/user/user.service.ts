@@ -22,6 +22,7 @@ export class UserService {
       uuid: user.uuid,
       name: user.name,
       email: user.email,
+      avatar: user.avatar,
       projects: user.projects.map((project: ProjectEntity) => {
         return {
           id: project.id,
@@ -80,7 +81,7 @@ export class UserService {
     userId: number,
     user: UserEntity,
     avatar: any,
-  ): Promise<string> {
+  ): Promise<any> {
     const foundUser = await this.userRepository.findOne({ where: { id: userId } });
 
     if (!foundUser || (foundUser.email !== user.email && foundUser.password !== user.password)) {
@@ -94,6 +95,6 @@ export class UserService {
       throw new InternalServerErrorException();
     }
 
-    return 'success';
+    return {fileName: avatar};
   }
 }

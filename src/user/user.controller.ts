@@ -65,7 +65,7 @@ export class UserController extends FileUploaderHelper {
     @Param('id', ParseIntPipe) userId: number,
     @GetUser() user: UserEntity,
     @UploadedFile() avatar: any,
-  ): Promise<string> {
+  ): Promise<any> {
     this.compressImage(avatar.originalname).then(() => {
       this.logger.verbose('Image was optimized.');
     });

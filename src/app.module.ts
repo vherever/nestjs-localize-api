@@ -11,7 +11,6 @@ import { TranslationModule } from './translation-item/translation.module';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { UserModule } from './user/user.module';
 import { SharedProjectModule } from './shared-project/shared-project.module';
-import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -24,10 +23,11 @@ import { MulterModule } from '@nestjs/platform-express';
   ],
   controllers: [AppController],
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: HttpErrorFilter,
-    },
+    // This is not fully worked. Ex: Serve http://localhost:3000/uploads/ - infinite loading... // todo
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: HttpErrorFilter,
+    // },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,

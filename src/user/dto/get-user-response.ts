@@ -5,5 +5,6 @@ export class GetUserResponse {
   uuid: string;
   name: string;
   email: string;
+  avatar: string;
   projects: GetProjectResponse[];
 }
