@@ -1,8 +1,9 @@
 import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import * as moment from 'moment';
 // app imports
 import { UserEntity } from '../auth/user.entity';
-import { Repository } from 'typeorm';
 import { GetUserResponse } from './dto/get-user-response';
 import { UpdateUserDTO } from './dto/update-user.dto';
 import { ProjectEntity } from '../project/project.entity';
@@ -10,6 +11,7 @@ import { ProjectEntity } from '../project/project.entity';
 @Injectable()
 export class UserService {
   private logger = new Logger('UserService');
+
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
@@ -30,6 +32,8 @@ export class UserService {
           description: project.description,
           defaultLocale: project.defaultLocale,
           ownerId: project.ownerId,
+          translationsLocales: project.translationsLocales,
+          updated_formatted: moment(project.updated).fromNow(),
         };
       }),
     };
