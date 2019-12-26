@@ -33,7 +33,7 @@ export class UserService {
           defaultLocale: project.defaultLocale,
           ownerId: project.ownerId,
           translationsLocales: project.translationsLocales,
-          updated_formatted: moment(project.updated).fromNow(),
+          latestUpdatedAtFormatted: moment(project.latestUpdatedAt).fromNow(),
         };
       }),
     };

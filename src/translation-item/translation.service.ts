@@ -98,6 +98,7 @@ export class TranslationService {
     translation.assetProjectCode = projectId + '-' + createTranslationDTO.assetCode;
 
     try {
+      await this.projectRepository.update({ id: projectId }, { latestUpdatedAt: new Date() });
       await this.translationRepository.save(translation);
     } catch (error) {
       if (error.code === '23505') {
@@ -131,6 +132,7 @@ export class TranslationService {
       throw new NotFoundException(`Translation with id "${translationId}" not found.`);
     }
     try {
+      await this.projectRepository.update({ id: projectId }, { latestUpdatedAt: new Date() });
       await this.translationRepository.update({id: translationId}, {
         assetCode: updateTranslationDTO.assetCode,
         translations: updateTranslationDTO.translations,
@@ -164,6 +166,12 @@ export class TranslationService {
       throw new NotFoundException(`Translation with id "${translationId}" not found.`);
     }
 
-    await this.translationRepository.delete({ id: translationId, user });
+    try {
+      await this.projectRepository.update({ id: projectId }, { latestUpdatedAt: new Date() });
+      await this.translationRepository.delete({ id: translationId, user });
+    } catch (error) {
+      this.logger.error(`Failed to delete translation for user "${user.email}", projectId: "${projectId}".`, error.stack);
+      throw new InternalServerErrorException();
+    }
   }
 }

@@ -79,6 +79,7 @@ export class ProjectService {
     project.translationsLocales = translationsLocales;
     project.user = user;
     project.ownerId = user.id;
+    project.latestUpdatedAt = new Date();
 
     try {
       await project.save();
