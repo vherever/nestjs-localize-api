@@ -1,12 +1,15 @@
 import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
+import { Repository } from 'typeorm';
+//
 import { ProjectEntity } from './project.entity';
 import { UserEntity } from '../auth/user.entity';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
-import { Repository } from 'typeorm';
 import { CreateProjectDTO } from './dto/create-project.dto';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
+import * as moment from 'moment';
+import { GetUserResponse } from '../user/dto/get-user-response';
+import { GetProjectResponse } from './dto/get-project-response';
 
 @Injectable()
 export class ProjectService {
@@ -70,7 +73,7 @@ export class ProjectService {
   async createProject(
     createProjectDTO: CreateProjectDTO,
     user: UserEntity,
-  ): Promise<ProjectEntity> {
+  ): Promise<GetProjectResponse> {
     const project = new ProjectEntity();
     const { title, description, defaultLocale, translationsLocales } = createProjectDTO;
     project.title = title;
@@ -89,14 +92,14 @@ export class ProjectService {
     }
 
     delete project.user;
-    return project;
+    return new GetProjectResponse(project);
   }
 
   async updateProject(
     id: number,
     updateProjectDTO: Partial<CreateProjectDTO>,
     user: UserEntity,
-  ): Promise<ProjectEntity> {
+  ): Promise<GetProjectResponse> {
     let project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
     if (!project) {
       this.logger.error(`Project with id: "${id}" not found.`);
@@ -109,7 +112,7 @@ export class ProjectService {
       throw new InternalServerErrorException();
     }
     project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
-    return project;
+    return new GetProjectResponse(project);
   }
 
   async deleteProject(

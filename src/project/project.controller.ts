@@ -8,6 +8,7 @@ import { GetUser } from '../auth/get-user.decorator';
 import { CreateProjectDTO } from './dto/create-project.dto';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
+import { GetProjectResponse } from './dto/get-project-response';
 
 @Controller('projects')
 @UseGuards(AuthGuard())
@@ -40,7 +41,7 @@ export class ProjectController {
   createProject(
     @Body() createProjectDTO: CreateProjectDTO,
     @GetUser() user: UserEntity,
-  ): Promise<ProjectEntity> {
+  ): Promise<GetProjectResponse> {
     this.logger.verbose(`User "${user.email}" is creating a new project. Data: ${JSON.stringify(createProjectDTO)}.`);
     return this.projectsService.createProject(createProjectDTO, user);
   }
@@ -51,7 +52,7 @@ export class ProjectController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateProjectDTO: CreateProjectDTO,
     @GetUser() user: UserEntity,
-  ): Promise<ProjectEntity> {
+  ): Promise<GetProjectResponse> {
     this.logger.verbose(`User "${user.email}" is updating a project with id "${id}". Data: ${JSON.stringify(updateProjectDTO)}`);
     return this.projectsService.updateProject(id, updateProjectDTO, user);
   }
