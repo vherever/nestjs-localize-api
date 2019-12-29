@@ -1,15 +1,14 @@
 import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-//
+// app imports
 import { ProjectEntity } from './project.entity';
 import { UserEntity } from '../auth/user.entity';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
 import { CreateProjectDTO } from './dto/create-project.dto';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
-import * as moment from 'moment';
-import { GetUserResponse } from '../user/dto/get-user-response';
 import { GetProjectResponse } from './dto/get-project-response';
+import { RoleEnum } from '../shared/enums/role.enum';
 
 @Injectable()
 export class ProjectService {
@@ -30,7 +29,7 @@ export class ProjectService {
   async getProjects(
     filterDTO: GetProjectsFilterDTO,
     user: UserEntity,
-  ): Promise<{owned: ProjectEntity[], shared: SharedProjectEntity[]}> {
+  ): Promise<{owned: GetProjectResponse[], shared: GetProjectResponse[]}> {
     const { search } = filterDTO;
     const query = this.projectRepository.createQueryBuilder('project');
 
@@ -45,8 +44,11 @@ export class ProjectService {
     try {
       return Promise.all([await query.getMany(), await shared]).then(r => {
         return {
-          owned: r[0], // created projects by this user
-          shared: r[1], // shared projects with this user
+          owned: r[0].map((p: ProjectEntity) => new GetProjectResponse(p)), // created projects by this user
+          shared: r[1].map((p: SharedProjectEntity) => {
+            p.project.role = p.role;
+            return new GetProjectResponse(p.project);
+          }), // shared projects with this user
         };
       });
     } catch (error) {
@@ -83,6 +85,7 @@ export class ProjectService {
     project.user = user;
     project.ownerId = user.id;
     project.latestUpdatedAt = new Date();
+    project.role = RoleEnum.ADMINISTRATOR;
 
     try {
       await project.save();
@@ -120,19 +123,17 @@ export class ProjectService {
     user: UserEntity,
   ): Promise<void> {
     const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
-    const shared: SharedProjectEntity = await SharedProjectEntity.findOne({ where: { projectId: id, senderId: user.id }, relations: ['project'] });
 
     if (!project) {
       this.logger.error(`Project with id: "${id}" not found`);
       throw new NotFoundException(`Project with id: "${id}" not found.`);
     }
 
-    if (shared) {
-      await this.sharedProjectRepository.delete({ projectId: id });
-    }
-
-    if (project) {
+    try {
       await this.projectRepository.delete({ id });
+    } catch (error) {
+      this.logger.error(`Failed to delete project with projectId: "${id}".`, error.stack);
+      throw new InternalServerErrorException();
     }
   }
 }

@@ -1,4 +1,5 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+// app imports
 import { UserEntity } from '../auth/user.entity';
 import { ProjectEntity } from '../project/project.entity';
 import { RoleEnum } from '../shared/enums/role.enum';
@@ -19,7 +20,7 @@ export class SharedProjectEntity extends BaseEntity {
 
   @PrimaryColumn()
   projectId: number;
-  @ManyToOne(() => ProjectEntity, project => project.shares)
+  @ManyToOne(() => ProjectEntity, project => project.shares, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'projectId' })
   project: ProjectEntity;
 

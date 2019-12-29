@@ -1,12 +1,10 @@
 import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as moment from 'moment';
 // app imports
 import { UserEntity } from '../auth/user.entity';
 import { GetUserResponse } from './dto/get-user-response';
 import { UpdateUserDTO } from './dto/update-user.dto';
-import { ProjectEntity } from '../project/project.entity';
 
 @Injectable()
 export class UserService {
@@ -25,17 +23,6 @@ export class UserService {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
-      projects: user.projects.map((project: ProjectEntity) => {
-        return {
-          id: project.id,
-          title: project.title,
-          description: project.description,
-          defaultLocale: project.defaultLocale,
-          ownerId: project.ownerId,
-          translationsLocales: project.translationsLocales,
-          latestUpdatedAtFormatted: moment(project.latestUpdatedAt).fromNow(),
-        };
-      }),
     };
   }
 
@@ -43,7 +30,7 @@ export class UserService {
     userId: number,
     user: UserEntity,
   ): Promise<GetUserResponse> {
-    const found = await this.userRepository.findOne({ where: { id: userId }, relations: ['projects'] });
+    const found = await this.userRepository.findOne({ where: { id: userId } });
 
     if (!found || (found.email !== user.email && found.password !== user.password)) {
       throw new NotFoundException(`User with id "${userId}" not found.`);
@@ -77,7 +64,7 @@ export class UserService {
       throw new InternalServerErrorException();
     }
 
-    foundUser = await this.userRepository.findOne({ where: { id: userId }, relations: ['projects'] });
+    foundUser = await this.userRepository.findOne({ where: { id: userId } });
     return this.getUserRO(foundUser);
   }
 

@@ -10,6 +10,7 @@ export class GetProjectResponse {
     this.translationsLocales = project.translationsLocales;
     this.ownerId = project.ownerId;
     this.latestUpdatedAtFormatted = moment(project.latestUpdatedAt).fromNow();
+    this.role = project.role;
   }
   id: number;
   title: string;
@@ -18,4 +19,5 @@ export class GetProjectResponse {
   translationsLocales: string;
   ownerId: number;
   latestUpdatedAtFormatted: string;
+  role: string;
 }

@@ -1,13 +1,12 @@
 import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
-
 import { Repository } from 'typeorm';
+// app imports
 import { UserEntity } from '../auth/user.entity';
 import { SharedProjectEntity } from './shared-project.entity';
 import { ProjectEntity } from '../project/project.entity';
 import { ShareProjectDTO } from './dto/share-project.dto';
-import { RoleEnum } from '../shared/enums/role.enum';
 import { InviteTokenPayloadInterface } from './invite-token-payload.interface';
 
 @Injectable()
@@ -54,7 +53,7 @@ export class SharedProjectService {
       targetId: targetUser.id,
       targetEmail,
       projectId,
-      role: RoleEnum.TRANSLATOR,
+      role,
     };
 
     const shared = await SharedProjectEntity.findOne({ where: { targetEmail, projectId }, relations: ['project'] });
@@ -64,7 +63,12 @@ export class SharedProjectService {
       throw new ConflictException(`You already shared this project with this user.`);
     }
 
-    return this.jwtService.sign(tokenPayload);
+    try {
+      return this.jwtService.sign(tokenPayload);
+    } catch (error) {
+      this.logger.error(`Failed to share project for user: "${tokenPayload.targetId}".`, error.stack);
+      throw new InternalServerErrorException();
+    }
   }
 
   async processingInvitationToken(token: string): Promise<SharedProjectEntity> {

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { GetUser } from '../auth/get-user.decorator';
@@ -17,6 +17,7 @@ export class SharedProjectController {
 
   // Share project
   @Post('/add')
+  @UsePipes(ValidationPipe)
   generateInviteLink(
     @Body() shareProjectDTO: ShareProjectDTO,
     @GetUser() user: UserEntity,

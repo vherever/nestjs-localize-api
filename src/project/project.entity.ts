@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
+// app imports
 import { UserEntity } from '../auth/user.entity';
 import { TranslationEntity } from '../translation-item/translation.entity';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
@@ -57,4 +57,7 @@ export class ProjectEntity extends BaseEntity {
 
   @Column({ nullable: true })
   latestUpdatedAt: Date;
+
+  @Column({ nullable: true })
+  role: string;
 }
