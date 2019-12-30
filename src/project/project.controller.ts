@@ -31,7 +31,7 @@ export class ProjectController {
   getProjectById(
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: UserEntity,
-  ): Promise<ProjectEntity | SharedProjectEntity> {
+  ): Promise<GetProjectResponse> {
     this.logger.verbose(`User "${user.email} is getting project by id: ${id}.`);
     return this.projectsService.getProjectById(id, user);
   }

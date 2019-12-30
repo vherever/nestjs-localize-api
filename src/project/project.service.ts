@@ -44,10 +44,10 @@ export class ProjectService {
     try {
       return Promise.all([await query.getMany(), await shared]).then(r => {
         return {
-          owned: r[0].map((p: ProjectEntity) => new GetProjectResponse(p)), // created projects by this user
+          owned: r[0].map((p: ProjectEntity) => new GetProjectResponse(p, RoleEnum.ADMINISTRATOR)), // created projects by this user
           shared: r[1].map((p: SharedProjectEntity) => {
-            p.project.role = p.role;
-            return new GetProjectResponse(p.project);
+            // p.project.role = p.role;
+            return new GetProjectResponse(p.project, p.role);
           }), // shared projects with this user
         };
       });
@@ -60,7 +60,7 @@ export class ProjectService {
   async getProjectById(
     id: number,
     user: UserEntity,
-  ): Promise<ProjectEntity | SharedProjectEntity> {
+  ): Promise<GetProjectResponse> {
     const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
 
     const shared = await SharedProjectEntity.findOne({ where: { projectId: id, targetId: user.id }, relations: ['project'] });
@@ -69,7 +69,7 @@ export class ProjectService {
       throw new NotFoundException(`Project with ID "${id}" not found.`);
     }
 
-    return project ? project : shared;
+    return project ? new GetProjectResponse(project, RoleEnum.ADMINISTRATOR) : new GetProjectResponse(shared.project, shared.role);
   }
 
   async createProject(
@@ -85,7 +85,6 @@ export class ProjectService {
     project.user = user;
     project.ownerId = user.id;
     project.latestUpdatedAt = new Date();
-    project.role = RoleEnum.ADMINISTRATOR;
 
     try {
       await project.save();
@@ -95,7 +94,7 @@ export class ProjectService {
     }
 
     delete project.user;
-    return new GetProjectResponse(project);
+    return new GetProjectResponse(project, RoleEnum.ADMINISTRATOR);
   }
 
   async updateProject(
@@ -115,7 +114,7 @@ export class ProjectService {
       throw new InternalServerErrorException();
     }
     project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
-    return new GetProjectResponse(project);
+    return new GetProjectResponse(project, RoleEnum.ADMINISTRATOR);
   }
 
   async deleteProject(

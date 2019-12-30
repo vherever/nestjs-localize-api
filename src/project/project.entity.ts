@@ -57,7 +57,4 @@ export class ProjectEntity extends BaseEntity {
 
   @Column({ nullable: true })
   latestUpdatedAt: Date;
-
-  @Column({ nullable: true })
-  role: string;
 }
