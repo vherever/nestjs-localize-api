@@ -1,11 +1,10 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-
+// app imports
 import { TranslationService } from './translation.service';
 import { GetUser } from '../auth/get-user.decorator';
 import { UserEntity } from '../auth/user.entity';
 import { CreateTranslationDTO } from './dto/create-translation.dto';
-import { TranslationEntity } from './translation.entity';
 import { TranslationRO } from './dto/translation-ro';
 
 @Controller('projects/:id')
@@ -26,12 +25,12 @@ export class TranslationController {
   }
 
   @Get('translations')
-  getUserTranslationsByProject(
+  getTranslationsByProject(
     @GetUser() user: UserEntity,
     @Param('id') projectId: string,
   ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is retrieving his translations.`);
-    return this.translationItemService.getUserTranslationsByProject(projectId, user);
+    return this.translationItemService.getTranslationsByProject(projectId, user);
   }
 
   @Post('translations')

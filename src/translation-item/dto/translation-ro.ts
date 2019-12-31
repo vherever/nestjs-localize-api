@@ -30,6 +30,8 @@ export class TranslationRO {
   projectId: number;
   authorId?: number;
   labels: string;
+  avatar: string;
+  name: string;
 }
 
 interface Translations {

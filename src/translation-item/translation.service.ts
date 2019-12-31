@@ -47,7 +47,7 @@ export class TranslationService {
     return this.getTranslationsRO(project.translations);
   }
 
-  async getUserTranslationsByProject(
+  async getTranslationsByProject(
     projectId: string,
     user: UserEntity,
   ): Promise<TranslationRO[]> {
@@ -56,18 +56,19 @@ export class TranslationService {
 
     let sharedFromProjects;
 
-    const translations: TranslationEntity[] = [];
+    let translations: TranslationEntity[];
 
     if (!project && !shared) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
+
     if (project) {
-      translations.push(...project.translations);
+      translations = project.translations;
     }
-    if (shared) {
+    if (shared && !project) {
       sharedFromProjects = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['translations'] });
-      translations.push(...sharedFromProjects.translations);
+      translations = sharedFromProjects.translations;
     }
     return this.getTranslationsRO(translations);
   }
@@ -118,11 +119,12 @@ export class TranslationService {
     projectId: number,
     translationId: number,
   ): Promise<TranslationRO[]> {
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.project'] });
+    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectId }, relations: ['project'] });
 
-    let translation = await this.translationRepository.findOne({ where: { id: translationId, userId: user.id } });
+    let translation = await this.translationRepository.findOne({ where: { id: translationId, targetId: user.id } });
 
-    if (!project) {
+    if (!project && !shared) {
       this.logger.error(`Project with id "${projectId}" not found.`);
       throw new NotFoundException(`Project with id "${projectId}" not found.`);
     }
@@ -143,7 +145,7 @@ export class TranslationService {
       throw new InternalServerErrorException();
     }
 
-    translation = await this.translationRepository.findOne({ where: { id: translationId, userId: user.id } });
+    translation = await this.translationRepository.findOne({ where: { id: translationId, targetId: user.id } });
     return this.getTranslationsRO([translation]);
   }
 
