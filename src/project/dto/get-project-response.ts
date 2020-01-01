@@ -1,5 +1,6 @@
-import { ProjectEntity } from '../project.entity';
 import * as moment from 'moment';
+// app imports
+import { ProjectEntity } from '../project.entity';
 import { RoleEnum } from '../../shared/enums/role.enum';
 
 export class GetProjectResponse {
