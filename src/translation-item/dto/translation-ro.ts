@@ -35,7 +35,7 @@ export class TranslationRO {
   private author: string;
 
   private getAuthorName(user: UserEntity): string {
-    return user.name ? user.name : '';
+    return user.name ? user.name : user.email;
   }
 }
 

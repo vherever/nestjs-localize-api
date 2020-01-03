@@ -1,4 +1,6 @@
 import { Controller, Get, Param, Res, Logger } from '@nestjs/common';
+// app imports
+import { GetLanguages } from './shared/validators/get-languages';
 
 @Controller()
 export class AppController {
@@ -24,6 +26,16 @@ export class AppController {
           res.status(error.status).json({statusCode: error.status, message: error.message});
         }
       }
+    });
+  }
+
+  @Get('/locales')
+  async getLocales(
+    @Res() res,
+  ) {
+    const getLocalesInstance = new GetLanguages();
+    getLocalesInstance.getLanguages().then((languages) => {
+      res.json(languages);
     });
   }
 }

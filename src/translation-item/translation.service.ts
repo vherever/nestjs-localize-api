@@ -54,7 +54,7 @@ export class TranslationService {
     const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.user'] });
     const shared = await SharedProjectEntity.findOne({ where: { projectId } });
 
-    let sharedFromProjects;
+    let sharedFromProjects: ProjectEntity;
 
     let translations: TranslationEntity[];
 
