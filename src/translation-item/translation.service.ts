@@ -27,12 +27,15 @@ export class TranslationService {
   ) {
   }
 
-  private async getTranslationsRO(translations: TranslationEntity[]): Promise<TranslationRO[]> {
+  private async getTranslationsRO(translations: TranslationEntity[], defaultLocale?: string): Promise<TranslationRO[]> {
     return translations
       .sort((a, b) => a.id - b.id) // sort ASC by id
       .map((translation: TranslationEntity) => {
-      return new TranslationRO(translation);
-    });
+        if (defaultLocale) {
+          translation.translations = JSON.stringify(Object.assign({[defaultLocale]: ''}, JSON.parse(translation.translations)));
+        }
+        return new TranslationRO(translation);
+      });
   }
 
   async getAllTranslationsByProject(
@@ -70,7 +73,7 @@ export class TranslationService {
       sharedFromProjects = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['translations', 'translations.user', 'translations.userLastUpdatedId'] });
       translations = sharedFromProjects.translations;
     }
-    return this.getTranslationsRO(translations);
+    return this.getTranslationsRO(translations, project.defaultLocale);
   }
 
   async createTranslation(
