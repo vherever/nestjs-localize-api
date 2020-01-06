@@ -56,7 +56,7 @@ export class SharedProjectService {
       role,
     };
 
-    const shared = await SharedProjectEntity.findOne({ where: { targetEmail, projectId }, relations: ['project'] });
+    const shared = await SharedProjectEntity.findOne({ where: { targetId: targetUser.id, projectId }, relations: ['project'] });
 
     if (shared) {
       this.logger.error(`You already shared this project with this user.`);

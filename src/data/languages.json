@@ -2,282 +2,338 @@
   {
     "key": "aa",
     "name": "Afar",
-    "native": "Afar"
+    "native": "Afar",
+    "countries": []
   },
   {
     "key": "ab",
     "name": "Abkhazian",
-    "native": "Аҧсуа"
+    "native": "Аҧсуа",
+    "countries": []
   },
   {
     "key": "af",
     "name": "Afrikaans",
-    "native": "Afrikaans"
+    "native": "Afrikaans",
+    "countries": []
   },
   {
     "key": "ak",
     "name": "Akan",
-    "native": "Akana"
+    "native": "Akana",
+    "countries": []
   },
   {
     "key": "am",
     "name": "Amharic",
-    "native": "አማርኛ"
+    "native": "አማርኛ",
+    "countries": []
   },
   {
     "key": "an",
     "name": "Aragonese",
-    "native": "Aragonés"
+    "native": "Aragonés",
+    "countries": []
   },
   {
     "key": "ar",
     "name": "Arabic",
-    "native": "العربية"
+    "native": "العربية",
+    "countries": []
   },
   {
     "key": "as",
     "name": "Assamese",
-    "native": "অসমীয়া"
+    "native": "অসমীয়া",
+    "countries": []
   },
   {
     "key": "av",
     "name": "Avar",
-    "native": "Авар"
+    "native": "Авар",
+    "countries": []
   },
   {
     "key": "ay",
     "name": "Aymara",
-    "native": "Aymar"
+    "native": "Aymar",
+    "countries": []
   },
   {
     "key": "az",
     "name": "Azerbaijani",
-    "native": "Azərbaycanca / آذربايجان"
+    "native": "Azərbaycanca / آذربايجان",
+    "countries": []
   },
   {
     "key": "ba",
     "name": "Bashkir",
-    "native": "Башҡорт"
+    "native": "Башҡорт",
+    "countries": []
   },
   {
     "key": "be",
     "name": "Belarusian",
-    "native": "Беларуская"
+    "native": "Беларуская",
+    "countries": []
   },
   {
     "key": "bg",
     "name": "Bulgarian",
-    "native": "Български"
+    "native": "Български",
+    "countries": []
   },
   {
     "key": "bh",
     "name": "Bihari",
-    "native": "भोजपुरी"
+    "native": "भोजपुरी",
+    "countries": []
   },
   {
     "key": "bi",
     "name": "Bislama",
-    "native": "Bislama"
+    "native": "Bislama",
+    "countries": []
   },
   {
     "key": "bm",
     "name": "Bambara",
-    "native": "Bamanankan"
+    "native": "Bamanankan",
+    "countries": []
   },
   {
     "key": "bn",
     "name": "Bengali",
-    "native": "বাংলা"
+    "native": "বাংলা",
+    "countries": []
   },
   {
     "key": "bo",
     "name": "Tibetan",
-    "native": "བོད་ཡིག / Bod skad"
+    "native": "བོད་ཡིག / Bod skad",
+    "countries": []
   },
   {
     "key": "br",
     "name": "Breton",
-    "native": "Brezhoneg"
+    "native": "Brezhoneg",
+    "countries": []
   },
   {
     "key": "bs",
     "name": "Bosnian",
-    "native": "Bosanski"
+    "native": "Bosanski",
+    "countries": []
   },
   {
     "key": "ca",
     "name": "Catalan",
-    "native": "Català"
+    "native": "Català",
+    "countries": []
   },
   {
     "key": "ce",
     "name": "Chechen",
-    "native": "Нохчийн"
+    "native": "Нохчийн",
+    "countries": []
   },
   {
     "key": "ch",
     "name": "Chamorro",
-    "native": "Chamoru"
+    "native": "Chamoru",
+    "countries": []
   },
   {
     "key": "co",
     "name": "Corsican",
-    "native": "Corsu"
+    "native": "Corsu",
+    "countries": []
   },
   {
     "key": "cr",
     "name": "Cree",
-    "native": "Nehiyaw"
+    "native": "Nehiyaw",
+    "countries": []
   },
   {
     "key": "cs",
     "name": "Czech",
-    "native": "Česky"
+    "native": "Česky",
+    "countries": []
   },
   {
     "key": "cu",
     "name": "Old Church Slavonic / Old Bulgarian",
-    "native": "словѣньскъ / slověnĭskŭ"
+    "native": "словѣньскъ / slověnĭskŭ",
+    "countries": []
   },
   {
     "key": "cv",
     "name": "Chuvash",
-    "native": "Чăваш"
+    "native": "Чăваш",
+    "countries": []
   },
   {
     "key": "cy",
     "name": "Welsh",
-    "native": "Cymraeg"
+    "native": "Cymraeg",
+    "countries": []
   },
   {
     "key": "da",
     "name": "Danish",
-    "native": "Dansk"
+    "native": "Dansk",
+    "countries": []
   },
   {
     "key": "de",
     "name": "German",
-    "native": "Deutsch"
+    "native": "Deutsch",
+    "countries": []
   },
   {
     "key": "dv",
     "name": "Divehi",
-    "native": "ދިވެހިބަސް"
+    "native": "ދިވެހިބަސް",
+    "countries": []
   },
   {
     "key": "dz",
     "name": "Dzongkha",
-    "native": "ཇོང་ཁ"
+    "native": "ཇོང་ཁ",
+    "countries": []
   },
   {
     "key": "ee",
     "name": "Ewe",
-    "native": "Ɛʋɛ"
+    "native": "Ɛʋɛ",
+    "countries": []
   },
   {
     "key": "el",
     "name": "Greek",
-    "native": "Ελληνικά"
+    "native": "Ελληνικά",
+    "countries": []
   },
   {
     "key": "en",
     "name": "English",
-    "native": "English"
+    "native": "English",
+    "countries": []
   },
   {
     "key": "eo",
     "name": "Esperanto",
-    "native": "Esperanto"
+    "native": "Esperanto",
+    "countries": []
   },
   {
     "key": "es",
     "name": "Spanish",
-    "native": "Español"
+    "native": "Español",
+    "countries": []
   },
   {
     "key": "et",
     "name": "Estonian",
-    "native": "Eesti"
+    "native": "Eesti",
+    "countries": []
   },
   {
     "key": "eu",
     "name": "Basque",
-    "native": "Euskara"
+    "native": "Euskara",
+    "countries": []
   },
   {
     "key": "fa",
     "name": "Persian",
-    "native": "فارسی"
+    "native": "فارسی",
+    "countries": []
   },
   {
     "key": "ff",
     "name": "Peul",
-    "native": "Fulfulde"
+    "native": "Fulfulde",
+    "countries": []
   },
   {
     "key": "fi",
     "name": "Finnish",
-    "native": "Suomi"
+    "native": "Suomi",
+    "countries": []
   },
   {
     "key": "fj",
     "name": "Fijian",
-    "native": "Na Vosa Vakaviti"
+    "native": "Na Vosa Vakaviti",
+    "countries": []
   },
   {
     "key": "fo",
     "name": "Faroese",
-    "native": "Føroyskt"
+    "native": "Føroyskt",
+    "countries": []
   },
   {
     "key": "fr",
     "name": "French",
-    "native": "Français"
+    "native": "Français",
+    "countries": []
   },
   {
     "key": "fy",
     "name": "West Frisian",
-    "native": "Frysk"
+    "native": "Frysk",
+    "countries": []
   },
   {
     "key": "ga",
     "name": "Irish",
-    "native": "Gaeilge"
+    "native": "Gaeilge",
+    "countries": []
   },
   {
     "key": "gd",
     "name": "Scottish Gaelic",
-    "native": "Gàidhlig"
+    "native": "Gàidhlig",
+    "countries": []
   },
   {
     "key": "gl",
     "name": "Galician",
-    "native": "Galego"
+    "native": "Galego",
+    "countries": []
   },
   {
     "key": "gn",
     "name": "Guarani",
-    "native": "Avañe'ẽ"
+    "native": "Avañe'ẽ",
+    "countries": []
   },
   {
     "key": "gu",
     "name": "Gujarati",
-    "native": "ગુજરાતી"
+    "native": "ગુજરાતી",
+    "countries": []
   },
   {
     "key": "gv",
     "name": "Manx",
-    "native": "Gaelg"
+    "native": "Gaelg",
+    "countries": []
   },
   {
     "key": "ha",
     "name": "Hausa",
-    "native": "هَوُسَ"
+    "native": "هَوُسَ",
+    "countries": []
   },
   {
     "key": "he",
     "name": "Hebrew",
-    "native": "עברית"
+    "native": "עברית",
+    "countries": []
   },
   {
     "key": "hi",
@@ -287,631 +343,757 @@
   {
     "key": "ho",
     "name": "Hiri Motu",
-    "native": "Hiri Motu"
+    "native": "Hiri Motu",
+    "countries": []
   },
   {
     "key": "hr",
     "name": "Croatian",
-    "native": "Hrvatski"
+    "native": "Hrvatski",
+    "countries": []
   },
   {
     "key": "ht",
     "name": "Haitian",
-    "native": "Krèyol ayisyen"
+    "native": "Krèyol ayisyen",
+    "countries": []
   },
   {
     "key": "hu",
     "name": "Hungarian",
-    "native": "Magyar"
+    "native": "Magyar",
+    "countries": []
   },
   {
     "key": "hy",
     "name": "Armenian",
-    "native": "Հայերեն"
+    "native": "Հայերեն",
+    "countries": []
   },
   {
     "key": "hz",
     "name": "Herero",
-    "native": "Otsiherero"
+    "native": "Otsiherero",
+    "countries": []
   },
   {
     "key": "ia",
     "name": "Interlingua",
-    "native": "Interlingua"
+    "native": "Interlingua",
+    "countries": []
   },
   {
     "key": "id",
     "name": "Indonesian",
-    "native": "Bahasa Indonesia"
+    "native": "Bahasa Indonesia",
+    "countries": []
   },
   {
     "key": "ie",
     "name": "Interlingue",
-    "native": "Interlingue"
+    "native": "Interlingue",
+    "countries": []
   },
   {
     "key": "ig",
     "name": "Igbo",
-    "native": "Igbo"
+    "native": "Igbo",
+    "countries": []
   },
   {
     "key": "ii",
     "name": "Sichuan Yi",
-    "native": "ꆇꉙ / 四川彝语"
+    "native": "ꆇꉙ / 四川彝语",
+    "countries": []
   },
   {
     "key": "ik",
     "name": "Inupiak",
-    "native": "Iñupiak"
+    "native": "Iñupiak",
+    "countries": []
   },
   {
     "key": "io",
     "name": "Ido",
-    "native": "Ido"
+    "native": "Ido",
+    "countries": []
   },
   {
     "key": "is",
     "name": "Icelandic",
-    "native": "Íslenska"
+    "native": "Íslenska",
+    "countries": []
   },
   {
     "key": "it",
     "name": "Italian",
-    "native": "Italiano"
+    "native": "Italiano",
+    "countries": []
   },
   {
     "key": "iu",
     "name": "Inuktitut",
-    "native": "ᐃᓄᒃᑎᑐᑦ"
+    "native": "ᐃᓄᒃᑎᑐᑦ",
+    "countries": []
   },
   {
     "key": "ja",
     "name": "Japanese",
-    "native": "日本語"
+    "native": "日本語",
+    "countries": []
   },
   {
     "key": "jv",
     "name": "Javanese",
-    "native": "Basa Jawa"
+    "native": "Basa Jawa",
+    "countries": []
   },
   {
     "key": "ka",
     "name": "Georgian",
-    "native": "ქართული"
+    "native": "ქართული",
+    "countries": []
   },
   {
     "key": "kg",
     "name": "Kongo",
-    "native": "KiKongo"
+    "native": "KiKongo",
+    "countries": []
   },
   {
     "key": "ki",
     "name": "Kikuyu",
-    "native": "Gĩkũyũ"
+    "native": "Gĩkũyũ",
+    "countries": []
   },
   {
     "key": "kj",
     "name": "Kuanyama",
-    "native": "Kuanyama"
+    "native": "Kuanyama",
+    "countries": []
   },
   {
     "key": "kk",
     "name": "Kazakh",
-    "native": "Қазақша"
+    "native": "Қазақша",
+    "countries": []
   },
   {
     "key": "kl",
     "name": "Greenlandic",
-    "native": "Kalaallisut"
+    "native": "Kalaallisut",
+    "countries": []
   },
   {
     "key": "km",
     "name": "Cambodian",
-    "native": "ភាសាខ្មែរ"
+    "native": "ភាសាខ្មែរ",
+    "countries": []
   },
   {
     "key": "kn",
     "name": "Kannada",
-    "native": "ಕನ್ನಡ"
+    "native": "ಕನ್ನಡ",
+    "countries": []
   },
   {
     "key": "ko",
     "name": "Korean",
-    "native": "한국어"
+    "native": "한국어",
+    "countries": []
   },
   {
     "key": "kr",
     "name": "Kanuri",
-    "native": "Kanuri"
+    "native": "Kanuri",
+    "countries": []
   },
   {
     "key": "ks",
     "name": "Kashmiri",
-    "native": "कश्मीरी / كشميري"
+    "native": "कश्मीरी / كشميري",
+    "countries": []
   },
   {
     "key": "ku",
     "name": "Kurdish",
-    "native": "Kurdî / كوردی"
+    "native": "Kurdî / كوردی",
+    "countries": []
   },
   {
     "key": "kv",
     "name": "Komi",
-    "native": "Коми"
+    "native": "Коми",
+    "countries": []
   },
   {
     "key": "kw",
     "name": "Cornish",
-    "native": "Kernewek"
+    "native": "Kernewek",
+    "countries": []
   },
   {
     "key": "ky",
     "name": "Kirghiz",
-    "native": "Kırgızca / Кыргызча"
+    "native": "Kırgızca / Кыргызча",
+    "countries": []
   },
   {
     "key": "la",
     "name": "Latin",
-    "native": "Latina"
+    "native": "Latina",
+    "countries": []
   },
   {
     "key": "lb",
     "name": "Luxembourgish",
-    "native": "Lëtzebuergesch"
+    "native": "Lëtzebuergesch",
+    "countries": []
   },
   {
     "key": "lg",
     "name": "Ganda",
-    "native": "Luganda"
+    "native": "Luganda",
+    "countries": []
   },
   {
     "key": "li",
     "name": "Limburgian",
-    "native": "Limburgs"
+    "native": "Limburgs",
+    "countries": []
   },
   {
     "key": "ln",
     "name": "Lingala",
-    "native": "Lingála"
+    "native": "Lingála",
+    "countries": []
   },
   {
     "key": "lo",
     "name": "Laotian",
-    "native": "ລາວ / Pha xa lao"
+    "native": "ລາວ / Pha xa lao",
+    "countries": []
   },
   {
     "key": "lt",
     "name": "Lithuanian",
-    "native": "Lietuvių"
+    "native": "Lietuvių",
+    "countries": []
   },
   {
     "key": "lv",
     "name": "Latvian",
-    "native": "Latviešu"
+    "native": "Latviešu",
+    "countries": []
   },
   {
     "key": "mg",
     "name": "Malagasy",
-    "native": "Malagasy"
+    "native": "Malagasy",
+    "countries": []
   },
   {
     "key": "mh",
     "name": "Marshallese",
-    "native": "Kajin Majel / Ebon"
+    "native": "Kajin Majel / Ebon",
+    "countries": []
   },
   {
     "key": "mi",
     "name": "Maori",
-    "native": "Māori"
+    "native": "Māori",
+    "countries": []
   },
   {
     "key": "mk",
     "name": "Macedonian",
-    "native": "Македонски"
+    "native": "Македонски",
+    "countries": []
   },
   {
     "key": "ml",
     "name": "Malayalam",
-    "native": "മലയാളം"
+    "native": "മലയാളം",
+    "countries": []
   },
   {
     "key": "mn",
     "name": "Mongolian",
-    "native": "Монгол"
+    "native": "Монгол",
+    "countries": []
   },
   {
     "key": "mo",
     "name": "Moldovan",
-    "native": "Moldovenească"
+    "native": "Moldovenească",
+    "countries": []
   },
   {
     "key": "mr",
     "name": "Marathi",
-    "native": "मराठी"
+    "native": "मराठी",
+    "countries": []
   },
   {
     "key": "ms",
     "name": "Malay",
-    "native": "Bahasa Melayu"
+    "native": "Bahasa Melayu",
+    "countries": []
   },
   {
     "key": "mt",
     "name": "Maltese",
-    "native": "bil-Malti"
+    "native": "bil-Malti",
+    "countries": []
   },
   {
     "key": "my",
     "name": "Burmese",
-    "native": "မြန်မာစာ"
+    "native": "မြန်မာစာ",
+    "countries": []
   },
   {
     "key": "na",
     "name": "Nauruan",
-    "native": "Dorerin Naoero"
+    "native": "Dorerin Naoero",
+    "countries": []
   },
   {
     "key": "nd",
     "name": "North Ndebele",
-    "native": "Sindebele"
+    "native": "Sindebele",
+    "countries": []
   },
   {
     "key": "ne",
     "name": "Nepali",
-    "native": "नेपाली"
+    "native": "नेपाली",
+    "countries": []
   },
   {
     "key": "ng",
     "name": "Ndonga",
-    "native": "Oshiwambo"
+    "native": "Oshiwambo",
+    "countries": []
   },
   {
     "key": "nl",
     "name": "Dutch",
-    "native": "Nederlands"
+    "native": "Nederlands",
+    "countries": []
   },
   {
     "key": "nn",
     "name": "Norwegian Nynorsk",
-    "native": "Norsk (nynorsk)"
+    "native": "Norsk (nynorsk)",
+    "countries": []
   },
   {
     "key": "no",
     "name": "Norwegian",
-    "native": "Norsk (bokmål / riksmål)"
+    "native": "Norsk (bokmål / riksmål)",
+    "countries": []
   },
   {
     "key": "nr",
     "name": "South Ndebele",
-    "native": "isiNdebele"
+    "native": "isiNdebele",
+    "countries": []
   },
   {
     "key": "nv",
     "name": "Navajo",
-    "native": "Diné bizaad"
+    "native": "Diné bizaad",
+    "countries": []
   },
   {
     "key": "ny",
     "name": "Chichewa",
-    "native": "Chi-Chewa"
+    "native": "Chi-Chewa",
+    "countries": []
   },
   {
     "key": "oc",
     "name": "Occitan",
-    "native": "Occitan"
+    "native": "Occitan",
+    "countries": []
   },
   {
     "key": "oj",
     "name": "Ojibwa",
-    "native": "ᐊᓂᔑᓈᐯᒧᐎᓐ / Anishinaabemowin"
+    "native": "ᐊᓂᔑᓈᐯᒧᐎᓐ / Anishinaabemowin",
+    "countries": []
   },
   {
     "key": "om",
     "name": "Oromo",
-    "native": "Oromoo"
+    "native": "Oromoo",
+    "countries": []
   },
   {
     "key": "or",
     "name": "Oriya",
-    "native": "ଓଡ଼ିଆ"
+    "native": "ଓଡ଼ିଆ",
+    "countries": []
   },
   {
     "key": "os",
     "name": "Ossetian / Ossetic",
-    "native": "Иронау"
+    "native": "Иронау",
+    "countries": []
   },
   {
     "key": "pa",
     "name": "Panjabi / Punjabi",
-    "native": "ਪੰਜਾਬੀ / पंजाबी / پنجابي"
+    "native": "ਪੰਜਾਬੀ / पंजाबी / پنجابي",
+    "countries": []
   },
   {
     "key": "pi",
     "name": "Pali",
-    "native": "Pāli / पाऴि"
+    "native": "Pāli / पाऴि",
+    "countries": []
   },
   {
     "key": "pl",
     "name": "Polish",
-    "native": "Polski"
+    "native": "Polski",
+    "countries": []
   },
   {
     "key": "ps",
     "name": "Pashto",
-    "native": "پښتو"
+    "native": "پښتو",
+    "countries": []
   },
   {
     "key": "pt",
     "name": "Portuguese",
-    "native": "Português"
+    "native": "Português",
+    "countries": []
   },
   {
     "key": "qu",
     "name": "Quechua",
-    "native": "Runa Simi"
+    "native": "Runa Simi",
+    "countries": []
   },
   {
     "key": "rm",
     "name": "Raeto Romance",
-    "native": "Rumantsch"
+    "native": "Rumantsch",
+    "countries": []
   },
   {
     "key": "rn",
     "name": "Kirundi",
-    "native": "Kirundi"
+    "native": "Kirundi",
+    "countries": []
   },
   {
     "key": "ro",
     "name": "Romanian",
-    "native": "Română"
+    "native": "Română",
+    "countries": []
   },
   {
     "key": "ru",
     "name": "Russian",
-    "native": "Русский"
+    "native": "Русский",
+    "countries": []
   },
   {
     "key": "rw",
     "name": "Rwandi",
-    "native": "Kinyarwandi"
+    "native": "Kinyarwandi",
+    "countries": []
   },
   {
     "key": "sa",
     "name": "Sanskrit",
-    "native": "संस्कृतम्"
+    "native": "संस्कृतम्",
+    "countries": []
   },
   {
     "key": "sc",
     "name": "Sardinian",
-    "native": "Sardu"
+    "native": "Sardu",
+    "countries": []
   },
   {
     "key": "sd",
     "name": "Sindhi",
-    "native": "सिनधि"
+    "native": "सिनधि",
+    "countries": []
   },
   {
     "key": "se",
     "name": "Northern Sami",
-    "native": "Sámegiella"
+    "native": "Sámegiella",
+    "countries": []
   },
   {
     "key": "sg",
     "name": "Sango",
-    "native": "Sängö"
+    "native": "Sängö",
+    "countries": []
   },
   {
     "key": "sh",
     "name": "Serbo-Croatian",
-    "native": "Srpskohrvatski / Српскохрватски"
+    "native": "Srpskohrvatski / Српскохрватски",
+    "countries": []
   },
   {
     "key": "si",
     "name": "Sinhalese",
-    "native": "සිංහල"
+    "native": "සිංහල",
+    "countries": []
   },
   {
     "key": "sk",
     "name": "Slovak",
-    "native": "Slovenčina"
+    "native": "Slovenčina",
+    "countries": []
   },
   {
     "key": "sl",
     "name": "Slovenian",
-    "native": "Slovenščina"
+    "native": "Slovenščina",
+    "countries": []
   },
   {
     "key": "sm",
     "name": "Samoan",
-    "native": "Gagana Samoa"
+    "native": "Gagana Samoa",
+    "countries": []
   },
   {
     "key": "sn",
     "name": "Shona",
-    "native": "chiShona"
+    "native": "chiShona",
+    "countries": []
   },
   {
     "key": "so",
     "name": "Somalia",
-    "native": "Soomaaliga"
+    "native": "Soomaaliga",
+    "countries": []
   },
   {
     "key": "sq",
     "name": "Albanian",
-    "native": "Shqip"
+    "native": "Shqip",
+    "countries": []
   },
   {
     "key": "sr",
     "name": "Serbian",
-    "native": "Српски"
+    "native": "Српски",
+    "countries": []
   },
   {
     "key": "ss",
     "name": "Swati",
-    "native": "SiSwati"
+    "native": "SiSwati",
+    "countries": []
   },
   {
     "key": "st",
     "name": "Southern Sotho",
-    "native": "Sesotho"
+    "native": "Sesotho",
+    "countries": []
   },
   {
     "key": "su",
     "name": "Sundanese",
-    "native": "Basa Sunda"
+    "native": "Basa Sunda",
+    "countries": []
   },
   {
     "key": "sv",
     "name": "Swedish",
-    "native": "Svenska"
+    "native": "Svenska",
+    "countries": []
   },
   {
     "key": "sw",
     "name": "Swahili",
-    "native": "Kiswahili"
+    "native": "Kiswahili",
+    "countries": []
   },
   {
     "key": "ta",
     "name": "Tamil",
-    "native": "தமிழ்"
+    "native": "தமிழ்",
+    "countries": []
   },
   {
     "key": "te",
     "name": "Telugu",
-    "native": "తెలుగు"
+    "native": "తెలుగు",
+    "countries": []
   },
   {
     "key": "tg",
     "name": "Tajik",
-    "native": "Тоҷикӣ"
+    "native": "Тоҷикӣ",
+    "countries": []
   },
   {
     "key": "th",
     "name": "Thai",
-    "native": "ไทย / Phasa Thai"
+    "native": "ไทย / Phasa Thai",
+    "countries": []
   },
   {
     "key": "ti",
     "name": "Tigrinya",
-    "native": "ትግርኛ"
+    "native": "ትግርኛ",
+    "countries": []
   },
   {
     "key": "tk",
     "name": "Turkmen",
-    "native": "Туркмен / تركمن"
+    "native": "Туркмен / تركمن",
+    "countries": []
   },
   {
     "key": "tl",
     "name": "Tagalog / Filipino",
-    "native": "Tagalog"
+    "native": "Tagalog",
+    "countries": []
   },
   {
     "key": "tn",
     "name": "Tswana",
-    "native": "Setswana"
+    "native": "Setswana",
+    "countries": []
   },
   {
     "key": "to",
     "name": "Tonga",
-    "native": "Lea Faka-Tonga"
+    "native": "Lea Faka-Tonga",
+    "countries": []
   },
   {
     "key": "tr",
     "name": "Turkish",
-    "native": "Türkçe"
+    "native": "Türkçe",
+    "countries": []
   },
   {
     "key": "ts",
     "name": "Tsonga",
-    "native": "Xitsonga"
+    "native": "Xitsonga",
+    "countries": []
   },
   {
     "key": "tt",
     "name": "Tatar",
-    "native": "Tatarça"
+    "native": "Tatarça",
+    "countries": []
   },
   {
     "key": "tw",
     "name": "Twi",
-    "native": "Twi"
+    "native": "Twi",
+    "countries": []
   },
   {
     "key": "ty",
     "name": "Tahitian",
-    "native": "Reo Mā`ohi"
+    "native": "Reo Mā`ohi",
+    "countries": []
   },
   {
     "key": "ug",
     "name": "Uyghur",
-    "native": "Uyƣurqə / ئۇيغۇرچە"
+    "native": "Uyƣurqə / ئۇيغۇرچە",
+    "countries": []
   },
   {
     "key": "uk",
     "name": "Ukrainian",
-    "native": "Українська"
+    "native": "Українська",
+    "countries": []
   },
   {
     "key": "ur",
     "name": "Urdu",
-    "native": "اردو"
+    "native": "اردو",
+    "countries": []
   },
   {
     "key": "uz",
     "name": "Uzbek",
-    "native": "Ўзбек"
+    "native": "Ўзбек",
+    "countries": []
   },
   {
     "key": "ve",
     "name": "Venda",
-    "native": "Tshivenḓa"
+    "native": "Tshivenḓa",
+    "countries": []
   },
   {
     "key": "vi",
     "name": "Vietnamese",
-    "native": "Tiếng Việt"
+    "native": "Tiếng Việt",
+    "countries": []
   },
   {
     "key": "vo",
     "name": "Volapük",
-    "native": "Volapük"
+    "native": "Volapük",
+    "countries": []
   },
   {
     "key": "wa",
     "name": "Walloon",
-    "native": "Walon"
+    "native": "Walon",
+    "countries": []
   },
   {
     "key": "wo",
     "name": "Wolof",
-    "native": "Wollof"
+    "native": "Wollof",
+    "countries": []
   },
   {
     "key": "xh",
     "name": "Xhosa",
-    "native": "isiXhosa"
+    "native": "isiXhosa",
+    "countries": []
   },
   {
     "key": "yi",
     "name": "Yiddish",
-    "native": "ייִדיש"
+    "native": "ייִדיש",
+    "countries": []
   },
   {
     "key": "yo",
     "name": "Yoruba",
-    "native": "Yorùbá"
+    "native": "Yorùbá",
+    "countries": []
   },
   {
     "key": "za",
     "name": "Zhuang",
-    "native": "Cuengh / Tôô / 壮语"
+    "native": "Cuengh / Tôô / 壮语",
+    "countries": []
   },
   {
     "key": "zh",
     "name": "Chinese",
-    "native": "中文"
+    "native": "中文",
+    "countries": []
   },
   {
     "key": "zu",
     "name": "Zulu",
-    "native": "isiZulu"
+    "native": "isiZulu",
+    "countries": []
   }
 ]

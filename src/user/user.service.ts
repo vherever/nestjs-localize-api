@@ -16,26 +16,27 @@ export class UserService {
   ) {
   }
 
-  private getUserRO(user: UserEntity): GetUserResponse {
-    return {
-      id: user.id,
-      uuid: user.uuid,
-      name: user.name,
-      email: user.email,
-      avatar: user.avatar,
-    };
-  }
+  // private getUserRO(user: UserEntity): GetUserResponse {
+  //   return {
+  //     id: user.id,
+  //     uuid: user.uuid,
+  //     name: user.name,
+  //     email: user.email,
+  //     avatar: user.avatar,
+  //   };
+  // }
 
   async getUser(
     userId: number,
     user: UserEntity,
   ): Promise<GetUserResponse> {
-    const found = await this.userRepository.findOne({ where: { id: userId } });
+    const found = await this.userRepository.findOne({ where: { id: userId }, relations: ['projects', 'projectsSharedWithYou'] });
+    // console.log('___ found', found); // todo
 
     if (!found || (found.email !== user.email && found.password !== user.password)) {
       throw new NotFoundException(`User with id "${userId}" not found.`);
     }
-    return this.getUserRO(found);
+    return new GetUserResponse(found);
   }
 
   async updateUser(
@@ -65,7 +66,7 @@ export class UserService {
     }
 
     foundUser = await this.userRepository.findOne({ where: { id: userId } });
-    return this.getUserRO(foundUser);
+    return new GetUserResponse(foundUser);
   }
 
   async uploadAvatar(

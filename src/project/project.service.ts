@@ -9,6 +9,7 @@ import { CreateProjectDTO } from './dto/create-project.dto';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 import { GetProjectResponse } from './dto/get-project-response';
 import { RoleEnum } from '../shared/enums/role.enum';
+import { GetUserResponse } from '../user/dto/get-user-response';
 
 @Injectable()
 export class ProjectService {
@@ -29,28 +30,28 @@ export class ProjectService {
   async getProjects(
     filterDTO: GetProjectsFilterDTO,
     user: UserEntity,
-  ): Promise<{owned: GetProjectResponse[], shared: GetProjectResponse[]}> {
+  ): Promise<{owned: GetProjectResponse[], shared: any[]}> {
     const { search } = filterDTO;
-    const query = this.projectRepository.createQueryBuilder('project');
+    // const query = this.projectRepository.createQueryBuilder('project');
+    // query.where('project.userId = :userId', { userId: user.id });
 
-    query.where('project.userId = :userId', { userId: user.id });
+    const projects = await this.projectRepository.find({ where: { userId: user.id }, relations: ['user', 'shares'] });
 
-    const shared = await SharedProjectEntity.find({ where: { targetId: user.id }, relations: ['project'] });
+    const shared = await SharedProjectEntity.find({ where: { targetId: user.id }, relations: ['project', 'project.shares'] });
 
-    if (search) {
-      query.andWhere('(project.title LIKE :search OR project.description LIKE :search)', { search: `%${search}%` });
-    }
+    const sharedProjectsAndUsersBelongsToShared = await shared.map(async (p: SharedProjectEntity) => {
+      return Object.assign({sharedUsers:  await this.getSharedUsers(p.project.shares, user.id)}, new GetProjectResponse(p.project, p.role));
+    });
+
+    const projectsAndUsersBelongsToProject = await projects.map(async (p: ProjectEntity) => {
+      return Object.assign({sharedUsers: await this.getSharedUsers(p.shares, user.id)}, new GetProjectResponse(p, RoleEnum.ADMINISTRATOR));
+    });
 
     try {
-      return Promise.all([await query.getMany(), await shared]).then(r => {
-        return {
-          owned: r[0].map((p: ProjectEntity) => new GetProjectResponse(p, RoleEnum.ADMINISTRATOR)), // created projects by this user
-          shared: r[1].map((p: SharedProjectEntity) => {
-            // p.project.role = p.role;
-            return new GetProjectResponse(p.project, p.role);
-          }), // shared projects with this user
-        };
-      });
+      return {
+        owned: await Promise.all(projectsAndUsersBelongsToProject),
+        shared: await Promise.all(sharedProjectsAndUsersBelongsToShared),
+      };
     } catch (error) {
       this.logger.error(`Failed to get projects for user "${user.email}", DTO: ${JSON.stringify(filterDTO)}.`, error.stack);
       throw new InternalServerErrorException();
@@ -61,15 +62,25 @@ export class ProjectService {
     id: number,
     user: UserEntity,
   ): Promise<GetProjectResponse> {
-    const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
-
+    const project = await this.projectRepository.findOne({ where: { id, userId: user.id }, relations: ['shares'] });
     const shared = await SharedProjectEntity.findOne({ where: { projectId: id, targetId: user.id }, relations: ['project'] });
 
     if (!project && !shared) {
       throw new NotFoundException(`Project with ID "${id}" not found.`);
     }
 
-    return project ? new GetProjectResponse(project, RoleEnum.ADMINISTRATOR) : new GetProjectResponse(shared.project, shared.role);
+    let projectsAndUsersBelongsToProject;
+
+    if (shared) {
+      const projectShared = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['shares'] });
+      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id)}, new GetProjectResponse(projectShared, RoleEnum.ADMINISTRATOR));
+    }
+
+    if (project) {
+      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(project.shares, user.id)}, new GetProjectResponse(project, RoleEnum.ADMINISTRATOR));
+    }
+
+    return await projectsAndUsersBelongsToProject;
   }
 
   async createProject(
@@ -134,5 +145,39 @@ export class ProjectService {
       this.logger.error(`Failed to delete project with projectId: "${id}".`, error.stack);
       throw new InternalServerErrorException();
     }
+  }
+
+  private async getSharedUsers(shares: SharedProjectEntity[], userId?: number): Promise<GetUserResponse[]> {
+    const sharedUsersArr = await shares.reduce(async (accPromise, sh: SharedProjectEntity) => {
+      const acc = await accPromise;
+      return acc.concat(sh);
+    }, Promise.resolve([]));
+
+    const sharedUsersIdsArr = await sharedUsersArr.map((sh: SharedProjectEntity) => sh.targetId).filter((n) => n !== userId);
+    const sharedById = await sharedUsersArr
+      .map((sh: SharedProjectEntity) => sh.senderId)
+      .filter((value, index, self) => {
+        return self.indexOf(value) === index && value !== userId;
+      });
+
+    const sharedAll = await sharedUsersIdsArr.concat(sharedById);
+
+    const foundUsers = await this.userRepository.findByIds(await sharedAll);
+
+    const usersFormatted = await foundUsers.map((u: UserEntity) => new GetUserResponse(u));
+
+    usersFormatted.map((u: GetUserResponse) => {
+      return sharedUsersArr.map((sh: SharedProjectEntity) => {
+        if (u.id === sharedById[0]) {
+          u.role = RoleEnum.ADMINISTRATOR;
+        }
+        if (u.id === sh.targetId) {
+          u.role = sh.role;
+          return u;
+        }
+      });
+    });
+
+    return await usersFormatted;
   }
 }
