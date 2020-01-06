@@ -51,7 +51,7 @@ export class TranslationService {
     projectId: string,
     user: UserEntity,
   ): Promise<TranslationRO[]> {
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.user'] });
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.user', 'translations.userLastUpdatedId'] });
     const shared = await SharedProjectEntity.findOne({ where: { projectId } });
 
     let sharedFromProjects: ProjectEntity;
@@ -67,7 +67,7 @@ export class TranslationService {
       translations = project.translations;
     }
     if (shared && !project) {
-      sharedFromProjects = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['translations', 'translations.user'] });
+      sharedFromProjects = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['translations', 'translations.user', 'translations.userLastUpdatedId'] });
       translations = sharedFromProjects.translations;
     }
     return this.getTranslationsRO(translations);
@@ -79,7 +79,7 @@ export class TranslationService {
     projectId: number,
   ): Promise<TranslationRO[]> {
     const uuid = uuidv1();
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
+    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.userLastUpdatedId'] });
 
     const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectId }, relations: ['project'] });
 
@@ -97,6 +97,7 @@ export class TranslationService {
     });
 
     translation.assetProjectCode = projectId + '-' + createTranslationDTO.assetCode;
+    translation.userLastUpdatedId = user;
 
     try {
       await this.projectRepository.update({ id: projectId }, { latestUpdatedAt: new Date() });
@@ -146,13 +147,14 @@ export class TranslationService {
         assetCode: updateTranslationDTO.assetCode,
         translations: updateTranslationDTO.translations,
         assetProjectCode: `${projectId}-${updateTranslationDTO.assetCode}`,
+        userLastUpdatedId: user,
       });
     } catch (error) {
       this.logger.error(`Failed to update translation for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateTranslationDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
 
-    translation = await this.translationRepository.findOne({ where: { id: translationId, targetId: user.id }, relations: ['user'] });
+    translation = await this.translationRepository.findOne({ where: { id: translationId, targetId: user.id }, relations: ['user', 'userLastUpdatedId'] });
     return this.getTranslationsRO([translation]);
   }
 

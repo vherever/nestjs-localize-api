@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { ProjectEntity } from '../project/project.entity';
 import { UserEntity } from '../auth/user.entity';
 
@@ -49,4 +49,7 @@ export class TranslationEntity extends BaseEntity {
 
   @Column()
   projectId: number;
+
+  @ManyToOne(type => UserEntity, user => user.id)
+  userLastUpdatedId: UserEntity;
 }

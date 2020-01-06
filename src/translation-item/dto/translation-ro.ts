@@ -2,6 +2,7 @@ import * as moment from 'moment';
 // app imports
 import { TranslationEntity } from '../translation.entity';
 import { UserEntity } from '../../auth/user.entity';
+import { GetUserResponse } from '../../user/dto/get-user-response';
 
 export class TranslationRO {
   constructor(
@@ -19,6 +20,7 @@ export class TranslationRO {
     this.authorId = translation.userId;
     this.labels = translation.labels;
     this.author = this.getAuthorName(translation.user);
+    this.updatedBy = translation.userLastUpdatedId ? new GetUserResponse(translation.userLastUpdatedId) : null;
   }
 
   private id: number;
@@ -33,6 +35,7 @@ export class TranslationRO {
   private authorId?: number;
   private labels: string;
   private author: string;
+  private updatedBy: GetUserResponse;
 
   private getAuthorName(user: UserEntity): string {
     return user.name ? user.name : user.email;

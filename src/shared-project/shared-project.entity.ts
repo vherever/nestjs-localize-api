@@ -26,8 +26,4 @@ export class SharedProjectEntity extends BaseEntity {
 
   @Column({ nullable: true })
   role: RoleEnum;
-
-  // @Column({ nullable: true})
-  // participants:
-  // Select targetId from shared-project where project-id = id
 }
