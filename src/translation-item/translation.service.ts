@@ -58,6 +58,7 @@ export class TranslationService {
     const shared = await SharedProjectEntity.findOne({ where: { projectId } });
 
     let sharedFromProjects: ProjectEntity;
+    let defaultLocale: string;
 
     let translations: TranslationEntity[];
 
@@ -68,12 +69,14 @@ export class TranslationService {
 
     if (project) {
       translations = project.translations;
+      defaultLocale = project.defaultLocale;
     }
     if (shared && !project) {
       sharedFromProjects = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['translations', 'translations.user', 'translations.userLastUpdatedId'] });
       translations = sharedFromProjects.translations;
+      defaultLocale = sharedFromProjects.defaultLocale;
     }
-    return this.getTranslationsRO(translations, project.defaultLocale);
+    return this.getTranslationsRO(translations, defaultLocale);
   }
 
   async createTranslation(
