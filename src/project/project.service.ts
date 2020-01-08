@@ -10,6 +10,7 @@ import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 import { GetProjectResponse } from './dto/get-project-response';
 import { RoleEnum } from '../shared/enums/role.enum';
 import { GetUserResponse } from '../user/dto/get-user-response';
+import { TranslationEntity } from '../translation-item/translation.entity';
 
 @Injectable()
 export class ProjectService {
@@ -24,6 +25,9 @@ export class ProjectService {
 
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+
+    @InjectRepository(TranslationEntity)
+    private translationRepository: Repository<TranslationEntity>,
   ) {
   }
 
@@ -40,11 +44,17 @@ export class ProjectService {
     const shared = await SharedProjectEntity.find({ where: { targetId: user.id }, relations: ['project', 'project.shares'] });
 
     const sharedProjectsAndUsersBelongsToShared = await shared.map(async (p: SharedProjectEntity) => {
-      return Object.assign({sharedUsers:  await this.getSharedUsers(p.project.shares, user.id)}, new GetProjectResponse(p.project, p.role));
+      return Object.assign({
+        sharedUsers:  await this.getSharedUsers(p.project.shares, user.id),
+        translationsCount: await this.getTranslationsCount(p, 'projectId'),
+      }, new GetProjectResponse(p.project, p.role));
     });
 
     const projectsAndUsersBelongsToProject = await projects.map(async (p: ProjectEntity) => {
-      return Object.assign({sharedUsers: await this.getSharedUsers(p.shares, user.id)}, new GetProjectResponse(p, RoleEnum.ADMINISTRATOR));
+      return Object.assign({
+        sharedUsers: await this.getSharedUsers(p.shares, user.id),
+        translationsCount: await this.getTranslationsCount(p, 'id'),
+      }, new GetProjectResponse(p, RoleEnum.ADMINISTRATOR));
     });
 
     try {
@@ -179,5 +189,9 @@ export class ProjectService {
     });
 
     return await usersFormatted;
+  }
+
+  private async getTranslationsCount(p: ProjectEntity | SharedProjectEntity, key: string): Promise<number> {
+    return await TranslationEntity.count({where: { projectId: p[key] }});
   }
 }
