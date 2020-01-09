@@ -54,7 +54,4 @@ export class ProjectEntity extends BaseEntity {
 
   @OneToMany(() => SharedProjectEntity, sharedProject => sharedProject.project)
   shares: SharedProjectEntity[];
-
-  @Column({ nullable: true })
-  latestUpdatedAt: Date;
 }

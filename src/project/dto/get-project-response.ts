@@ -13,7 +13,7 @@ export class GetProjectResponse {
     this.defaultLocale = project.defaultLocale;
     this.translationsLocales = project.translationsLocales;
     this.ownerId = project.ownerId;
-    this.latestUpdatedAtFormatted = moment(project.latestUpdatedAt).fromNow();
+    this.latestUpdatedAtFormatted = moment(project.updated).fromNow();
     this.role = role;
     this.sharedWith = project.shares;
   }

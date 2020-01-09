@@ -22,7 +22,7 @@ export class ProjectController {
   getProjects(
     @Query(ValidationPipe) filterDTO: GetProjectsFilterDTO,
     @GetUser() user: UserEntity,
-  ): Promise<{owned: GetProjectResponse[], shared: GetProjectResponse[]}> {
+  ): Promise<GetProjectResponse[]> {
     this.logger.verbose(`User "${user.email}" is retrieving all projects. Filter: ${JSON.stringify(filterDTO)}.`);
     return this.projectsService.getProjects(filterDTO, user);
   }

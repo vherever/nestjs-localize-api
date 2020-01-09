@@ -34,7 +34,7 @@ export class ProjectService {
   async getProjects(
     filterDTO: GetProjectsFilterDTO,
     user: UserEntity,
-  ): Promise<{owned: GetProjectResponse[], shared: any[]}> {
+  ): Promise<GetProjectResponse[]> {
     const { search } = filterDTO;
     // const query = this.projectRepository.createQueryBuilder('project');
     // query.where('project.userId = :userId', { userId: user.id });
@@ -57,11 +57,11 @@ export class ProjectService {
       }, new GetProjectResponse(p, RoleEnum.ADMINISTRATOR));
     });
 
+    // TODO: filter manually by needed column
+    const projectsAll = await Promise.all([...await projectsAndUsersBelongsToProject, ...await sharedProjectsAndUsersBelongsToShared]);
+
     try {
-      return {
-        owned: await Promise.all(projectsAndUsersBelongsToProject),
-        shared: await Promise.all(sharedProjectsAndUsersBelongsToShared),
-      };
+      return await projectsAll;
     } catch (error) {
       this.logger.error(`Failed to get projects for user "${user.email}", DTO: ${JSON.stringify(filterDTO)}.`, error.stack);
       throw new InternalServerErrorException();
@@ -105,7 +105,6 @@ export class ProjectService {
     project.translationsLocales = translationsLocales;
     project.user = user;
     project.ownerId = user.id;
-    project.latestUpdatedAt = new Date();
 
     try {
       await project.save();
