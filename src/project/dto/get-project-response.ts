@@ -16,6 +16,8 @@ export class GetProjectResponse {
     this.latestUpdatedAtFormatted = moment(project.updated).fromNow();
     this.role = role;
     this.sharedWith = project.shares;
+    this.updated = project.updated;
+    this.created = project.created;
   }
   id: number;
   title: string;
@@ -26,6 +28,8 @@ export class GetProjectResponse {
   latestUpdatedAtFormatted: string;
   role: string;
   sharedWith: SharedWithInterface[];
+  updated: Date;
+  created: Date;
 }
 
 interface SharedWithInterface {

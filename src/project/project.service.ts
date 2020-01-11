@@ -11,9 +11,10 @@ import { GetProjectResponse } from './dto/get-project-response';
 import { RoleEnum } from '../shared/enums/role.enum';
 import { GetUserResponse } from '../user/dto/get-user-response';
 import { TranslationEntity } from '../translation-item/translation.entity';
+import { SortingHelper } from '../shared/sorting-helper';
 
 @Injectable()
-export class ProjectService {
+export class ProjectService extends SortingHelper {
   private logger = new Logger('ProjectService');
 
   constructor(
@@ -29,6 +30,7 @@ export class ProjectService {
     @InjectRepository(TranslationEntity)
     private translationRepository: Repository<TranslationEntity>,
   ) {
+    super();
   }
 
   async getProjects(
@@ -59,9 +61,10 @@ export class ProjectService {
 
     // TODO: filter manually by needed column
     const projectsAll = await Promise.all([...await projectsAndUsersBelongsToProject, ...await sharedProjectsAndUsersBelongsToShared]);
+    const projectsAllFiltered = await this.sortData(await projectsAll, 'updated_desc');
 
     try {
-      return await projectsAll;
+      return await projectsAllFiltered;
     } catch (error) {
       this.logger.error(`Failed to get projects for user "${user.email}", DTO: ${JSON.stringify(filterDTO)}.`, error.stack);
       throw new InternalServerErrorException();
