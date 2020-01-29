@@ -1,24 +1,25 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { GetLanguages } from './get-languages';
+// app imports
+import { AppData } from '../../data/app-data';
+
+const localesArr = AppData.localesArr;
 
 @ValidatorConstraint()
-export class LanguageValidatorString extends GetLanguages implements ValidatorConstraintInterface {
+export class LanguageValidatorString implements ValidatorConstraintInterface {
 
   async validate(locales: string): Promise<boolean> {
     if (locales) {
       const splitted = locales.split(',');
-      return this.getLanguages().then(languages => {
-        if (splitted.length > 1) {
-          const temp = [];
-          splitted.forEach(l => {
-            const found = languages.find(language => l === language.key);
-            temp.push(found);
-          });
-          return !!!temp.filter(f => f === undefined).length;
-        } else {
-          return !!languages.find(language => locales === language.key);
-        }
-      });
+      if (splitted.length > 1) {
+        const temp = splitted.reduce((acc, curr) => {
+          const found = localesArr.find(locale => curr === locale);
+          acc.push(found);
+          return acc;
+        }, []);
+        return !!!temp.filter(f => f === undefined).length;
+      } else {
+        return !!localesArr.find(locale => locales === locale);
+      }
     }
     return await false;
   }
