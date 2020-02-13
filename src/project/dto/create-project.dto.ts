@@ -5,7 +5,7 @@ export class CreateProjectDTO {
   @IsNotEmpty()
   title: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   description: string;
 
   @IsNotEmpty()

@@ -9,11 +9,12 @@ import { ProjectEntity } from '../project/project.entity';
 import { UserEntity } from '../auth/user.entity';
 
 import * as config from 'config';
+import { SharedProjectEntity } from './shared-project.entity';
 const jwtConfig = config.get('jwt');
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProjectEntity, UserEntity]),
+    TypeOrmModule.forFeature([ProjectEntity, SharedProjectEntity, UserEntity]),
     JwtModule.register({
       secret: process.env.JWT_SECRET || jwtConfig.secret,
       signOptions: {

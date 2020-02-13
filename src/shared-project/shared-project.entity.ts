@@ -14,7 +14,7 @@ export class SharedProjectEntity extends BaseEntity {
 
   @PrimaryColumn()
   senderId: number;
-  @ManyToOne(() => UserEntity, user => user.projectsYouShared)
+  @ManyToOne(() => UserEntity, user => user.projectsYouShared, {onUpdate: 'CASCADE'})
   @JoinColumn({ name: 'senderId' })
   sender: UserEntity;
 
@@ -26,4 +26,7 @@ export class SharedProjectEntity extends BaseEntity {
 
   @Column({ nullable: true })
   role: RoleEnum;
+
+  @Column()
+  translationLocales: string;
 }

@@ -8,6 +8,8 @@ import { SharedProjectEntity } from './shared-project.entity';
 import { ProjectEntity } from '../project/project.entity';
 import { ShareProjectDTO } from './dto/share-project.dto';
 import { InviteTokenPayloadInterface } from './invite-token-payload.interface';
+import { ExcludeProjectDTO } from './dto/exclude-project.dto';
+import { ManagePermissionsDTO } from './dto/manage-permissions.dto';
 
 @Injectable()
 export class SharedProjectService {
@@ -16,6 +18,9 @@ export class SharedProjectService {
   constructor(
     @InjectRepository(ProjectEntity)
     private projectRepository: Repository<ProjectEntity>,
+
+    @InjectRepository(ProjectEntity)
+    private sharedProjectRepository: Repository<SharedProjectEntity>,
 
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
@@ -53,6 +58,7 @@ export class SharedProjectService {
       targetId: targetUser.id,
       targetEmail,
       projectId,
+      translationLocales: `${project.defaultLocale}, ${project.translationsLocales}`,
       role,
     };
 
@@ -73,12 +79,13 @@ export class SharedProjectService {
 
   async processingInvitationToken(token: string): Promise<SharedProjectEntity> {
     const decodedToken: InviteTokenPayloadInterface = this.jwtService.decode(token) as InviteTokenPayloadInterface;
-    const { targetId, senderId, projectId, role } = decodedToken;
+    const { targetId, senderId, projectId, role, translationLocales } = decodedToken;
     const sharedProject = new SharedProjectEntity();
     sharedProject.senderId = senderId;
     sharedProject.targetId = targetId;
     sharedProject.projectId = projectId;
     sharedProject.role = role;
+    sharedProject.translationLocales = translationLocales;
 
     let shared: SharedProjectEntity;
 
@@ -97,14 +104,28 @@ export class SharedProjectService {
   }
 
   async excludeUserFromProject(
-    shareProjectDTO: ShareProjectDTO,
+    excludeProjectDTO: ExcludeProjectDTO,
   ): Promise<void> {
-    const { targetEmail, projectId } = shareProjectDTO;
+    const { targetEmail, projectId } = excludeProjectDTO;
     const shared = await SharedProjectEntity.findOne({ where: { targetEmail, projectId }, relations: ['project'] });
+    const targetId = shared.targetId;
     if (!shared) {
       this.logger.error(`There is no shared projectId "${projectId}" with user "${targetEmail}"`);
       throw new NotFoundException(`There is no shared projectId "${projectId}" with user "${targetEmail}"`);
     }
-    await SharedProjectEntity.delete({ projectId });
+    await SharedProjectEntity.delete({ targetId, projectId });
+  }
+
+  async manageUserPermissionsDTO(
+    manageUserPermissionsDTO: ManagePermissionsDTO,
+  ): Promise<any> {
+    const { targetId, projectId, translationLocales } = manageUserPermissionsDTO;
+
+    try {
+      SharedProjectEntity.update({ targetId, projectId }, manageUserPermissionsDTO);
+    } catch (error) {
+      this.logger.error('Cannot update user permissions');
+      throw new InternalServerErrorException();
+    }
   }
 }

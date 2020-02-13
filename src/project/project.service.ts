@@ -86,7 +86,8 @@ export class ProjectService extends SortingHelper {
 
     if (shared) {
       const projectShared = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['shares'] });
-      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id)}, new GetProjectResponse(projectShared, RoleEnum.ADMINISTRATOR));
+      projectShared.translationsLocales = shared.translationLocales;
+      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id)}, new GetProjectResponse(projectShared, shared.role));
     }
 
     if (project) {
