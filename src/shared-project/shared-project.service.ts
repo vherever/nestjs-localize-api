@@ -58,7 +58,7 @@ export class SharedProjectService {
       targetId: targetUser.id,
       targetEmail,
       projectId,
-      translationLocales: `${project.defaultLocale}, ${project.translationsLocales}`,
+      availableTranslationLocales: `${project.defaultLocale}, ${project.translationsLocales}`,
       role,
     };
 
@@ -79,13 +79,13 @@ export class SharedProjectService {
 
   async processingInvitationToken(token: string): Promise<SharedProjectEntity> {
     const decodedToken: InviteTokenPayloadInterface = this.jwtService.decode(token) as InviteTokenPayloadInterface;
-    const { targetId, senderId, projectId, role, translationLocales } = decodedToken;
+    const { targetId, senderId, projectId, role, availableTranslationLocales } = decodedToken;
     const sharedProject = new SharedProjectEntity();
     sharedProject.senderId = senderId;
     sharedProject.targetId = targetId;
     sharedProject.projectId = projectId;
     sharedProject.role = role;
-    sharedProject.translationLocales = translationLocales;
+    sharedProject.availableTranslationLocales = availableTranslationLocales;
 
     let shared: SharedProjectEntity;
 
@@ -119,7 +119,7 @@ export class SharedProjectService {
   async manageUserPermissionsDTO(
     manageUserPermissionsDTO: ManagePermissionsDTO,
   ): Promise<any> {
-    const { targetId, projectId, translationLocales } = manageUserPermissionsDTO;
+    const { targetId, projectId, availableTranslationLocales } = manageUserPermissionsDTO;
 
     try {
       SharedProjectEntity.update({ targetId, projectId }, manageUserPermissionsDTO);

@@ -9,5 +9,5 @@ export class ManagePermissionsDTO {
   projectId: number;
 
   @IsNotEmpty()
-  translationLocales: string;
+  availableTranslationLocales: string;
 }

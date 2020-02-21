@@ -46,10 +46,12 @@ export class ProjectService extends SortingHelper {
     const shared = await SharedProjectEntity.find({ where: { targetId: user.id }, relations: ['project', 'project.shares'] });
 
     const sharedProjectsAndUsersBelongsToShared = await shared.map(async (p: SharedProjectEntity) => {
-      return Object.assign({
+      const d = Object.assign({
         sharedUsers:  await this.getSharedUsers(p.project.shares, user.id),
         translationsCount: await this.getTranslationsCount(p, 'projectId'),
       }, new GetProjectResponse(p.project, p.role));
+      d.availableTranslationLocales = p.availableTranslationLocales;
+      return d;
     });
 
     const projectsAndUsersBelongsToProject = await projects.map(async (p: ProjectEntity) => {
@@ -86,8 +88,7 @@ export class ProjectService extends SortingHelper {
 
     if (shared) {
       const projectShared = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['shares'] });
-      projectShared.translationsLocales = shared.translationLocales;
-      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id)}, new GetProjectResponse(projectShared, shared.role));
+      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id), availableTranslationLocales: shared.availableTranslationLocales}, new GetProjectResponse(projectShared, shared.role));
     }
 
     if (project) {

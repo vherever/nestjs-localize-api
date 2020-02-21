@@ -28,5 +28,5 @@ export class SharedProjectEntity extends BaseEntity {
   role: RoleEnum;
 
   @Column()
-  translationLocales: string;
+  availableTranslationLocales: string;
 }

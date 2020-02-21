@@ -24,6 +24,7 @@ export class GetProjectResponse {
   description: string;
   defaultLocale: string;
   translationsLocales: string;
+  availableTranslationLocales?: string;
   ownerId: number;
   latestUpdatedAtFormatted: string;
   role: string;
