@@ -19,7 +19,7 @@ export class SharedProjectService {
     @InjectRepository(ProjectEntity)
     private projectRepository: Repository<ProjectEntity>,
 
-    @InjectRepository(ProjectEntity)
+    @InjectRepository(SharedProjectEntity)
     private sharedProjectRepository: Repository<SharedProjectEntity>,
 
     @InjectRepository(UserEntity)
@@ -80,27 +80,33 @@ export class SharedProjectService {
   async processingInvitationToken(token: string): Promise<SharedProjectEntity> {
     const decodedToken: InviteTokenPayloadInterface = this.jwtService.decode(token) as InviteTokenPayloadInterface;
     const { targetId, senderId, projectId, role, availableTranslationLocales } = decodedToken;
-    const sharedProject = new SharedProjectEntity();
-    sharedProject.senderId = senderId;
-    sharedProject.targetId = targetId;
-    sharedProject.projectId = projectId;
-    sharedProject.role = role;
-    sharedProject.availableTranslationLocales = availableTranslationLocales;
+    const foundShared = await this.sharedProjectRepository.findOne({ where: { projectId, targetId, senderId } });
 
-    let shared: SharedProjectEntity;
+    if (!foundShared) {
+      const sharedProject = new SharedProjectEntity();
+      sharedProject.senderId = senderId;
+      sharedProject.targetId = targetId;
+      sharedProject.projectId = projectId;
+      sharedProject.role = role;
+      sharedProject.availableTranslationLocales = availableTranslationLocales;
 
-    try {
-      await sharedProject.save();
-      shared = await SharedProjectEntity.findOne({ where: { projectId, targetId }, relations: ['project'] });
-    } catch (error) {
-      if (error.code === '23505') {
-        this.logger.error(`You already accepted an invitation.`);
-        throw new ConflictException(`You already accepted an invitation.`);
+      let shared: SharedProjectEntity;
+
+      try {
+        await sharedProject.save();
+        shared = await SharedProjectEntity.findOne({ where: { projectId, targetId }, relations: ['project'] });
+      } catch (error) {
+        if (error.code === '23505') {
+          this.logger.error(`You already accepted an invitation.`);
+          throw new ConflictException(`You already accepted an invitation.`);
+        }
+        this.logger.error(`Failed to create shared project for user: "${targetId}".`, error.stack);
+        throw new InternalServerErrorException();
       }
-      this.logger.error(`Failed to create shared project for user: "${targetId}".`, error.stack);
-      throw new InternalServerErrorException();
+      return shared;
     }
-    return shared;
+    this.logger.error(`You already accepted an invitation.`);
+    throw new ConflictException(`You already accepted an invitation.`);
   }
 
   async excludeUserFromProject(

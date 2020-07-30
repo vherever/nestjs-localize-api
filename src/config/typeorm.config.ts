@@ -18,4 +18,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   synchronize: process.env.TYPEORM_SYNC || dbConfig.synchronize,
   logging: true,
   entities: ['dist/**/*.entity.js'],
+  // dropSchema: true,
 };
