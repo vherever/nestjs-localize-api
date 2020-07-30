@@ -32,25 +32,25 @@ export class UserController extends FileUploaderHelper {
     super();
   }
 
-  @Get('/:id')
+  @Get('/:uuid')
   getUser(
-    @Param('id', ParseIntPipe) userId: number,
+    @Param('uuid') uuid: string,
     @GetUser() user: UserEntity,
   ): Promise<GetUserResponse> {
-    return this.userService.getUser(userId, user);
+    return this.userService.getUser(uuid, user);
   }
 
-  @Put('/:id')
+  @Put('/:uuid')
   @UsePipes(ValidationPipe)
   updateUser(
-    @Param('id', ParseIntPipe) userId: number,
+    @Param('uuid') uuid: string,
     @GetUser() user: UserEntity,
     @Body() updateUserDTO: UpdateUserDTO,
   ): Promise<GetUserResponse> {
-    return this.userService.updateUser(userId, user, updateUserDTO);
+    return this.userService.updateUser(uuid, user, updateUserDTO);
   }
 
-  @Post('/:id/avatar')
+  @Post('/:uuid/avatar')
   @UseInterceptors(FileInterceptor('image', {
     fileFilter: fileExtensionFilter,
     limits: {fileSize: 5242880}, // 5MB
@@ -62,7 +62,7 @@ export class UserController extends FileUploaderHelper {
     }),
   }))
   uploadAvatar(
-    @Param('id', ParseIntPipe) userId: number,
+    @Param('uuid') uuid: string,
     @GetUser() user: UserEntity,
     @UploadedFile() avatar: any,
   ): Promise<any> {
@@ -70,6 +70,6 @@ export class UserController extends FileUploaderHelper {
       this.logger.verbose('Image was optimized.');
     });
 
-    return this.userService.uploadAvatar(userId, user, avatar.originalname);
+    return this.userService.uploadAvatar(uuid, user, avatar.originalname);
   }
 }

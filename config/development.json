@@ -2,7 +2,7 @@
   "db": {
     "host": "localhost",
     "username": "postgres",
-    "password": "",
+    "password": "12345",
     "synchronize": true
   },
   "jwt": {

@@ -32,7 +32,7 @@ export class AuthService {
     if (user && await user.validatePassword(password)) {
       return {
         email: user.email,
-        id: user.id,
+        uuid: user.uuid,
       };
     } else {
       return null;

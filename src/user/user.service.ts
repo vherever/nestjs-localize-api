@@ -27,33 +27,33 @@ export class UserService {
   // }
 
   async getUser(
-    userId: number,
+    uuid: string,
     user: UserEntity,
   ): Promise<GetUserResponse> {
-    const found = await this.userRepository.findOne({ where: { id: userId }, relations: ['projects', 'projectsSharedWithYou'] });
+    const found = await this.userRepository.findOne({ where: { uuid }, relations: ['projects', 'projectsSharedWithYou'] });
     // console.log('___ found', found); // todo
 
     if (!found || (found.email !== user.email && found.password !== user.password)) {
-      throw new NotFoundException(`User with id "${userId}" not found.`);
+      throw new NotFoundException(`User with id "${uuid}" not found.`);
     }
     return new GetUserResponse(found);
   }
 
   async updateUser(
-    userId: number,
+    uuid: string,
     user: UserEntity,
     updateUserDTO: UpdateUserDTO,
   ): Promise<GetUserResponse> {
-    let foundUser = await this.userRepository.findOne({ where: { id: userId } });
+    let foundUser = await this.userRepository.findOne({ where: { uuid } });
 
     if (!foundUser || (foundUser.email !== user.email && foundUser.password !== user.password)) {
-      this.logger.error(`User with id ${userId} not found.`);
-      throw new NotFoundException(`User with id: "${userId}" not found.`);
+      this.logger.error(`User with id ${uuid} not found.`);
+      throw new NotFoundException(`User with id: "${uuid}" not found.`);
     }
 
     try {
       this.logger.verbose(`The user was updated with data: "${JSON.stringify(updateUserDTO)}"`);
-      await this.userRepository.update({ id: userId }, updateUserDTO);
+      await this.userRepository.update({ uuid }, updateUserDTO);
     } catch (error) {
 
       if (error.code === '23505') {
@@ -61,29 +61,29 @@ export class UserService {
         throw new ConflictException(`Email already exists.`);
       }
 
-      this.logger.error(`Failed to update user with userId "${userId}". Data: ${JSON.stringify(updateUserDTO)}.`, error.stack);
+      this.logger.error(`Failed to update user with userId "${uuid}". Data: ${JSON.stringify(updateUserDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
 
-    foundUser = await this.userRepository.findOne({ where: { id: userId } });
+    foundUser = await this.userRepository.findOne({ where: { uuid } });
     return new GetUserResponse(foundUser);
   }
 
   async uploadAvatar(
-    userId: number,
+    uuid: string,
     user: UserEntity,
     avatar: any,
   ): Promise<any> {
-    const foundUser = await this.userRepository.findOne({ where: { id: userId } });
+    const foundUser = await this.userRepository.findOne({ where: { uuid } });
 
     if (!foundUser || (foundUser.email !== user.email && foundUser.password !== user.password)) {
-      throw new NotFoundException(`User with id "${userId}" not found.`);
+      throw new NotFoundException(`User with id "${uuid}" not found.`);
     }
 
     try {
-      await this.userRepository.update({ id: userId }, {avatar});
+      await this.userRepository.update({ uuid }, {avatar});
     } catch (error) {
-      this.logger.error(`Failed to upload avatar for userId "${userId}".`, error.stack);
+      this.logger.error(`Failed to upload avatar for userId "${uuid}".`, error.stack);
       throw new InternalServerErrorException();
     }
 
