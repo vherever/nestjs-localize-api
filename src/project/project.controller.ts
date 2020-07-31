@@ -49,7 +49,7 @@ export class ProjectController {
   @Put(':id')
   @UsePipes(ValidationPipe)
   updateProject(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,
     @Body() updateProjectDTO: CreateProjectDTO,
     @GetUser() user: UserEntity,
   ): Promise<GetProjectResponse> {
@@ -59,10 +59,10 @@ export class ProjectController {
 
   @Delete('/:id')
   deleteProject(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') uuid: string,
     @GetUser() user: UserEntity,
   ): Promise<void> {
-    this.logger.verbose(`User "${user.email}" is deleting a project by id: ${id}.`);
-    return this.projectsService.deleteProject(id, user);
+    this.logger.verbose(`User "${user.email}" is deleting a project by id: ${uuid}.`);
+    return this.projectsService.deleteProject(uuid, user);
   }
 }

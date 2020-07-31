@@ -123,40 +123,40 @@ export class ProjectService extends SortingHelper {
   }
 
   async updateProject(
-    id: number,
+    projectUuid: string,
     updateProjectDTO: Partial<CreateProjectDTO>,
     user: UserEntity,
   ): Promise<GetProjectResponse> {
-    let project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
+    let project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
     if (!project) {
-      this.logger.error(`Project with id: "${id}" not found.`);
-      throw new NotFoundException(`Project with id: "${id}" not found.`);
+      this.logger.error(`Project with id: "${projectUuid}" not found.`);
+      throw new NotFoundException(`Project with id: "${projectUuid}" not found.`);
     }
     try {
-      await this.projectRepository.update({ id }, updateProjectDTO);
+      await this.projectRepository.update({ uuid: projectUuid }, updateProjectDTO);
     } catch (error) {
       this.logger.error(`Failed to update project for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateProjectDTO)}.`, error.stack);
       throw new InternalServerErrorException();
     }
-    project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
+    project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
     return new GetProjectResponse(project, RoleEnum.ADMINISTRATOR);
   }
 
   async deleteProject(
-    id: number,
+    uuid: string,
     user: UserEntity,
   ): Promise<void> {
-    const project = await this.projectRepository.findOne({ where: { id, userId: user.id } });
+    const project = await this.projectRepository.findOne({ where: { uuid, userId: user.id } });
 
     if (!project) {
-      this.logger.error(`Project with id: "${id}" not found`);
-      throw new NotFoundException(`Project with id: "${id}" not found.`);
+      this.logger.error(`Project with id: "${uuid}" not found`);
+      throw new NotFoundException(`Project with id: "${uuid}" not found.`);
     }
 
     try {
-      await this.projectRepository.delete({ id });
+      await this.projectRepository.delete({ uuid });
     } catch (error) {
-      this.logger.error(`Failed to delete project with projectId: "${id}".`, error.stack);
+      this.logger.error(`Failed to delete project with projectId: "${uuid}".`, error.stack);
       throw new InternalServerErrorException();
     }
   }
