@@ -51,11 +51,11 @@ export class TranslationService {
   }
 
   async getTranslationsByProject(
-    projectId: string,
+    projectUuid: string,
     user: UserEntity,
   ): Promise<TranslationRO[]> {
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.user', 'translations.userLastUpdatedId'] });
-    const shared = await SharedProjectEntity.findOne({ where: { projectId } });
+    const project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id }, relations: ['translations', 'translations.user', 'translations.userLastUpdatedId'] });
+    const shared = await SharedProjectEntity.findOne({ where: { projectUuid } });
 
     let sharedFromProjects: ProjectEntity;
     let defaultLocale: string;
@@ -63,8 +63,8 @@ export class TranslationService {
     let translations: TranslationEntity[];
 
     if (!project && !shared) {
-      this.logger.error(`Project with id "${projectId}" not found.`);
-      throw new NotFoundException(`Project with id "${projectId}" not found.`);
+      this.logger.error(`Project with id "${projectUuid}" not found.`);
+      throw new NotFoundException(`Project with id "${projectUuid}" not found.`);
     }
 
     if (project) {
@@ -82,16 +82,16 @@ export class TranslationService {
   async createTranslation(
     createTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
-    projectId: number,
+    projectUuid: string,
   ): Promise<TranslationRO[]> {
-    const uuid = uuidv1();
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.userLastUpdatedId'] });
+    // const uuid = uuidv1();
+    const project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id }, relations: ['translations', 'translations.userLastUpdatedId'] });
 
-    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectId }, relations: ['project'] });
+    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectUuid }, relations: ['project'] });
 
     if (!project && !shared) {
-      this.logger.error(`Project with id "${projectId}" not found.`);
-      throw new NotFoundException(`Project with id "${projectId}" not found.`);
+      this.logger.error(`Project with id "${projectUuid}" not found.`);
+      throw new NotFoundException(`Project with id "${projectUuid}" not found.`);
     }
 
     const projectToUse: ProjectEntity = shared ? shared.project : project;
@@ -102,11 +102,11 @@ export class TranslationService {
       user,
     });
 
-    translation.assetProjectCode = projectId + '-' + createTranslationDTO.assetCode;
+    translation.assetProjectCode = projectUuid + '-' + createTranslationDTO.assetCode;
     translation.userLastUpdatedId = user;
 
     try {
-      await this.projectRepository.update({ id: projectId }, {});
+      await this.projectRepository.update({ uuid: projectUuid }, {});
       await this.translationRepository.save(translation);
     } catch (error) {
       if (error.code === '23505') {
@@ -123,36 +123,36 @@ export class TranslationService {
   async updateTranslation(
     updateTranslationDTO: CreateTranslationDTO,
     user: UserEntity,
-    projectId: number,
-    translationId: number,
+    projectUuid: string,
+    translationUuid: string,
   ): Promise<TranslationRO[]> {
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations', 'translations.project', 'translations.user'] });
-    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectId }, relations: ['project'] });
+    const project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id }, relations: ['translations', 'translations.project', 'translations.user'] });
+    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectUuid }, relations: ['project'] });
     let translation;
 
     if (!project && !shared) {
-      this.logger.error(`Project with id "${projectId}" not found.`);
-      throw new NotFoundException(`Project with id "${projectId}" not found.`);
+      this.logger.error(`Project with id "${projectUuid}" not found.`);
+      throw new NotFoundException(`Project with id "${projectUuid}" not found.`);
     }
 
     if (project) {
-      translation = await project.translations.find((t: TranslationEntity) => t.id === parseInt(translationId.toString(), 10));
+      translation = await project.translations.find((t: TranslationEntity) => t.uuid === translationUuid);
     }
 
     if (shared) {
-      translation = await this.translationRepository.findOne({ where: { id: translationId, targetId: user.id } });
+      translation = await this.translationRepository.findOne({ where: { uuid: translationUuid, targetId: user.id } });
     }
 
     if (!translation) {
-      this.logger.error(`Translation with id "${translationId}" not found.`);
-      throw new NotFoundException(`Translation with id "${translationId}" not found.`);
+      this.logger.error(`Translation with id "${translationUuid}" not found.`);
+      throw new NotFoundException(`Translation with id "${translationUuid}" not found.`);
     }
     try {
-      await this.projectRepository.update({ id: projectId }, {});
-      await this.translationRepository.update({id: translationId}, {
+      await this.projectRepository.update({ uuid: projectUuid }, {});
+      await this.translationRepository.update({ uuid: translationUuid }, {
         assetCode: updateTranslationDTO.assetCode,
         translations: updateTranslationDTO.translations,
-        assetProjectCode: `${projectId}-${updateTranslationDTO.assetCode}`,
+        assetProjectCode: `${projectUuid}-${updateTranslationDTO.assetCode}`,
         userLastUpdatedId: user,
       });
     } catch (error) {
@@ -160,41 +160,41 @@ export class TranslationService {
       throw new InternalServerErrorException();
     }
 
-    translation = await this.translationRepository.findOne({ where: { id: translationId, targetId: user.id }, relations: ['user', 'userLastUpdatedId'] });
+    translation = await this.translationRepository.findOne({ where: { uuid: translationUuid, targetId: user.id }, relations: ['user', 'userLastUpdatedId'] });
     return this.getTranslationsRO([translation]);
   }
 
   async deleteTranslation(
-    projectId: number,
-    translationId: number,
+    projectUuid: string,
+    translationUuid: string,
     user: UserEntity,
   ): Promise<void> {
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id }, relations: ['translations'] });
-    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectId }, relations: ['project'] });
+    const project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id }, relations: ['translations'] });
+    const shared = await SharedProjectEntity.findOne({ where: { targetId: user.id, projectUuid }, relations: ['project'] });
     let translation;
 
     if (!project && !shared) {
-      this.logger.error(`Project with id "${projectId}" not found.`);
-      throw new NotFoundException(`Project with id "${projectId}" not found.`);
+      this.logger.error(`Project with id "${projectUuid}" not found.`);
+      throw new NotFoundException(`Project with id "${projectUuid}" not found.`);
     }
 
     if (project) {
-      translation = await project.translations.find((t: TranslationEntity) => t.id === parseInt(translationId.toString(), 10));
+      translation = await project.translations.find((t: TranslationEntity) => t.uuid === translationUuid);
     }
 
     if (shared) {
-      translation = await this.translationRepository.findOne({ where: { id: translationId, targetId: user.id } });
+      translation = await this.translationRepository.findOne({ where: { uuid: translationUuid, targetId: user.id } });
     }
 
     if (!translation) {
-      this.logger.error(`Translation with id "${translationId}" not found.`);
-      throw new NotFoundException(`Translation with id "${translationId}" not found.`);
+      this.logger.error(`Translation with id "${translationUuid}" not found.`);
+      throw new NotFoundException(`Translation with id "${translationUuid}" not found.`);
     }
     try {
-      await this.projectRepository.update({ id: projectId }, {});
-      await this.translationRepository.delete({ id: translationId });
+      await this.projectRepository.update({ uuid: projectUuid }, {});
+      await this.translationRepository.delete({ uuid: translationUuid });
     } catch (error) {
-      this.logger.error(`Failed to delete translation for user "${user.email}", projectId: "${projectId}".`, error.stack);
+      this.logger.error(`Failed to delete translation for user "${user.email}", projectId: "${projectUuid}".`, error.stack);
       throw new InternalServerErrorException();
     }
   }

@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, Generated, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { ProjectEntity } from '../project/project.entity';
 import { UserEntity } from '../auth/user.entity';
 
@@ -6,6 +6,10 @@ import { UserEntity } from '../auth/user.entity';
 export class TranslationEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  uuid: string;
 
   @CreateDateColumn()
   created: Date;

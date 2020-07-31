@@ -2,7 +2,7 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, Generated,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -18,6 +18,10 @@ import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 export class ProjectEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  uuid: string;
 
   @CreateDateColumn({ type: 'timestamp' })
   created: Date;

@@ -58,6 +58,7 @@ export class SharedProjectService {
       targetId: targetUser.id,
       targetEmail,
       projectId,
+      projectUuid: project.uuid,
       availableTranslationLocales: `${project.defaultLocale}, ${project.translationsLocales}`,
       role,
     };
@@ -79,7 +80,7 @@ export class SharedProjectService {
 
   async processingInvitationToken(token: string): Promise<SharedProjectEntity> {
     const decodedToken: InviteTokenPayloadInterface = this.jwtService.decode(token) as InviteTokenPayloadInterface;
-    const { targetId, senderId, projectId, role, availableTranslationLocales } = decodedToken;
+    const { targetId, senderId, projectId, projectUuid, role, availableTranslationLocales } = decodedToken;
     const foundShared = await this.sharedProjectRepository.findOne({ where: { projectId, targetId, senderId } });
 
     if (!foundShared) {
@@ -87,6 +88,7 @@ export class SharedProjectService {
       sharedProject.senderId = senderId;
       sharedProject.targetId = targetId;
       sharedProject.projectId = projectId;
+      sharedProject.projectUuid = projectUuid;
       sharedProject.role = role;
       sharedProject.availableTranslationLocales = availableTranslationLocales;
 

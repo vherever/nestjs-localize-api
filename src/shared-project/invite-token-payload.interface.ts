@@ -5,6 +5,7 @@ export interface InviteTokenPayloadInterface {
   targetId: number;
   targetEmail: string;
   projectId: number;
+  projectUuid: string;
   availableTranslationLocales: string;
   role: RoleEnum;
   iat?: number;

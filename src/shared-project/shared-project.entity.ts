@@ -24,6 +24,9 @@ export class SharedProjectEntity extends BaseEntity {
   @JoinColumn({ name: 'projectId' })
   project: ProjectEntity;
 
+  @PrimaryColumn()
+  projectUuid: string;
+
   @Column({ nullable: true })
   role: RoleEnum;
 

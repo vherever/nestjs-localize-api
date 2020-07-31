@@ -29,7 +29,7 @@ export class ProjectController {
 
   @Get('/:id')
   getProjectById(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,
     @GetUser() user: UserEntity,
   ): Promise<GetProjectResponse> {
     this.logger.verbose(`User "${user.email} is getting project by id: ${id}.`);

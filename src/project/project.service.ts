@@ -74,11 +74,11 @@ export class ProjectService extends SortingHelper {
   }
 
   async getProjectById(
-    id: number,
+    id: string,
     user: UserEntity,
   ): Promise<GetProjectResponse> {
-    const project = await this.projectRepository.findOne({ where: { id, userId: user.id }, relations: ['shares'] });
-    const shared = await SharedProjectEntity.findOne({ where: { projectId: id, targetId: user.id }, relations: ['project'] });
+    const project = await this.projectRepository.findOne({ where: { uuid: id, userId: user.id }, relations: ['shares'] });
+    const shared = await SharedProjectEntity.findOne({ where: { uuid: id, targetId: user.id }, relations: ['project'] });
 
     if (!project && !shared) {
       throw new NotFoundException(`Project with ID "${id}" not found.`);

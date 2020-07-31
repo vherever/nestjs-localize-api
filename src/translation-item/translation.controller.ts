@@ -27,42 +27,42 @@ export class TranslationController {
   @Get('translations')
   getTranslationsByProject(
     @GetUser() user: UserEntity,
-    @Param('id') projectId: string,
+    @Param('id') projectUuid: string,
   ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is retrieving his translations.`);
-    return this.translationItemService.getTranslationsByProject(projectId, user);
+    return this.translationItemService.getTranslationsByProject(projectUuid, user);
   }
 
   @Post('translations')
   @UsePipes(ValidationPipe)
   createTranslation(
     @Body() createTranslationDTO: CreateTranslationDTO,
-    @Param('id') projectId: number,
+    @Param('id') projectUuid: string,
     @GetUser() user: UserEntity,
   ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is creating a new translation. Data: ${JSON.stringify(createTranslationDTO)}.`);
-    return this.translationItemService.createTranslation(createTranslationDTO, user, projectId);
+    return this.translationItemService.createTranslation(createTranslationDTO, user, projectUuid);
   }
 
   @Put('translations/:translationId')
   @UsePipes(ValidationPipe)
   updateTranslation(
     @Body() updateTranslationDTO: CreateTranslationDTO,
-    @Param('id') projectId: number,
-    @Param('translationId') translationId: number,
+    @Param('id') projectUuid: string,
+    @Param('translationId') translationUuid: string,
     @GetUser() user: UserEntity,
   ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is updating translation. Data: ${JSON.stringify(updateTranslationDTO)}.`);
-    return this.translationItemService.updateTranslation(updateTranslationDTO, user, projectId, translationId);
+    return this.translationItemService.updateTranslation(updateTranslationDTO, user, projectUuid, translationUuid);
   }
 
   @Delete('translations/:translationId')
   @UsePipes(ValidationPipe)
   deleteTranslation(
-    @Param('id') projectId: number,
-    @Param('translationId') translationId: number,
+    @Param('id') projectUuid: string,
+    @Param('translationId') translationUuid: string,
     @GetUser() user: UserEntity,
   ): Promise<void> {
-    return this.translationItemService.deleteTranslation(projectId, translationId, user);
+    return this.translationItemService.deleteTranslation(projectUuid, translationUuid, user);
   }
 }

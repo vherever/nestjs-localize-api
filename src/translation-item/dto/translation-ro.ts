@@ -9,6 +9,7 @@ export class TranslationRO {
     translation: TranslationEntity,
   ) {
     this.id = translation.id;
+    this.uuid = translation.uuid;
     this.latestUpdatedAtFormatted = moment(translation.updated).fromNow();
     this.translations = JSON.parse(translation.translations);
     this.assetCode = translation.assetCode;
@@ -24,6 +25,7 @@ export class TranslationRO {
   }
 
   private id: number;
+  private uuid: string;
   private latestUpdatedAtFormatted: string;
   private translations: Translations;
   private assetCode: string;
