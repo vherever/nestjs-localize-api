@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 // app imports
@@ -12,6 +12,7 @@ import { RoleEnum } from '../shared/enums/role.enum';
 import { GetUserResponse } from '../user/dto/get-user-response';
 import { TranslationEntity } from '../translation-item/translation.entity';
 import { SortingHelper } from '../shared/sorting-helper';
+import { LocaleToAddRemoveDTO } from './dto/locale-add-remove.dto';
 
 @Injectable()
 export class ProjectService extends SortingHelper {
@@ -103,11 +104,11 @@ export class ProjectService extends SortingHelper {
     user: UserEntity,
   ): Promise<GetProjectResponse> {
     const project = new ProjectEntity();
-    const { title, description, defaultLocale, translationsLocales } = createProjectDTO;
+    const { title, description, defaultLocale } = createProjectDTO;
     project.title = title;
     project.description = description;
     project.defaultLocale = defaultLocale;
-    project.translationsLocales = translationsLocales;
+    // project.translationsLocales = translationsLocales;
     project.user = user;
     project.ownerId = user.id;
 
@@ -120,6 +121,66 @@ export class ProjectService extends SortingHelper {
 
     delete project.user;
     return new GetProjectResponse(project, RoleEnum.ADMINISTRATOR);
+  }
+
+  async updateTranslationLocalesAddLocale(
+    projectUuid: string,
+    translationLocaleDTO: Partial<LocaleToAddRemoveDTO>,
+    user: UserEntity,
+  ): Promise<any> {
+    let project: ProjectEntity = await this.findProject(projectUuid, user);
+    if (!project) {
+      this.logger.error(`Project with id: "${projectUuid}" not found.`);
+      throw new NotFoundException(`Project with id: "${projectUuid}" not found.`);
+    }
+    const projectLocalesArr: string[] = this.getProjectLocalesArray(project.translationsLocales);
+
+    const localeToAdd = translationLocaleDTO.locale;
+
+    if (!this.isLocaleAlreadyExists(projectLocalesArr, localeToAdd)) {
+      try {
+        const locales: string = this.addLocaleToProjectLocales(projectLocalesArr, localeToAdd);
+        await this.projectRepository.update({ uuid: projectUuid }, { translationsLocales : locales });
+      } catch (error) {
+        this.logger.error(`Failed to update project for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(translationLocaleDTO)}.`, error.stack);
+        throw new InternalServerErrorException();
+      }
+      project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
+      return new GetProjectResponse(project, RoleEnum.ADMINISTRATOR);
+    } else {
+      this.logger.error(`The locale '${localeToAdd}' already exists`);
+      throw new ConflictException(`The locale '${localeToAdd}' already exists`);
+    }
+  }
+
+  async updateTranslationLocalesRemoveLocale(
+    projectUuid: string,
+    translationLocaleDTO: Partial<LocaleToAddRemoveDTO>,
+    user: UserEntity,
+  ): Promise<any> {
+    let project: ProjectEntity = await this.findProject(projectUuid, user);
+    if (!project) {
+      this.logger.error(`Project with id: "${projectUuid}" not found.`);
+      throw new NotFoundException(`Project with id: "${projectUuid}" not found.`);
+    }
+    const projectLocalesArr: string[] = this.getProjectLocalesArray(project.translationsLocales);
+
+    const localeToRemove = translationLocaleDTO.locale;
+
+    if (this.isLocaleAlreadyExists(projectLocalesArr, localeToRemove)) {
+      try {
+        const locales = this.removeLocaleFromProjectLocales(projectLocalesArr, localeToRemove);
+        await this.projectRepository.update({ uuid: projectUuid }, { translationsLocales : locales });
+      } catch (error) {
+        this.logger.error(`Failed to update project for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(translationLocaleDTO)}.`, error.stack);
+        throw new InternalServerErrorException();
+      }
+      project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
+      return new GetProjectResponse(project, RoleEnum.ADMINISTRATOR);
+    } else {
+      this.logger.error(`The locale '${localeToRemove}' is not exists in current project.`);
+      throw new NotFoundException(`The locale '${localeToRemove}' is not exists in current project.`);
+    }
   }
 
   async updateProject(
@@ -197,5 +258,37 @@ export class ProjectService extends SortingHelper {
 
   private async getTranslationsCount(p: ProjectEntity | SharedProjectEntity, key: string): Promise<number> {
     return await TranslationEntity.count({where: { projectId: p[key] }});
+  }
+
+  private async findProject(projectUuid: string, user: UserEntity, shares: any = []): Promise<ProjectEntity> {
+    return await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id }, relations: shares });
+  }
+
+  private getProjectLocalesArray(projectLocalesString: string): string[] {
+    return projectLocalesString ? projectLocalesString
+      .replace(/\s/g, '')
+      .split(',') : [];
+  }
+
+  private addLocaleToProjectLocales(projectLocalesArr: string[], localeToAdd: string): string {
+    projectLocalesArr.push(localeToAdd);
+    return projectLocalesArr.join(',');
+  }
+
+  private removeLocaleFromProjectLocales(projectLocalesArr: string[], localeToRemove: string): string {
+    const localeToRemoveIndex = projectLocalesArr.indexOf(localeToRemove);
+    if (localeToRemoveIndex > -1) {
+      projectLocalesArr.splice(localeToRemoveIndex, 1);
+    }
+    return projectLocalesArr.join(',');
+  }
+
+  private isLocaleAlreadyExists(localesArr: string[], locale: string): boolean {
+    return !!localesArr.reduce((acc: string, curr: string) => {
+      if (curr === locale) {
+        return !!curr;
+      }
+      return acc;
+    }, null);
   }
 }

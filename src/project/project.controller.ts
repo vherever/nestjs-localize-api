@@ -9,6 +9,7 @@ import { CreateProjectDTO } from './dto/create-project.dto';
 import { GetProjectsFilterDTO } from './dto/get-projects-filter.dto';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 import { GetProjectResponse } from './dto/get-project-response';
+import { LocaleToAddRemoveDTO } from './dto/locale-add-remove.dto';
 
 @Controller('projects')
 @UseGuards(AuthGuard())
@@ -44,6 +45,26 @@ export class ProjectController {
   ): Promise<GetProjectResponse> {
     this.logger.verbose(`User "${user.email}" is creating a new project. Data: ${JSON.stringify(createProjectDTO)}.`);
     return this.projectsService.createProject(createProjectDTO, user);
+  }
+
+  @Post(':id/locale')
+  @UsePipes(ValidationPipe)
+  updateTranslationLocalesAddLocale(
+    @Param('id') projectUuid: string,
+    @Body() translationLocaleDTO: LocaleToAddRemoveDTO,
+    @GetUser() user: UserEntity,
+  ): Promise<GetProjectResponse> {
+    return this.projectsService.updateTranslationLocalesAddLocale(projectUuid, translationLocaleDTO, user);
+  }
+
+  @Delete(':id/locale')
+  @UsePipes(ValidationPipe)
+  updateTranslationLocalesRemoveLocale(
+    @Param('id') projectUuid: string,
+    @Body() translationsLocaleDTO: LocaleToAddRemoveDTO,
+    @GetUser() user: UserEntity,
+  ): Promise<GetProjectResponse> {
+    return this.projectsService.updateTranslationLocalesRemoveLocale(projectUuid, translationsLocaleDTO, user);
   }
 
   @Put(':id')
