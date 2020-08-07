@@ -13,6 +13,7 @@ import { GetUserResponse } from '../user/dto/get-user-response';
 import { TranslationEntity } from '../translation-item/translation.entity';
 import { SortingHelper } from '../shared/sorting-helper';
 import { LocaleToAddRemoveDTO } from './dto/locale-add-remove.dto';
+import { UpdateProjectDTO } from './dto/update-project.dto';
 
 @Injectable()
 export class ProjectService extends SortingHelper {
@@ -185,7 +186,7 @@ export class ProjectService extends SortingHelper {
 
   async updateProject(
     projectUuid: string,
-    updateProjectDTO: Partial<CreateProjectDTO>,
+    updateProjectDTO: Partial<UpdateProjectDTO>,
     user: UserEntity,
   ): Promise<GetProjectResponse> {
     let project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
@@ -194,6 +195,7 @@ export class ProjectService extends SortingHelper {
       throw new NotFoundException(`Project with id: "${projectUuid}" not found.`);
     }
     try {
+      updateProjectDTO.translationsLocales = this.getTranslationLocales(project.defaultLocale, updateProjectDTO.defaultLocale, project.translationsLocales);
       await this.projectRepository.update({ uuid: projectUuid }, updateProjectDTO);
     } catch (error) {
       this.logger.error(`Failed to update project for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateProjectDTO)}.`, error.stack);
@@ -290,5 +292,14 @@ export class ProjectService extends SortingHelper {
       }
       return acc;
     }, null);
+  }
+
+  private getTranslationLocales(oldDefaultLocale: string, newDefaultLocale: string, translationsLocales: string): any {
+    const locales = translationsLocales.split(',');
+    const index = locales.indexOf(newDefaultLocale);
+    if (index > -1) {
+      locales[index] = oldDefaultLocale;
+    }
+    return locales.join(',');
   }
 }
