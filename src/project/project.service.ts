@@ -138,7 +138,7 @@ export class ProjectService extends SortingHelper {
 
     const localeToAdd = translationLocaleDTO.locale;
 
-    if (!this.isLocaleAlreadyExists(projectLocalesArr, localeToAdd)) {
+    if (!this.isLocaleAlreadyExists(projectLocalesArr, project.defaultLocale, localeToAdd)) {
       try {
         const locales: string = this.addLocaleToProjectLocales(projectLocalesArr, localeToAdd);
         await this.projectRepository.update({ uuid: projectUuid }, { translationsLocales : locales });
@@ -168,7 +168,7 @@ export class ProjectService extends SortingHelper {
 
     const localeToRemove = translationLocaleDTO.locale;
 
-    if (this.isLocaleAlreadyExists(projectLocalesArr, localeToRemove)) {
+    if (this.isLocaleAlreadyExists(projectLocalesArr, project.defaultLocale, localeToRemove)) {
       try {
         const locales = this.removeLocaleFromProjectLocales(projectLocalesArr, localeToRemove);
         await this.projectRepository.update({ uuid: projectUuid }, { translationsLocales : locales });
@@ -285,13 +285,13 @@ export class ProjectService extends SortingHelper {
     return projectLocalesArr.join(',');
   }
 
-  private isLocaleAlreadyExists(localesArr: string[], locale: string): boolean {
+  private isLocaleAlreadyExists(localesArr: string[], defaultLocale: string, locale: string): boolean {
     return !!localesArr.reduce((acc: string, curr: string) => {
       if (curr === locale) {
-        return !!curr;
+        acc = curr;
       }
       return acc;
-    }, null);
+    }, null) || defaultLocale === locale;
   }
 
   private getTranslationLocales(oldDefaultLocale: string, newDefaultLocale: string, translationsLocales: string): any {

@@ -57,7 +57,7 @@ export class ProjectController {
     return this.projectsService.updateTranslationLocalesAddLocale(projectUuid, translationLocaleDTO, user);
   }
 
-  @Delete(':id/locale')
+  @Delete(':id/locale/:locale')
   @UsePipes(ValidationPipe)
   updateTranslationLocalesRemoveLocale(
     @Param('id') projectUuid: string,
