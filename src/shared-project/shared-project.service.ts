@@ -124,7 +124,7 @@ export class SharedProjectService {
     await SharedProjectEntity.delete({ targetId, projectId });
   }
 
-  async manageUserPermissionsDTO(
+  async manageUserPermissions(
     manageUserPermissionsDTO: ManagePermissionsDTO,
   ): Promise<any> {
     const { targetId, projectId, availableTranslationLocales } = manageUserPermissionsDTO;

@@ -53,6 +53,6 @@ export class SharedProjectController {
     @Body() manageUserPermissionsDTO: ManagePermissionsDTO,
     @GetUser() user: UserEntity,
   ): Promise<any> {
-    return this.sharedProjectService.manageUserPermissionsDTO(manageUserPermissionsDTO);
+    return this.sharedProjectService.manageUserPermissions(manageUserPermissionsDTO);
   }
 }

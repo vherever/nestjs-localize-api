@@ -90,7 +90,7 @@ export class ProjectService extends SortingHelper {
 
     if (shared) {
       const projectShared = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['shares'] });
-      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id), availableTranslationLocales: shared.availableTranslationLocales}, new GetProjectResponse(projectShared, shared.role));
+      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id), availableTranslationLocales: shared.availableTranslationLocales, isShared: true}, new GetProjectResponse(projectShared, shared.role));
     }
 
     if (project) {
@@ -190,11 +190,18 @@ export class ProjectService extends SortingHelper {
     user: UserEntity,
   ): Promise<GetProjectResponse> {
     let project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
+    const shared: SharedProjectEntity = await SharedProjectEntity.findOne({ where: { senderId: user.id, projectUuid }, relations: ['project', 'project.shares'] });
     if (!project) {
       this.logger.error(`Project with id: "${projectUuid}" not found.`);
       throw new NotFoundException(`Project with id: "${projectUuid}" not found.`);
     }
     try {
+      if (shared) {
+        await SharedProjectEntity.update(
+          { senderId: user.id, projectUuid },
+          { availableTranslationLocales: this.getUpdatedAvailableTranslationLocales(shared.availableTranslationLocales, updateProjectDTO.defaultLocale) },
+          );
+      }
       updateProjectDTO.translationsLocales = this.getTranslationLocales(project.defaultLocale, updateProjectDTO.defaultLocale, project.translationsLocales);
       await this.projectRepository.update({ uuid: projectUuid }, updateProjectDTO);
     } catch (error) {
@@ -301,5 +308,15 @@ export class ProjectService extends SortingHelper {
       locales[index] = oldDefaultLocale;
     }
     return locales.join(',');
+  }
+
+  private getUpdatedAvailableTranslationLocales(translationsLocales: string, defaultLocale: string): string {
+    const splitted: string[] = translationsLocales.replace(/\s/g, '').split(',');
+    const elementIndex = splitted.indexOf(defaultLocale);
+    if (elementIndex > -1) {
+      splitted.splice(elementIndex, 1);
+      splitted.unshift(defaultLocale);
+    }
+    return splitted.join(',');
   }
 }
