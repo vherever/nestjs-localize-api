@@ -12,7 +12,7 @@ export class UpdateProjectDTO {
   @Validate(LanguageValidatorString, {message: 'Unsupported locale key in defaultLocale'})
   defaultLocale: string;
 
-  @IsOptional()
-  @Validate(LanguageValidatorString, {message: 'Unsupported locale key in translationsLocales'})
-  translationsLocales: string;
+  // @IsOptional()
+  // @Validate(LanguageValidatorString, {message: 'Unsupported locale key in translationsLocales'})
+  // translationsLocales: string;
 }

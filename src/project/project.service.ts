@@ -48,12 +48,12 @@ export class ProjectService extends SortingHelper {
     const shared = await SharedProjectEntity.find({ where: { targetId: user.id }, relations: ['project', 'project.shares'] });
 
     const sharedProjectsAndUsersBelongsToShared = await shared.map(async (p: SharedProjectEntity) => {
-      const d = Object.assign({
+      return Object.assign({
         sharedUsers:  await this.getSharedUsers(p.project.shares, user.id),
         translationsCount: await this.getTranslationsCount(p, 'projectId'),
+        availableTranslationLocales: p.availableTranslationLocales,
+        isShared: true,
       }, new GetProjectResponse(p.project, p.role));
-      d.availableTranslationLocales = p.availableTranslationLocales;
-      return d;
     });
 
     const projectsAndUsersBelongsToProject = await projects.map(async (p: ProjectEntity) => {
@@ -65,10 +65,10 @@ export class ProjectService extends SortingHelper {
 
     // TODO: filter manually by needed column
     const projectsAll = await Promise.all([...await projectsAndUsersBelongsToProject, ...await sharedProjectsAndUsersBelongsToShared]);
-    const projectsAllFiltered = await this.sortData(await projectsAll, 'updated_desc');
+    const projectsAllFiltered = await this.sortData(projectsAll, 'updated_desc');
 
     try {
-      return await projectsAllFiltered;
+      return projectsAllFiltered;
     } catch (error) {
       this.logger.error(`Failed to get projects for user "${user.email}", DTO: ${JSON.stringify(filterDTO)}.`, error.stack);
       throw new InternalServerErrorException();
@@ -202,7 +202,7 @@ export class ProjectService extends SortingHelper {
           { availableTranslationLocales: this.getUpdatedAvailableTranslationLocales(shared.availableTranslationLocales, updateProjectDTO.defaultLocale) },
           );
       }
-      updateProjectDTO.translationsLocales = this.getTranslationLocales(project.defaultLocale, updateProjectDTO.defaultLocale, project.translationsLocales);
+      // updateProjectDTO.translationsLocales = this.getTranslationLocales(project.defaultLocale, updateProjectDTO.defaultLocale, project.translationsLocales);
       await this.projectRepository.update({ uuid: projectUuid }, updateProjectDTO);
     } catch (error) {
       this.logger.error(`Failed to update project for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateProjectDTO)}.`, error.stack);
