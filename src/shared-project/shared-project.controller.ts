@@ -8,6 +8,7 @@ import { ShareProjectDTO } from './dto/share-project.dto';
 import { SharedProjectEntity } from './shared-project.entity';
 import { ExcludeProjectDTO } from './dto/exclude-project.dto';
 import { ManagePermissionsDTO } from './dto/manage-permissions.dto';
+import { SharedProjectResponse } from './dto/shared-project-response';
 
 @Controller('invite')
 export class SharedProjectController {
@@ -24,15 +25,15 @@ export class SharedProjectController {
     @Body() shareProjectDTO: ShareProjectDTO,
     @GetUser() user: UserEntity,
   ): Promise<string> {
-    const { targetEmail, projectId } = shareProjectDTO;
-    this.logger.verbose(`The user "${user.email}" sending to the user "${targetEmail}" the project invite with projectId "${projectId}".`);
+    const { targetEmail, projectUuid } = shareProjectDTO;
+    this.logger.verbose(`The user "${user.email}" sending to the user "${targetEmail}" the project invite with projectId "${projectUuid}".`);
     return this.sharedProjectService.generateInvitationLink(shareProjectDTO, user);
   }
 
   @Get('/:token')
   inviteUserToProject(
     @Param('token') token: string,
-  ): Promise<SharedProjectEntity> {
+  ): Promise<SharedProjectResponse> {
     this.logger.verbose(`Invitation token has been processed.`);
     return this.sharedProjectService.processingInvitationToken(token);
   }

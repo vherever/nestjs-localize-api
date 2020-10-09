@@ -10,6 +10,7 @@ import { ShareProjectDTO } from './dto/share-project.dto';
 import { InviteTokenPayloadInterface } from './invite-token-payload.interface';
 import { ExcludeProjectDTO } from './dto/exclude-project.dto';
 import { ManagePermissionsDTO } from './dto/manage-permissions.dto';
+import { SharedProjectResponse } from './dto/shared-project-response';
 
 @Injectable()
 export class SharedProjectService {
@@ -32,9 +33,9 @@ export class SharedProjectService {
     shareProjectDTO: ShareProjectDTO,
     user: UserEntity,
   ): Promise<string> {
-    const { targetEmail, projectId, role } = shareProjectDTO;
+    const { targetEmail, projectUuid, role } = shareProjectDTO;
 
-    const project = await this.projectRepository.findOne({ where: { id: projectId, userId: user.id } });
+    const project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
 
     const targetUser = await this.userRepository.findOne({ where: { email: targetEmail } });
 
@@ -49,21 +50,20 @@ export class SharedProjectService {
     }
 
     if (!project) {
-      this.logger.error(`Project with id: "${projectId}" not found`);
-      throw new NotFoundException(`Project with id: "${projectId}" not found.`);
+      this.logger.error(`Project with id: "${project.id}" not found`);
+      throw new NotFoundException(`Project with id: "${project.id}" not found.`);
     }
 
     const tokenPayload: InviteTokenPayloadInterface = {
-      senderId: user.id,
-      targetId: targetUser.id,
+      senderUuid: user.uuid,
+      targetUuid: targetUser.uuid,
       targetEmail,
-      projectId,
       projectUuid: project.uuid,
-      availableTranslationLocales: `${project.defaultLocale}, ${project.translationsLocales}`,
+      availableTranslationLocales: project.translationsLocales ? project.defaultLocale + ',' + project.translationsLocales : project.defaultLocale,
       role,
     };
 
-    const shared = await SharedProjectEntity.findOne({ where: { targetId: targetUser.id, projectId }, relations: ['project'] });
+    const shared = await SharedProjectEntity.findOne({ where: { targetId: targetUser.id, projectId: project.id }, relations: ['project'] });
 
     if (shared) {
       this.logger.error(`You already shared this project with this user.`);
@@ -73,22 +73,28 @@ export class SharedProjectService {
     try {
       return this.jwtService.sign(tokenPayload);
     } catch (error) {
-      this.logger.error(`Failed to share project for user: "${tokenPayload.targetId}".`, error.stack);
+      this.logger.error(`Failed to share project for user: "${tokenPayload.targetUuid}".`, error.stack);
       throw new InternalServerErrorException();
     }
   }
 
-  async processingInvitationToken(token: string): Promise<SharedProjectEntity> {
+  async processingInvitationToken(token: string): Promise<SharedProjectResponse> {
     const decodedToken: InviteTokenPayloadInterface = this.jwtService.decode(token) as InviteTokenPayloadInterface;
-    const { targetId, senderId, projectId, projectUuid, role, availableTranslationLocales } = decodedToken;
-    const foundShared = await this.sharedProjectRepository.findOne({ where: { projectId, targetId, senderId } });
+    const { targetUuid, senderUuid, projectUuid, role, availableTranslationLocales } = decodedToken;
+
+    const targetUser = await this.userRepository.findOne({ where: { uuid: targetUuid } });
+    const senderUser = await this.userRepository.findOne({ where: { uuid: senderUuid } });
+    const projectShared = await this.projectRepository.findOne({ where: { uuid: projectUuid } });
+
+    const foundShared = await this.sharedProjectRepository.findOne({ where: { projectId: projectShared.id, targetId: targetUser.id, senderId: senderUser.id } });
 
     if (!foundShared) {
       const sharedProject = new SharedProjectEntity();
-      sharedProject.senderId = senderId;
-      sharedProject.targetId = targetId;
-      sharedProject.projectId = projectId;
+      sharedProject.senderId = senderUser.id;
+      sharedProject.targetId = targetUser.id;
+      sharedProject.projectId = projectShared.id;
       sharedProject.projectUuid = projectUuid;
+      sharedProject.targetUuid = targetUuid;
       sharedProject.role = role;
       sharedProject.availableTranslationLocales = availableTranslationLocales;
 
@@ -96,16 +102,16 @@ export class SharedProjectService {
 
       try {
         await sharedProject.save();
-        shared = await SharedProjectEntity.findOne({ where: { projectId, targetId }, relations: ['project'] });
+        shared = await SharedProjectEntity.findOne({ where: { projectId: projectShared.id, targetId: targetUser.id }, relations: ['project'] });
       } catch (error) {
         if (error.code === '23505') {
           this.logger.error(`You already accepted an invitation.`);
           throw new ConflictException(`You already accepted an invitation.`);
         }
-        this.logger.error(`Failed to create shared project for user: "${targetId}".`, error.stack);
+        this.logger.error(`Failed to create shared project for user: "${targetUser.id}".`, error.stack);
         throw new InternalServerErrorException();
       }
-      return shared;
+      return new SharedProjectResponse(shared);
     }
     this.logger.error(`You already accepted an invitation.`);
     throw new ConflictException(`You already accepted an invitation.`);
@@ -127,10 +133,18 @@ export class SharedProjectService {
   async manageUserPermissions(
     manageUserPermissionsDTO: ManagePermissionsDTO,
   ): Promise<any> {
-    const { targetId, projectId, availableTranslationLocales } = manageUserPermissionsDTO;
+    const { targetUuid, projectUuid, availableTranslationLocales } = manageUserPermissionsDTO;
+    // console.log('targetUuid', targetUuid);
+    // console.log('projectUuid', projectUuid);
+
+    const targetUser = await this.userRepository.findOne({ where: { uuid: targetUuid } });
+    const sharedProject = await this.projectRepository.findOne({ where: { uuid: projectUuid } });
+
+    // console.log('targetUser', targetUser);
+    // console.log('sharedProject', sharedProject);
 
     try {
-      SharedProjectEntity.update({ targetId, projectId }, manageUserPermissionsDTO);
+      SharedProjectEntity.update({ targetId: targetUser.id, projectId: sharedProject.id }, manageUserPermissionsDTO);
     } catch (error) {
       this.logger.error('Cannot update user permissions');
       throw new InternalServerErrorException();

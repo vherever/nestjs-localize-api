@@ -3,10 +3,10 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class ManagePermissionsDTO {
   @IsString()
   @IsNotEmpty()
-  targetId: number;
+  targetUuid: string;
 
   @IsNotEmpty()
-  projectId: number;
+  projectUuid: string;
 
   @IsNotEmpty()
   availableTranslationLocales: string;

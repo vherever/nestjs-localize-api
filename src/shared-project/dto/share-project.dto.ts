@@ -8,7 +8,7 @@ export class ShareProjectDTO {
   targetEmail: string;
 
   @IsNotEmpty()
-  projectId: number;
+  projectUuid: string;
 
   @IsNotEmpty()
   @IsIn([RoleEnum.TRANSLATOR, RoleEnum.DEVELOPER])
