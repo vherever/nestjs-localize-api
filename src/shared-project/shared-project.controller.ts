@@ -54,6 +54,7 @@ export class SharedProjectController {
     @Body() manageUserPermissionsDTO: ManagePermissionsDTO,
     @GetUser() user: UserEntity,
   ): Promise<any> {
+    this.logger.verbose(`The user "${user.email}" managing permission for the user "${manageUserPermissionsDTO.targetUuid}"`);
     return this.sharedProjectService.manageUserPermissions(manageUserPermissionsDTO);
   }
 }

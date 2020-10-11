@@ -134,14 +134,9 @@ export class SharedProjectService {
     manageUserPermissionsDTO: ManagePermissionsDTO,
   ): Promise<any> {
     const { targetUuid, projectUuid, availableTranslationLocales } = manageUserPermissionsDTO;
-    // console.log('targetUuid', targetUuid);
-    // console.log('projectUuid', projectUuid);
 
     const targetUser = await this.userRepository.findOne({ where: { uuid: targetUuid } });
     const sharedProject = await this.projectRepository.findOne({ where: { uuid: projectUuid } });
-
-    // console.log('targetUser', targetUser);
-    // console.log('sharedProject', sharedProject);
 
     try {
       SharedProjectEntity.update({ targetId: targetUser.id, projectId: sharedProject.id }, manageUserPermissionsDTO);

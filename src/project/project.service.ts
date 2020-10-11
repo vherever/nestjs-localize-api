@@ -257,6 +257,7 @@ export class ProjectService extends SortingHelper {
         }
         if (u.id === sh.targetId) {
           u.role = sh.role;
+          u.availableTranslationLocales = sh.availableTranslationLocales;
           return u;
         }
       });

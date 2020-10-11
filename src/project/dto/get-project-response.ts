@@ -6,7 +6,7 @@ import { SharedProjectEntity } from '../../shared-project/shared-project.entity'
 import { UserEntity } from '../../auth/user.entity';
 
 export class GetProjectResponse {
-  constructor(project: ProjectEntity, role: RoleEnum) {
+  constructor(project: ProjectEntity, role: RoleEnum, availableTranslationLocales?: string) {
     this.id = project.id;
     this.uuid = project.uuid;
     this.title = project.title;

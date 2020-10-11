@@ -14,4 +14,5 @@ export class GetUserResponse {
   email: string;
   avatar: string;
   role?: string;
+  availableTranslationLocales?: string;
 }
