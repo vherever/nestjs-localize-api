@@ -109,7 +109,7 @@ export class ProjectService extends SortingHelper {
     project.title = title;
     project.description = description;
     project.defaultLocale = defaultLocale;
-    // project.translationsLocales = translationsLocales;
+    project.translationsLocales = defaultLocale;
     project.user = user;
     project.ownerId = user.id;
 

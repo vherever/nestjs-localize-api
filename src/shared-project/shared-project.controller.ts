@@ -44,7 +44,7 @@ export class SharedProjectController {
     @Body() excludeProjectDTO: ExcludeProjectDTO,
     @GetUser() user: UserEntity,
   ): Promise<void> {
-    this.logger.verbose(`The user "${user.id} excluding the user ${excludeProjectDTO.targetEmail}" from the project with id "${excludeProjectDTO.projectId}"`);
+    this.logger.verbose(`The user "${user.id} excluding the user ${excludeProjectDTO.targetEmail}" from the project with projectUuid "${excludeProjectDTO.projectUuid}"`);
     return this.sharedProjectService.excludeUserFromProject(excludeProjectDTO);
   }
 

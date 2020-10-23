@@ -33,7 +33,7 @@ export class SharedProjectService {
     shareProjectDTO: ShareProjectDTO,
     user: UserEntity,
   ): Promise<string> {
-    const { targetEmail, projectUuid, role } = shareProjectDTO;
+    const { targetEmail, projectUuid, role, availableTranslationLocales } = shareProjectDTO;
 
     const project = await this.projectRepository.findOne({ where: { uuid: projectUuid, userId: user.id } });
 
@@ -59,7 +59,7 @@ export class SharedProjectService {
       targetUuid: targetUser.uuid,
       targetEmail,
       projectUuid: project.uuid,
-      availableTranslationLocales: project.translationsLocales ? project.defaultLocale + ',' + project.translationsLocales : project.defaultLocale,
+      availableTranslationLocales,
       role,
     };
 
@@ -80,7 +80,7 @@ export class SharedProjectService {
 
   async processingInvitationToken(token: string): Promise<SharedProjectResponse> {
     const decodedToken: InviteTokenPayloadInterface = this.jwtService.decode(token) as InviteTokenPayloadInterface;
-    const { targetUuid, senderUuid, projectUuid, role, availableTranslationLocales } = decodedToken;
+    const { targetUuid, senderUuid, projectUuid, role, availableTranslationLocales, targetEmail } = decodedToken;
 
     const targetUser = await this.userRepository.findOne({ where: { uuid: targetUuid } });
     const senderUser = await this.userRepository.findOne({ where: { uuid: senderUuid } });
@@ -95,6 +95,7 @@ export class SharedProjectService {
       sharedProject.projectId = projectShared.id;
       sharedProject.projectUuid = projectUuid;
       sharedProject.targetUuid = targetUuid;
+      sharedProject.targetEmail = targetEmail;
       sharedProject.role = role;
       sharedProject.availableTranslationLocales = availableTranslationLocales;
 
@@ -120,14 +121,13 @@ export class SharedProjectService {
   async excludeUserFromProject(
     excludeProjectDTO: ExcludeProjectDTO,
   ): Promise<void> {
-    const { targetEmail, projectId } = excludeProjectDTO;
-    const shared = await SharedProjectEntity.findOne({ where: { targetEmail, projectId }, relations: ['project'] });
-    const targetId = shared.targetId;
+    const { targetEmail, projectUuid } = excludeProjectDTO;
+    const shared = await SharedProjectEntity.findOne({ where: { targetEmail, projectUuid }, relations: ['project'] });
     if (!shared) {
-      this.logger.error(`There is no shared projectId "${projectId}" with user "${targetEmail}"`);
-      throw new NotFoundException(`There is no shared projectId "${projectId}" with user "${targetEmail}"`);
+      this.logger.error(`There is no shared projectUuid "${projectUuid}" with user "${targetEmail}"`);
+      throw new NotFoundException(`There is no shared projectUuid "${projectUuid}" with user "${targetEmail}"`);
     }
-    await SharedProjectEntity.delete({ targetId, projectId });
+    await SharedProjectEntity.delete({ targetUuid: shared.targetUuid, projectUuid });
   }
 
   async manageUserPermissions(
@@ -136,10 +136,10 @@ export class SharedProjectService {
     const { targetUuid, projectUuid, availableTranslationLocales } = manageUserPermissionsDTO;
 
     const targetUser = await this.userRepository.findOne({ where: { uuid: targetUuid } });
-    const sharedProject = await this.projectRepository.findOne({ where: { uuid: projectUuid } });
+    const targetProject = await this.projectRepository.findOne({ where: { uuid: projectUuid } });
 
     try {
-      SharedProjectEntity.update({ targetId: targetUser.id, projectId: sharedProject.id }, manageUserPermissionsDTO);
+      SharedProjectEntity.update({ targetId: targetUser.id, projectId: targetProject.id }, manageUserPermissionsDTO);
     } catch (error) {
       this.logger.error('Cannot update user permissions');
       throw new InternalServerErrorException();

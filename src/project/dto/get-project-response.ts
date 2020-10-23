@@ -12,7 +12,7 @@ export class GetProjectResponse {
     this.title = project.title;
     this.description = project.description;
     this.defaultLocale = project.defaultLocale;
-    this.translationsLocales = project.translationsLocales;
+    this.translationsLocales = project.translationsLocales ? project.translationsLocales : '';
     this.ownerId = project.ownerId;
     this.latestUpdatedAtFormatted = moment(project.updated).fromNow();
     this.role = role;

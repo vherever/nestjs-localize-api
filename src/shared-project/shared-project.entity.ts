@@ -30,6 +30,9 @@ export class SharedProjectEntity extends BaseEntity {
   @PrimaryColumn()
   targetUuid: string;
 
+  @Column()
+  targetEmail: string;
+
   @Column({ nullable: true })
   role: RoleEnum;
 

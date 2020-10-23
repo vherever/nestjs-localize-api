@@ -13,4 +13,7 @@ export class ShareProjectDTO {
   @IsNotEmpty()
   @IsIn([RoleEnum.TRANSLATOR, RoleEnum.DEVELOPER])
   role: RoleEnum;
+
+  @IsNotEmpty()
+  availableTranslationLocales: string;
 }

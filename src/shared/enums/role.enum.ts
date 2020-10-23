@@ -1,5 +1,6 @@
 export enum RoleEnum {
-  ADMINISTRATOR = 'administrator',
-  TRANSLATOR = 'translator',
-  DEVELOPER = 'developer',
+  ADMINISTRATOR = 'ADMINISTRATOR',
+  MANAGER = 'MANAGER',
+  TRANSLATOR = 'TRANSLATOR',
+  DEVELOPER = 'DEVELOPER',
 }

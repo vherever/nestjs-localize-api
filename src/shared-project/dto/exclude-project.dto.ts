@@ -6,5 +6,5 @@ export class ExcludeProjectDTO {
   targetEmail: string;
 
   @IsNotEmpty()
-  projectId: number;
+  projectUuid: string;
 }
