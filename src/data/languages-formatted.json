@@ -1033,2576 +1033,2944 @@
     "keyCode": "af"
   },
   {
-    "value": "Catalan (Andorra)",
+    "lang": "Catalan",
+    "country": "Andorra",
     "filter": "Catalan Andorra",
     "code": "ad",
     "emoji": "🇦🇩",
     "keyCode": "ad-ca"
   },
   {
-    "value": "Arabic (United Arab Emirates)",
+    "lang": "Arabic",
+    "country": "United Arab Emirates",
     "filter": "Arabic United Arab Emirates",
     "code": "ae",
     "emoji": "🇦🇪",
     "keyCode": "ae-ar"
   },
   {
-    "value": "Pashto (Afghanistan)",
+    "lang": "Pashto",
+    "country": "Afghanistan",
     "filter": "Pashto Afghanistan",
     "code": "af",
     "emoji": "🇦🇫",
     "keyCode": "af-ps"
   },
   {
-    "value": "Turkmen (Afghanistan)",
+    "lang": "Turkmen",
+    "country": "Afghanistan",
     "filter": "Turkmen Afghanistan",
     "code": "af",
     "emoji": "🇦🇫",
     "keyCode": "af-tk"
   },
   {
-    "value": "Uzbek (Afghanistan)",
+    "lang": "Uzbek",
+    "country": "Afghanistan",
     "filter": "Uzbek Afghanistan",
     "code": "af",
     "emoji": "🇦🇫",
     "keyCode": "af-uz"
   },
   {
-    "value": "English (Antigua and Barbuda)",
+    "lang": "English",
+    "country": "Antigua and Barbuda",
     "filter": "English Antigua and Barbuda",
     "code": "ag",
     "emoji": "🇦🇬",
     "keyCode": "ag-en"
   },
   {
-    "value": "English (Anguilla)",
+    "lang": "English",
+    "country": "Anguilla",
     "filter": "English Anguilla",
     "code": "ai",
     "emoji": "🇦🇮",
     "keyCode": "ai-en"
   },
   {
-    "value": "Albanian (Albania)",
+    "lang": "Albanian",
+    "country": "Albania",
     "filter": "Albanian Albania",
     "code": "al",
     "emoji": "🇦🇱",
     "keyCode": "al-sq"
   },
   {
-    "value": "Armenian (Armenia)",
+    "lang": "Armenian",
+    "country": "Armenia",
     "filter": "Armenian Armenia",
     "code": "am",
     "emoji": "🇦🇲",
     "keyCode": "am-hy"
   },
   {
-    "value": "Russian (Armenia)",
+    "lang": "Russian",
+    "country": "Armenia",
     "filter": "Russian Armenia",
     "code": "am",
     "emoji": "🇦🇲",
     "keyCode": "am-ru"
   },
   {
-    "value": "Portuguese (Angola)",
+    "lang": "Portuguese",
+    "country": "Angola",
     "filter": "Portuguese Angola",
     "code": "ao",
     "emoji": "🇦🇴",
     "keyCode": "ao-pt"
   },
   {
-    "value": "Spanish (Argentina)",
+    "lang": "Spanish",
+    "country": "Argentina",
     "filter": "Spanish Argentina",
     "code": "ar",
     "emoji": "🇦🇷",
     "keyCode": "ar-es"
   },
   {
-    "value": "Guarani (Argentina)",
+    "lang": "Guarani",
+    "country": "Argentina",
     "filter": "Guarani Argentina",
     "code": "ar",
     "emoji": "🇦🇷",
     "keyCode": "ar-gn"
   },
   {
-    "value": "English (American Samoa)",
+    "lang": "English",
+    "country": "American Samoa",
     "filter": "English American Samoa",
     "code": "as",
     "emoji": "🇦🇸",
     "keyCode": "as-en"
   },
   {
-    "value": "Samoan (American Samoa)",
+    "lang": "Samoan",
+    "country": "American Samoa",
     "filter": "Samoan American Samoa",
     "code": "as",
     "emoji": "🇦🇸",
     "keyCode": "as-sm"
   },
   {
-    "value": "German (Austria)",
+    "lang": "German",
+    "country": "Austria",
     "filter": "German Austria",
     "code": "at",
     "emoji": "🇦🇹",
     "keyCode": "at-de"
   },
   {
-    "value": "English (Australia)",
+    "lang": "English",
+    "country": "Australia",
     "filter": "English Australia",
     "code": "au",
     "emoji": "🇦🇺",
     "keyCode": "au-en"
   },
   {
-    "value": "Dutch (Aruba)",
+    "lang": "Dutch",
+    "country": "Aruba",
     "filter": "Dutch Aruba",
     "code": "aw",
     "emoji": "🇦🇼",
     "keyCode": "aw-nl"
   },
   {
-    "value": "Panjabi / Punjabi (Aruba)",
+    "lang": "Panjabi / Punjabi",
+    "country": "Aruba",
     "filter": "Panjabi / Punjabi Aruba",
     "code": "aw",
     "emoji": "🇦🇼",
     "keyCode": "aw-pa"
   },
   {
-    "value": "Swedish (Åland)",
+    "lang": "Swedish",
+    "country": "Åland",
     "filter": "Swedish Åland",
     "code": "ax",
     "emoji": "🇦🇽",
     "keyCode": "ax-sv"
   },
   {
-    "value": "Azerbaijani (Azerbaijan)",
+    "lang": "Azerbaijani",
+    "country": "Azerbaijan",
     "filter": "Azerbaijani Azerbaijan",
     "code": "az",
     "emoji": "🇦🇿",
     "keyCode": "az-az"
   },
   {
-    "value": "Bosnian (Bosnia and Herzegovina)",
+    "lang": "Bosnian",
+    "country": "Bosnia and Herzegovina",
     "filter": "Bosnian Bosnia and Herzegovina",
     "code": "ba",
     "emoji": "🇧🇦",
     "keyCode": "ba-bs"
   },
   {
-    "value": "Croatian (Bosnia and Herzegovina)",
+    "lang": "Croatian",
+    "country": "Bosnia and Herzegovina",
     "filter": "Croatian Bosnia and Herzegovina",
     "code": "ba",
     "emoji": "🇧🇦",
     "keyCode": "ba-hr"
   },
   {
-    "value": "Serbian (Bosnia and Herzegovina)",
+    "lang": "Serbian",
+    "country": "Bosnia and Herzegovina",
     "filter": "Serbian Bosnia and Herzegovina",
     "code": "ba",
     "emoji": "🇧🇦",
     "keyCode": "ba-sr"
   },
   {
-    "value": "English (Barbados)",
+    "lang": "English",
+    "country": "Barbados",
     "filter": "English Barbados",
     "code": "bb",
     "emoji": "🇧🇧",
     "keyCode": "bb-en"
   },
   {
-    "value": "Bengali (Bangladesh)",
+    "lang": "Bengali",
+    "country": "Bangladesh",
     "filter": "Bengali Bangladesh",
     "code": "bd",
     "emoji": "🇧🇩",
     "keyCode": "bd-bn"
   },
   {
-    "value": "German (Belgium)",
+    "lang": "German",
+    "country": "Belgium",
     "filter": "German Belgium",
     "code": "be",
     "emoji": "🇧🇪",
     "keyCode": "be-de"
   },
   {
-    "value": "French (Belgium)",
+    "lang": "French",
+    "country": "Belgium",
     "filter": "French Belgium",
     "code": "be",
     "emoji": "🇧🇪",
     "keyCode": "be-fr"
   },
   {
-    "value": "Dutch (Belgium)",
+    "lang": "Dutch",
+    "country": "Belgium",
     "filter": "Dutch Belgium",
     "code": "be",
     "emoji": "🇧🇪",
     "keyCode": "be-nl"
   },
   {
-    "value": "Peul (Burkina Faso)",
+    "lang": "Peul",
+    "country": "Burkina Faso",
     "filter": "Peul Burkina Faso",
     "code": "bf",
     "emoji": "🇧🇫",
     "keyCode": "bf-ff"
   },
   {
-    "value": "French (Burkina Faso)",
+    "lang": "French",
+    "country": "Burkina Faso",
     "filter": "French Burkina Faso",
     "code": "bf",
     "emoji": "🇧🇫",
     "keyCode": "bf-fr"
   },
   {
-    "value": "Bulgarian (Bulgaria)",
+    "lang": "Bulgarian",
+    "country": "Bulgaria",
     "filter": "Bulgarian Bulgaria",
     "code": "bg",
     "emoji": "🇧🇬",
     "keyCode": "bg-bg"
   },
   {
-    "value": "Arabic (Bahrain)",
+    "lang": "Arabic",
+    "country": "Bahrain",
     "filter": "Arabic Bahrain",
     "code": "bh",
     "emoji": "🇧🇭",
     "keyCode": "bh-ar"
   },
   {
-    "value": "French (Burundi)",
+    "lang": "French",
+    "country": "Burundi",
     "filter": "French Burundi",
     "code": "bi",
     "emoji": "🇧🇮",
     "keyCode": "bi-fr"
   },
   {
-    "value": "Kirundi (Burundi)",
+    "lang": "Kirundi",
+    "country": "Burundi",
     "filter": "Kirundi Burundi",
     "code": "bi",
     "emoji": "🇧🇮",
     "keyCode": "bi-rn"
   },
   {
-    "value": "French (Benin)",
+    "lang": "French",
+    "country": "Benin",
     "filter": "French Benin",
     "code": "bj",
     "emoji": "🇧🇯",
     "keyCode": "bj-fr"
   },
   {
-    "value": "French (Saint Barthélemy)",
+    "lang": "French",
+    "country": "Saint Barthélemy",
     "filter": "French Saint Barthélemy",
     "code": "bl",
     "emoji": "🇧🇱",
     "keyCode": "bl-fr"
   },
   {
-    "value": "English (Bermuda)",
+    "lang": "English",
+    "country": "Bermuda",
     "filter": "English Bermuda",
     "code": "bm",
     "emoji": "🇧🇲",
     "keyCode": "bm-en"
   },
   {
-    "value": "Malay (Brunei)",
+    "lang": "Malay",
+    "country": "Brunei",
     "filter": "Malay Brunei",
     "code": "bn",
     "emoji": "🇧🇳",
     "keyCode": "bn-ms"
   },
   {
-    "value": "Aymara (Bolivia)",
+    "lang": "Aymara",
+    "country": "Bolivia",
     "filter": "Aymara Bolivia",
     "code": "bo",
     "emoji": "🇧🇴",
     "keyCode": "bo-ay"
   },
   {
-    "value": "Spanish (Bolivia)",
+    "lang": "Spanish",
+    "country": "Bolivia",
     "filter": "Spanish Bolivia",
     "code": "bo",
     "emoji": "🇧🇴",
     "keyCode": "bo-es"
   },
   {
-    "value": "Quechua (Bolivia)",
+    "lang": "Quechua",
+    "country": "Bolivia",
     "filter": "Quechua Bolivia",
     "code": "bo",
     "emoji": "🇧🇴",
     "keyCode": "bo-qu"
   },
   {
-    "value": "Dutch (Bonaire)",
+    "lang": "Dutch",
+    "country": "Bonaire",
     "filter": "Dutch Bonaire",
     "code": "bq",
     "emoji": "🇧🇶",
     "keyCode": "bq-nl"
   },
   {
-    "value": "Portuguese (Brazil)",
+    "lang": "Portuguese",
+    "country": "Brazil",
     "filter": "Portuguese Brazil",
     "code": "br",
     "emoji": "🇧🇷",
     "keyCode": "br-pt"
   },
   {
-    "value": "English (Bahamas)",
+    "lang": "English",
+    "country": "Bahamas",
     "filter": "English Bahamas",
     "code": "bs",
     "emoji": "🇧🇸",
     "keyCode": "bs-en"
   },
   {
-    "value": "Dzongkha (Bhutan)",
+    "lang": "Dzongkha",
+    "country": "Bhutan",
     "filter": "Dzongkha Bhutan",
     "code": "bt",
     "emoji": "🇧🇹",
     "keyCode": "bt-dz"
   },
   {
-    "value": "Norwegian Bokmål (Bouvet Island)",
+    "lang": "Norwegian Bokmål",
+    "country": "Bouvet Island",
     "filter": "Norwegian Bokmål Bouvet Island",
     "code": "bv",
     "emoji": "🇧🇻",
     "keyCode": "bv-nb"
   },
   {
-    "value": "Norwegian Nynorsk (Bouvet Island)",
+    "lang": "Norwegian Nynorsk",
+    "country": "Bouvet Island",
     "filter": "Norwegian Nynorsk Bouvet Island",
     "code": "bv",
     "emoji": "🇧🇻",
     "keyCode": "bv-nn"
   },
   {
-    "value": "Norwegian (Bouvet Island)",
+    "lang": "Norwegian",
+    "country": "Bouvet Island",
     "filter": "Norwegian Bouvet Island",
     "code": "bv",
     "emoji": "🇧🇻",
     "keyCode": "bv-no"
   },
   {
-    "value": "English (Botswana)",
+    "lang": "English",
+    "country": "Botswana",
     "filter": "English Botswana",
     "code": "bw",
     "emoji": "🇧🇼",
     "keyCode": "bw-en"
   },
   {
-    "value": "Tswana (Botswana)",
+    "lang": "Tswana",
+    "country": "Botswana",
     "filter": "Tswana Botswana",
     "code": "bw",
     "emoji": "🇧🇼",
     "keyCode": "bw-tn"
   },
   {
-    "value": "Belarusian (Belarus)",
+    "lang": "Belarusian",
+    "country": "Belarus",
     "filter": "Belarusian Belarus",
     "code": "by",
     "emoji": "🇧🇾",
     "keyCode": "by-be"
   },
   {
-    "value": "Russian (Belarus)",
+    "lang": "Russian",
+    "country": "Belarus",
     "filter": "Russian Belarus",
     "code": "by",
     "emoji": "🇧🇾",
     "keyCode": "by-ru"
   },
   {
-    "value": "English (Belize)",
+    "lang": "English",
+    "country": "Belize",
     "filter": "English Belize",
     "code": "bz",
     "emoji": "🇧🇿",
     "keyCode": "bz-en"
   },
   {
-    "value": "Spanish (Belize)",
+    "lang": "Spanish",
+    "country": "Belize",
     "filter": "Spanish Belize",
     "code": "bz",
     "emoji": "🇧🇿",
     "keyCode": "bz-es"
   },
   {
-    "value": "English (Canada)",
+    "lang": "English",
+    "country": "Canada",
     "filter": "English Canada",
     "code": "ca",
     "emoji": "🇨🇦",
     "keyCode": "ca-en"
   },
   {
-    "value": "French (Canada)",
+    "lang": "French",
+    "country": "Canada",
     "filter": "French Canada",
     "code": "ca",
     "emoji": "🇨🇦",
     "keyCode": "ca-fr"
   },
   {
-    "value": "English (Cocos [Keeling] Islands)",
+    "lang": "English",
+    "country": "Cocos [Keeling] Islands",
     "filter": "English Cocos [Keeling] Islands",
     "code": "cc",
     "emoji": "🇨🇨",
     "keyCode": "cc-en"
   },
   {
-    "value": "French (Democratic Republic of the Congo)",
+    "lang": "French",
+    "country": "Democratic Republic of the Congo",
     "filter": "French Democratic Republic of the Congo",
     "code": "cd",
     "emoji": "🇨🇩",
     "keyCode": "cd-fr"
   },
   {
-    "value": "Kongo (Democratic Republic of the Congo)",
+    "lang": "Kongo",
+    "country": "Democratic Republic of the Congo",
     "filter": "Kongo Democratic Republic of the Congo",
     "code": "cd",
     "emoji": "🇨🇩",
     "keyCode": "cd-kg"
   },
   {
-    "value": "Lingala (Democratic Republic of the Congo)",
+    "lang": "Lingala",
+    "country": "Democratic Republic of the Congo",
     "filter": "Lingala Democratic Republic of the Congo",
     "code": "cd",
     "emoji": "🇨🇩",
     "keyCode": "cd-ln"
   },
   {
-    "value": "Luba-Katanga (Democratic Republic of the Congo)",
+    "lang": "Luba-Katanga",
+    "country": "Democratic Republic of the Congo",
     "filter": "Luba-Katanga Democratic Republic of the Congo",
     "code": "cd",
     "emoji": "🇨🇩",
     "keyCode": "cd-lu"
   },
   {
-    "value": "Swahili (Democratic Republic of the Congo)",
+    "lang": "Swahili",
+    "country": "Democratic Republic of the Congo",
     "filter": "Swahili Democratic Republic of the Congo",
     "code": "cd",
     "emoji": "🇨🇩",
     "keyCode": "cd-sw"
   },
   {
-    "value": "French (Central African Republic)",
+    "lang": "French",
+    "country": "Central African Republic",
     "filter": "French Central African Republic",
     "code": "cf",
     "emoji": "🇨🇫",
     "keyCode": "cf-fr"
   },
   {
-    "value": "Sango (Central African Republic)",
+    "lang": "Sango",
+    "country": "Central African Republic",
     "filter": "Sango Central African Republic",
     "code": "cf",
     "emoji": "🇨🇫",
     "keyCode": "cf-sg"
   },
   {
-    "value": "French (Republic of the Congo)",
+    "lang": "French",
+    "country": "Republic of the Congo",
     "filter": "French Republic of the Congo",
     "code": "cg",
     "emoji": "🇨🇬",
     "keyCode": "cg-fr"
   },
   {
-    "value": "Lingala (Republic of the Congo)",
+    "lang": "Lingala",
+    "country": "Republic of the Congo",
     "filter": "Lingala Republic of the Congo",
     "code": "cg",
     "emoji": "🇨🇬",
     "keyCode": "cg-ln"
   },
   {
-    "value": "German (Switzerland)",
+    "lang": "German",
+    "country": "Switzerland",
     "filter": "German Switzerland",
     "code": "ch",
     "emoji": "🇨🇭",
     "keyCode": "ch-de"
   },
   {
-    "value": "French (Switzerland)",
+    "lang": "French",
+    "country": "Switzerland",
     "filter": "French Switzerland",
     "code": "ch",
     "emoji": "🇨🇭",
     "keyCode": "ch-fr"
   },
   {
-    "value": "Italian (Switzerland)",
+    "lang": "Italian",
+    "country": "Switzerland",
     "filter": "Italian Switzerland",
     "code": "ch",
     "emoji": "🇨🇭",
     "keyCode": "ch-it"
   },
   {
-    "value": "French (Ivory Coast)",
+    "lang": "French",
+    "country": "Ivory Coast",
     "filter": "French Ivory Coast",
     "code": "ci",
     "emoji": "🇨🇮",
     "keyCode": "ci-fr"
   },
   {
-    "value": "English (Cook Islands)",
+    "lang": "English",
+    "country": "Cook Islands",
     "filter": "English Cook Islands",
     "code": "ck",
     "emoji": "🇨🇰",
     "keyCode": "ck-en"
   },
   {
-    "value": "Spanish (Chile)",
+    "lang": "Spanish",
+    "country": "Chile",
     "filter": "Spanish Chile",
     "code": "cl",
     "emoji": "🇨🇱",
     "keyCode": "cl-es"
   },
   {
-    "value": "English (Cameroon)",
+    "lang": "English",
+    "country": "Cameroon",
     "filter": "English Cameroon",
     "code": "cm",
     "emoji": "🇨🇲",
     "keyCode": "cm-en"
   },
   {
-    "value": "French (Cameroon)",
+    "lang": "French",
+    "country": "Cameroon",
     "filter": "French Cameroon",
     "code": "cm",
     "emoji": "🇨🇲",
     "keyCode": "cm-fr"
   },
   {
-    "value": "Chinese (China)",
+    "lang": "Chinese",
+    "country": "China",
     "filter": "Chinese China",
     "code": "cn",
     "emoji": "🇨🇳",
     "keyCode": "cn-zh"
   },
   {
-    "value": "Spanish (Colombia)",
+    "lang": "Spanish",
+    "country": "Colombia",
     "filter": "Spanish Colombia",
     "code": "co",
     "emoji": "🇨🇴",
     "keyCode": "co-es"
   },
   {
-    "value": "Spanish (Costa Rica)",
+    "lang": "Spanish",
+    "country": "Costa Rica",
     "filter": "Spanish Costa Rica",
     "code": "cr",
     "emoji": "🇨🇷",
     "keyCode": "cr-es"
   },
   {
-    "value": "Spanish (Cuba)",
+    "lang": "Spanish",
+    "country": "Cuba",
     "filter": "Spanish Cuba",
     "code": "cu",
     "emoji": "🇨🇺",
     "keyCode": "cu-es"
   },
   {
-    "value": "Portuguese (Cape Verde)",
+    "lang": "Portuguese",
+    "country": "Cape Verde",
     "filter": "Portuguese Cape Verde",
     "code": "cv",
     "emoji": "🇨🇻",
     "keyCode": "cv-pt"
   },
   {
-    "value": "English (Curacao)",
+    "lang": "English",
+    "country": "Curacao",
     "filter": "English Curacao",
     "code": "cw",
     "emoji": "🇨🇼",
     "keyCode": "cw-en"
   },
   {
-    "value": "Dutch (Curacao)",
+    "lang": "Dutch",
+    "country": "Curacao",
     "filter": "Dutch Curacao",
     "code": "cw",
     "emoji": "🇨🇼",
     "keyCode": "cw-nl"
   },
   {
-    "value": "Panjabi / Punjabi (Curacao)",
+    "lang": "Panjabi / Punjabi",
+    "country": "Curacao",
     "filter": "Panjabi / Punjabi Curacao",
     "code": "cw",
     "emoji": "🇨🇼",
     "keyCode": "cw-pa"
   },
   {
-    "value": "English (Christmas Island)",
+    "lang": "English",
+    "country": "Christmas Island",
     "filter": "English Christmas Island",
     "code": "cx",
     "emoji": "🇨🇽",
     "keyCode": "cx-en"
   },
   {
-    "value": "Greek (Cyprus)",
+    "lang": "Greek",
+    "country": "Cyprus",
     "filter": "Greek Cyprus",
     "code": "cy",
     "emoji": "🇨🇾",
     "keyCode": "cy-el"
   },
   {
-    "value": "Armenian (Cyprus)",
+    "lang": "Armenian",
+    "country": "Cyprus",
     "filter": "Armenian Cyprus",
     "code": "cy",
     "emoji": "🇨🇾",
     "keyCode": "cy-hy"
   },
   {
-    "value": "Turkish (Cyprus)",
+    "lang": "Turkish",
+    "country": "Cyprus",
     "filter": "Turkish Cyprus",
     "code": "cy",
     "emoji": "🇨🇾",
     "keyCode": "cy-tr"
   },
   {
-    "value": "Czech (Czech Republic)",
+    "lang": "Czech",
+    "country": "Czech Republic",
     "filter": "Czech Czech Republic",
     "code": "cz",
     "emoji": "🇨🇿",
     "keyCode": "cz-cs"
   },
   {
-    "value": "Slovak (Czech Republic)",
+    "lang": "Slovak",
+    "country": "Czech Republic",
     "filter": "Slovak Czech Republic",
     "code": "cz",
     "emoji": "🇨🇿",
     "keyCode": "cz-sk"
   },
   {
-    "value": "German (Germany)",
+    "lang": "German",
+    "country": "Germany",
     "filter": "German Germany",
     "code": "de",
     "emoji": "🇩🇪",
     "keyCode": "de-de"
   },
   {
-    "value": "Arabic (Djibouti)",
+    "lang": "Arabic",
+    "country": "Djibouti",
     "filter": "Arabic Djibouti",
     "code": "dj",
     "emoji": "🇩🇯",
     "keyCode": "dj-ar"
   },
   {
-    "value": "French (Djibouti)",
+    "lang": "French",
+    "country": "Djibouti",
     "filter": "French Djibouti",
     "code": "dj",
     "emoji": "🇩🇯",
     "keyCode": "dj-fr"
   },
   {
-    "value": "Danish (Denmark)",
+    "lang": "Danish",
+    "country": "Denmark",
     "filter": "Danish Denmark",
     "code": "dk",
     "emoji": "🇩🇰",
     "keyCode": "dk-da"
   },
   {
-    "value": "English (Dominica)",
+    "lang": "English",
+    "country": "Dominica",
     "filter": "English Dominica",
     "code": "dm",
     "emoji": "🇩🇲",
     "keyCode": "dm-en"
   },
   {
-    "value": "Spanish (Dominican Republic)",
+    "lang": "Spanish",
+    "country": "Dominican Republic",
     "filter": "Spanish Dominican Republic",
     "code": "do",
     "emoji": "🇩🇴",
     "keyCode": "do-es"
   },
   {
-    "value": "Arabic (Algeria)",
+    "lang": "Arabic",
+    "country": "Algeria",
     "filter": "Arabic Algeria",
     "code": "dz",
     "emoji": "🇩🇿",
     "keyCode": "dz-ar"
   },
   {
-    "value": "Spanish (Ecuador)",
+    "lang": "Spanish",
+    "country": "Ecuador",
     "filter": "Spanish Ecuador",
     "code": "ec",
     "emoji": "🇪🇨",
     "keyCode": "ec-es"
   },
   {
-    "value": "Estonian (Estonia)",
+    "lang": "Estonian",
+    "country": "Estonia",
     "filter": "Estonian Estonia",
     "code": "ee",
     "emoji": "🇪🇪",
     "keyCode": "ee-et"
   },
   {
-    "value": "Arabic (Egypt)",
+    "lang": "Arabic",
+    "country": "Egypt",
     "filter": "Arabic Egypt",
     "code": "eg",
     "emoji": "🇪🇬",
     "keyCode": "eg-ar"
   },
   {
-    "value": "Spanish (Western Sahara)",
+    "lang": "Spanish",
+    "country": "Western Sahara",
     "filter": "Spanish Western Sahara",
     "code": "eh",
     "emoji": "🇪🇭",
     "keyCode": "eh-es"
   },
   {
-    "value": "Arabic (Eritrea)",
+    "lang": "Arabic",
+    "country": "Eritrea",
     "filter": "Arabic Eritrea",
     "code": "er",
     "emoji": "🇪🇷",
     "keyCode": "er-ar"
   },
   {
-    "value": "English (Eritrea)",
+    "lang": "English",
+    "country": "Eritrea",
     "filter": "English Eritrea",
     "code": "er",
     "emoji": "🇪🇷",
     "keyCode": "er-en"
   },
   {
-    "value": "Tigrinya (Eritrea)",
+    "lang": "Tigrinya",
+    "country": "Eritrea",
     "filter": "Tigrinya Eritrea",
     "code": "er",
     "emoji": "🇪🇷",
     "keyCode": "er-ti"
   },
   {
-    "value": "Catalan (Spain)",
+    "lang": "Catalan",
+    "country": "Spain",
     "filter": "Catalan Spain",
     "code": "es",
     "emoji": "🇪🇸",
     "keyCode": "es-ca"
   },
   {
-    "value": "Spanish (Spain)",
+    "lang": "Spanish",
+    "country": "Spain",
     "filter": "Spanish Spain",
     "code": "es",
     "emoji": "🇪🇸",
     "keyCode": "es-es"
   },
   {
-    "value": "Basque (Spain)",
+    "lang": "Basque",
+    "country": "Spain",
     "filter": "Basque Spain",
     "code": "es",
     "emoji": "🇪🇸",
     "keyCode": "es-eu"
   },
   {
-    "value": "Galician (Spain)",
+    "lang": "Galician",
+    "country": "Spain",
     "filter": "Galician Spain",
     "code": "es",
     "emoji": "🇪🇸",
     "keyCode": "es-gl"
   },
   {
-    "value": "Occitan (Spain)",
+    "lang": "Occitan",
+    "country": "Spain",
     "filter": "Occitan Spain",
     "code": "es",
     "emoji": "🇪🇸",
     "keyCode": "es-oc"
   },
   {
-    "value": "Amharic (Ethiopia)",
+    "lang": "Amharic",
+    "country": "Ethiopia",
     "filter": "Amharic Ethiopia",
     "code": "et",
     "emoji": "🇪🇹",
     "keyCode": "et-am"
   },
   {
-    "value": "Finnish (Finland)",
+    "lang": "Finnish",
+    "country": "Finland",
     "filter": "Finnish Finland",
     "code": "fi",
     "emoji": "🇫🇮",
     "keyCode": "fi-fi"
   },
   {
-    "value": "Swedish (Finland)",
+    "lang": "Swedish",
+    "country": "Finland",
     "filter": "Swedish Finland",
     "code": "fi",
     "emoji": "🇫🇮",
     "keyCode": "fi-sv"
   },
   {
-    "value": "English (Fiji)",
+    "lang": "English",
+    "country": "Fiji",
     "filter": "English Fiji",
     "code": "fj",
     "emoji": "🇫🇯",
     "keyCode": "fj-en"
   },
   {
-    "value": "Fijian (Fiji)",
+    "lang": "Fijian",
+    "country": "Fiji",
     "filter": "Fijian Fiji",
     "code": "fj",
     "emoji": "🇫🇯",
     "keyCode": "fj-fj"
   },
   {
-    "value": "Hindi (Fiji)",
+    "lang": "Hindi",
+    "country": "Fiji",
     "filter": "Hindi Fiji",
     "code": "fj",
     "emoji": "🇫🇯",
     "keyCode": "fj-hi"
   },
   {
-    "value": "Urdu (Fiji)",
+    "lang": "Urdu",
+    "country": "Fiji",
     "filter": "Urdu Fiji",
     "code": "fj",
     "emoji": "🇫🇯",
     "keyCode": "fj-ur"
   },
   {
-    "value": "English (Falkland Islands)",
+    "lang": "English",
+    "country": "Falkland Islands",
     "filter": "English Falkland Islands",
     "code": "fk",
     "emoji": "🇫🇰",
     "keyCode": "fk-en"
   },
   {
-    "value": "English (Micronesia)",
+    "lang": "English",
+    "country": "Micronesia",
     "filter": "English Micronesia",
     "code": "fm",
     "emoji": "🇫🇲",
     "keyCode": "fm-en"
   },
   {
-    "value": "Faroese (Faroe Islands)",
+    "lang": "Faroese",
+    "country": "Faroe Islands",
     "filter": "Faroese Faroe Islands",
     "code": "fo",
     "emoji": "🇫🇴",
     "keyCode": "fo-fo"
   },
   {
-    "value": "French (France)",
+    "lang": "French",
+    "country": "France",
     "filter": "French France",
     "code": "fr",
     "emoji": "🇫🇷",
     "keyCode": "fr-fr"
   },
   {
-    "value": "French (Gabon)",
+    "lang": "French",
+    "country": "Gabon",
     "filter": "French Gabon",
     "code": "ga",
     "emoji": "🇬🇦",
     "keyCode": "ga-fr"
   },
   {
-    "value": "English (United Kingdom)",
+    "lang": "English",
+    "country": "United Kingdom",
     "filter": "English United Kingdom",
     "code": "gb",
     "emoji": "🇬🇧",
     "keyCode": "gb-en"
   },
   {
-    "value": "English (Grenada)",
+    "lang": "English",
+    "country": "Grenada",
     "filter": "English Grenada",
     "code": "gd",
     "emoji": "🇬🇩",
     "keyCode": "gd-en"
   },
   {
-    "value": "Georgian (Georgia)",
+    "lang": "Georgian",
+    "country": "Georgia",
     "filter": "Georgian Georgia",
     "code": "ge",
     "emoji": "🇬🇪",
     "keyCode": "ge-ka"
   },
   {
-    "value": "French (French Guiana)",
+    "lang": "French",
+    "country": "French Guiana",
     "filter": "French French Guiana",
     "code": "gf",
     "emoji": "🇬🇫",
     "keyCode": "gf-fr"
   },
   {
-    "value": "English (Guernsey)",
+    "lang": "English",
+    "country": "Guernsey",
     "filter": "English Guernsey",
     "code": "gg",
     "emoji": "🇬🇬",
     "keyCode": "gg-en"
   },
   {
-    "value": "French (Guernsey)",
+    "lang": "French",
+    "country": "Guernsey",
     "filter": "French Guernsey",
     "code": "gg",
     "emoji": "🇬🇬",
     "keyCode": "gg-fr"
   },
   {
-    "value": "English (Ghana)",
+    "lang": "English",
+    "country": "Ghana",
     "filter": "English Ghana",
     "code": "gh",
     "emoji": "🇬🇭",
     "keyCode": "gh-en"
   },
   {
-    "value": "English (Gibraltar)",
+    "lang": "English",
+    "country": "Gibraltar",
     "filter": "English Gibraltar",
     "code": "gi",
     "emoji": "🇬🇮",
     "keyCode": "gi-en"
   },
   {
-    "value": "Greenlandic (Greenland)",
+    "lang": "Greenlandic",
+    "country": "Greenland",
     "filter": "Greenlandic Greenland",
     "code": "gl",
     "emoji": "🇬🇱",
     "keyCode": "gl-kl"
   },
   {
-    "value": "English (Gambia)",
+    "lang": "English",
+    "country": "Gambia",
     "filter": "English Gambia",
     "code": "gm",
     "emoji": "🇬🇲",
     "keyCode": "gm-en"
   },
   {
-    "value": "Peul (Guinea)",
+    "lang": "Peul",
+    "country": "Guinea",
     "filter": "Peul Guinea",
     "code": "gn",
     "emoji": "🇬🇳",
     "keyCode": "gn-ff"
   },
   {
-    "value": "French (Guinea)",
+    "lang": "French",
+    "country": "Guinea",
     "filter": "French Guinea",
     "code": "gn",
     "emoji": "🇬🇳",
     "keyCode": "gn-fr"
   },
   {
-    "value": "French (Guadeloupe)",
+    "lang": "French",
+    "country": "Guadeloupe",
     "filter": "French Guadeloupe",
     "code": "gp",
     "emoji": "🇬🇵",
     "keyCode": "gp-fr"
   },
   {
-    "value": "Spanish (Equatorial Guinea)",
+    "lang": "Spanish",
+    "country": "Equatorial Guinea",
     "filter": "Spanish Equatorial Guinea",
     "code": "gq",
     "emoji": "🇬🇶",
     "keyCode": "gq-es"
   },
   {
-    "value": "French (Equatorial Guinea)",
+    "lang": "French",
+    "country": "Equatorial Guinea",
     "filter": "French Equatorial Guinea",
     "code": "gq",
     "emoji": "🇬🇶",
     "keyCode": "gq-fr"
   },
   {
-    "value": "Greek (Greece)",
+    "lang": "Greek",
+    "country": "Greece",
     "filter": "Greek Greece",
     "code": "gr",
     "emoji": "🇬🇷",
     "keyCode": "gr-el"
   },
   {
-    "value": "English (South Georgia and the South Sandwich Islands)",
+    "lang": "English",
+    "country": "South Georgia and the South Sandwich Islands",
     "filter": "English South Georgia and the South Sandwich Islands",
     "code": "gs",
     "emoji": "🇬🇸",
     "keyCode": "gs-en"
   },
   {
-    "value": "Spanish (Guatemala)",
+    "lang": "Spanish",
+    "country": "Guatemala",
     "filter": "Spanish Guatemala",
     "code": "gt",
     "emoji": "🇬🇹",
     "keyCode": "gt-es"
   },
   {
-    "value": "Chamorro (Guam)",
+    "lang": "Chamorro",
+    "country": "Guam",
     "filter": "Chamorro Guam",
     "code": "gu",
     "emoji": "🇬🇺",
     "keyCode": "gu-ch"
   },
   {
-    "value": "English (Guam)",
+    "lang": "English",
+    "country": "Guam",
     "filter": "English Guam",
     "code": "gu",
     "emoji": "🇬🇺",
     "keyCode": "gu-en"
   },
   {
-    "value": "Spanish (Guam)",
+    "lang": "Spanish",
+    "country": "Guam",
     "filter": "Spanish Guam",
     "code": "gu",
     "emoji": "🇬🇺",
     "keyCode": "gu-es"
   },
   {
-    "value": "Portuguese (Guinea-Bissau)",
+    "lang": "Portuguese",
+    "country": "Guinea-Bissau",
     "filter": "Portuguese Guinea-Bissau",
     "code": "gw",
     "emoji": "🇬🇼",
     "keyCode": "gw-pt"
   },
   {
-    "value": "English (Guyana)",
+    "lang": "English",
+    "country": "Guyana",
     "filter": "English Guyana",
     "code": "gy",
     "emoji": "🇬🇾",
     "keyCode": "gy-en"
   },
   {
-    "value": "English (Hong Kong)",
+    "lang": "English",
+    "country": "Hong Kong",
     "filter": "English Hong Kong",
     "code": "hk",
     "emoji": "🇭🇰",
     "keyCode": "hk-en"
   },
   {
-    "value": "Chinese (Hong Kong)",
+    "lang": "Chinese",
+    "country": "Hong Kong",
     "filter": "Chinese Hong Kong",
     "code": "hk",
     "emoji": "🇭🇰",
     "keyCode": "hk-zh"
   },
   {
-    "value": "English (Heard Island and McDonald Islands)",
+    "lang": "English",
+    "country": "Heard Island and McDonald Islands",
     "filter": "English Heard Island and McDonald Islands",
     "code": "hm",
     "emoji": "🇭🇲",
     "keyCode": "hm-en"
   },
   {
-    "value": "Spanish (Honduras)",
+    "lang": "Spanish",
+    "country": "Honduras",
     "filter": "Spanish Honduras",
     "code": "hn",
     "emoji": "🇭🇳",
     "keyCode": "hn-es"
   },
   {
-    "value": "Croatian (Croatia)",
+    "lang": "Croatian",
+    "country": "Croatia",
     "filter": "Croatian Croatia",
     "code": "hr",
     "emoji": "🇭🇷",
     "keyCode": "hr-hr"
   },
   {
-    "value": "French (Haiti)",
+    "lang": "French",
+    "country": "Haiti",
     "filter": "French Haiti",
     "code": "ht",
     "emoji": "🇭🇹",
     "keyCode": "ht-fr"
   },
   {
-    "value": "Haitian (Haiti)",
+    "lang": "Haitian",
+    "country": "Haiti",
     "filter": "Haitian Haiti",
     "code": "ht",
     "emoji": "🇭🇹",
     "keyCode": "ht-ht"
   },
   {
-    "value": "Hungarian (Hungary)",
+    "lang": "Hungarian",
+    "country": "Hungary",
     "filter": "Hungarian Hungary",
     "code": "hu",
     "emoji": "🇭🇺",
     "keyCode": "hu-hu"
   },
   {
-    "value": "Indonesian (Indonesia)",
+    "lang": "Indonesian",
+    "country": "Indonesia",
     "filter": "Indonesian Indonesia",
     "code": "id",
     "emoji": "🇮🇩",
     "keyCode": "id-id"
   },
   {
-    "value": "English (Ireland)",
+    "lang": "English",
+    "country": "Ireland",
     "filter": "English Ireland",
     "code": "ie",
     "emoji": "🇮🇪",
     "keyCode": "ie-en"
   },
   {
-    "value": "Irish (Ireland)",
+    "lang": "Irish",
+    "country": "Ireland",
     "filter": "Irish Ireland",
     "code": "ie",
     "emoji": "🇮🇪",
     "keyCode": "ie-ga"
   },
   {
-    "value": "Arabic (Israel)",
+    "lang": "Arabic",
+    "country": "Israel",
     "filter": "Arabic Israel",
     "code": "il",
     "emoji": "🇮🇱",
     "keyCode": "il-ar"
   },
   {
-    "value": "Hebrew (Israel)",
+    "lang": "Hebrew",
+    "country": "Israel",
     "filter": "Hebrew Israel",
     "code": "il",
     "emoji": "🇮🇱",
     "keyCode": "il-he"
   },
   {
-    "value": "English (Isle of Man)",
+    "lang": "English",
+    "country": "Isle of Man",
     "filter": "English Isle of Man",
     "code": "im",
     "emoji": "🇮🇲",
     "keyCode": "im-en"
   },
   {
-    "value": "Manx (Isle of Man)",
+    "lang": "Manx",
+    "country": "Isle of Man",
     "filter": "Manx Isle of Man",
     "code": "im",
     "emoji": "🇮🇲",
     "keyCode": "im-gv"
   },
   {
-    "value": "English (India)",
+    "lang": "English",
+    "country": "India",
     "filter": "English India",
     "code": "in",
     "emoji": "🇮🇳",
     "keyCode": "in-en"
   },
   {
-    "value": "Hindi (India)",
+    "lang": "Hindi",
+    "country": "India",
     "filter": "Hindi India",
     "code": "in",
     "emoji": "🇮🇳",
     "keyCode": "in-hi"
   },
   {
-    "value": "English (British Indian Ocean Territory)",
+    "lang": "English",
+    "country": "British Indian Ocean Territory",
     "filter": "English British Indian Ocean Territory",
     "code": "io",
     "emoji": "🇮🇴",
     "keyCode": "io-en"
   },
   {
-    "value": "Arabic (Iraq)",
+    "lang": "Arabic",
+    "country": "Iraq",
     "filter": "Arabic Iraq",
     "code": "iq",
     "emoji": "🇮🇶",
     "keyCode": "iq-ar"
   },
   {
-    "value": "Kurdish (Iraq)",
+    "lang": "Kurdish",
+    "country": "Iraq",
     "filter": "Kurdish Iraq",
     "code": "iq",
     "emoji": "🇮🇶",
     "keyCode": "iq-ku"
   },
   {
-    "value": "Persian (Iran)",
+    "lang": "Persian",
+    "country": "Iran",
     "filter": "Persian Iran",
     "code": "ir",
     "emoji": "🇮🇷",
     "keyCode": "ir-fa"
   },
   {
-    "value": "Icelandic (Iceland)",
+    "lang": "Icelandic",
+    "country": "Iceland",
     "filter": "Icelandic Iceland",
     "code": "is",
     "emoji": "🇮🇸",
     "keyCode": "is-is"
   },
   {
-    "value": "Italian (Italy)",
+    "lang": "Italian",
+    "country": "Italy",
     "filter": "Italian Italy",
     "code": "it",
     "emoji": "🇮🇹",
     "keyCode": "it-it"
   },
   {
-    "value": "English (Jersey)",
+    "lang": "English",
+    "country": "Jersey",
     "filter": "English Jersey",
     "code": "je",
     "emoji": "🇯🇪",
     "keyCode": "je-en"
   },
   {
-    "value": "French (Jersey)",
+    "lang": "French",
+    "country": "Jersey",
     "filter": "French Jersey",
     "code": "je",
     "emoji": "🇯🇪",
     "keyCode": "je-fr"
   },
   {
-    "value": "English (Jamaica)",
+    "lang": "English",
+    "country": "Jamaica",
     "filter": "English Jamaica",
     "code": "jm",
     "emoji": "🇯🇲",
     "keyCode": "jm-en"
   },
   {
-    "value": "Arabic (Jordan)",
+    "lang": "Arabic",
+    "country": "Jordan",
     "filter": "Arabic Jordan",
     "code": "jo",
     "emoji": "🇯🇴",
     "keyCode": "jo-ar"
   },
   {
-    "value": "Japanese (Japan)",
+    "lang": "Japanese",
+    "country": "Japan",
     "filter": "Japanese Japan",
     "code": "jp",
     "emoji": "🇯🇵",
     "keyCode": "jp-ja"
   },
   {
-    "value": "English (Kenya)",
+    "lang": "English",
+    "country": "Kenya",
     "filter": "English Kenya",
     "code": "ke",
     "emoji": "🇰🇪",
     "keyCode": "ke-en"
   },
   {
-    "value": "Swahili (Kenya)",
+    "lang": "Swahili",
+    "country": "Kenya",
     "filter": "Swahili Kenya",
     "code": "ke",
     "emoji": "🇰🇪",
     "keyCode": "ke-sw"
   },
   {
-    "value": "Kirghiz (Kyrgyzstan)",
+    "lang": "Kirghiz",
+    "country": "Kyrgyzstan",
     "filter": "Kirghiz Kyrgyzstan",
     "code": "kg",
     "emoji": "🇰🇬",
     "keyCode": "kg-ky"
   },
   {
-    "value": "Russian (Kyrgyzstan)",
+    "lang": "Russian",
+    "country": "Kyrgyzstan",
     "filter": "Russian Kyrgyzstan",
     "code": "kg",
     "emoji": "🇰🇬",
     "keyCode": "kg-ru"
   },
   {
-    "value": "Cambodian (Cambodia)",
+    "lang": "Cambodian",
+    "country": "Cambodia",
     "filter": "Cambodian Cambodia",
     "code": "kh",
     "emoji": "🇰🇭",
     "keyCode": "kh-km"
   },
   {
-    "value": "English (Kiribati)",
+    "lang": "English",
+    "country": "Kiribati",
     "filter": "English Kiribati",
     "code": "ki",
     "emoji": "🇰🇮",
     "keyCode": "ki-en"
   },
   {
-    "value": "Arabic (Comoros)",
+    "lang": "Arabic",
+    "country": "Comoros",
     "filter": "Arabic Comoros",
     "code": "km",
     "emoji": "🇰🇲",
     "keyCode": "km-ar"
   },
   {
-    "value": "French (Comoros)",
+    "lang": "French",
+    "country": "Comoros",
     "filter": "French Comoros",
     "code": "km",
     "emoji": "🇰🇲",
     "keyCode": "km-fr"
   },
   {
-    "value": "English (Saint Kitts and Nevis)",
+    "lang": "English",
+    "country": "Saint Kitts and Nevis",
     "filter": "English Saint Kitts and Nevis",
     "code": "kn",
     "emoji": "🇰🇳",
     "keyCode": "kn-en"
   },
   {
-    "value": "Korean (North Korea)",
+    "lang": "Korean",
+    "country": "North Korea",
     "filter": "Korean North Korea",
     "code": "kp",
     "emoji": "🇰🇵",
     "keyCode": "kp-ko"
   },
   {
-    "value": "Korean (South Korea)",
+    "lang": "Korean",
+    "country": "South Korea",
     "filter": "Korean South Korea",
     "code": "kr",
     "emoji": "🇰🇷",
     "keyCode": "kr-ko"
   },
   {
-    "value": "Arabic (Kuwait)",
+    "lang": "Arabic",
+    "country": "Kuwait",
     "filter": "Arabic Kuwait",
     "code": "kw",
     "emoji": "🇰🇼",
     "keyCode": "kw-ar"
   },
   {
-    "value": "English (Cayman Islands)",
+    "lang": "English",
+    "country": "Cayman Islands",
     "filter": "English Cayman Islands",
     "code": "ky",
     "emoji": "🇰🇾",
     "keyCode": "ky-en"
   },
   {
-    "value": "Kazakh (Kazakhstan)",
+    "lang": "Kazakh",
+    "country": "Kazakhstan",
     "filter": "Kazakh Kazakhstan",
     "code": "kz",
     "emoji": "🇰🇿",
     "keyCode": "kz-kk"
   },
   {
-    "value": "Russian (Kazakhstan)",
+    "lang": "Russian",
+    "country": "Kazakhstan",
     "filter": "Russian Kazakhstan",
     "code": "kz",
     "emoji": "🇰🇿",
     "keyCode": "kz-ru"
   },
   {
-    "value": "Laotian (Laos)",
+    "lang": "Laotian",
+    "country": "Laos",
     "filter": "Laotian Laos",
     "code": "la",
     "emoji": "🇱🇦",
     "keyCode": "la-lo"
   },
   {
-    "value": "Arabic (Lebanon)",
+    "lang": "Arabic",
+    "country": "Lebanon",
     "filter": "Arabic Lebanon",
     "code": "lb",
     "emoji": "🇱🇧",
     "keyCode": "lb-ar"
   },
   {
-    "value": "French (Lebanon)",
+    "lang": "French",
+    "country": "Lebanon",
     "filter": "French Lebanon",
     "code": "lb",
     "emoji": "🇱🇧",
     "keyCode": "lb-fr"
   },
   {
-    "value": "English (Saint Lucia)",
+    "lang": "English",
+    "country": "Saint Lucia",
     "filter": "English Saint Lucia",
     "code": "lc",
     "emoji": "🇱🇨",
     "keyCode": "lc-en"
   },
   {
-    "value": "German (Liechtenstein)",
+    "lang": "German",
+    "country": "Liechtenstein",
     "filter": "German Liechtenstein",
     "code": "li",
     "emoji": "🇱🇮",
     "keyCode": "li-de"
   },
   {
-    "value": "Sinhalese (Sri Lanka)",
+    "lang": "Sinhalese",
+    "country": "Sri Lanka",
     "filter": "Sinhalese Sri Lanka",
     "code": "lk",
     "emoji": "🇱🇰",
     "keyCode": "lk-si"
   },
   {
-    "value": "Tamil (Sri Lanka)",
+    "lang": "Tamil",
+    "country": "Sri Lanka",
     "filter": "Tamil Sri Lanka",
     "code": "lk",
     "emoji": "🇱🇰",
     "keyCode": "lk-ta"
   },
   {
-    "value": "English (Liberia)",
+    "lang": "English",
+    "country": "Liberia",
     "filter": "English Liberia",
     "code": "lr",
     "emoji": "🇱🇷",
     "keyCode": "lr-en"
   },
   {
-    "value": "English (Lesotho)",
+    "lang": "English",
+    "country": "Lesotho",
     "filter": "English Lesotho",
     "code": "ls",
     "emoji": "🇱🇸",
     "keyCode": "ls-en"
   },
   {
-    "value": "Southern Sotho (Lesotho)",
+    "lang": "Southern Sotho",
+    "country": "Lesotho",
     "filter": "Southern Sotho Lesotho",
     "code": "ls",
     "emoji": "🇱🇸",
     "keyCode": "ls-st"
   },
   {
-    "value": "Lithuanian (Lithuania)",
+    "lang": "Lithuanian",
+    "country": "Lithuania",
     "filter": "Lithuanian Lithuania",
     "code": "lt",
     "emoji": "🇱🇹",
     "keyCode": "lt-lt"
   },
   {
-    "value": "German (Luxembourg)",
+    "lang": "German",
+    "country": "Luxembourg",
     "filter": "German Luxembourg",
     "code": "lu",
     "emoji": "🇱🇺",
     "keyCode": "lu-de"
   },
   {
-    "value": "French (Luxembourg)",
+    "lang": "French",
+    "country": "Luxembourg",
     "filter": "French Luxembourg",
     "code": "lu",
     "emoji": "🇱🇺",
     "keyCode": "lu-fr"
   },
   {
-    "value": "Luxembourgish (Luxembourg)",
+    "lang": "Luxembourgish",
+    "country": "Luxembourg",
     "filter": "Luxembourgish Luxembourg",
     "code": "lu",
     "emoji": "🇱🇺",
     "keyCode": "lu-lb"
   },
   {
-    "value": "Latvian (Latvia)",
+    "lang": "Latvian",
+    "country": "Latvia",
     "filter": "Latvian Latvia",
     "code": "lv",
     "emoji": "🇱🇻",
     "keyCode": "lv-lv"
   },
   {
-    "value": "Arabic (Libya)",
+    "lang": "Arabic",
+    "country": "Libya",
     "filter": "Arabic Libya",
     "code": "ly",
     "emoji": "🇱🇾",
     "keyCode": "ly-ar"
   },
   {
-    "value": "Arabic (Morocco)",
+    "lang": "Arabic",
+    "country": "Morocco",
     "filter": "Arabic Morocco",
     "code": "ma",
     "emoji": "🇲🇦",
     "keyCode": "ma-ar"
   },
   {
-    "value": "French (Monaco)",
+    "lang": "French",
+    "country": "Monaco",
     "filter": "French Monaco",
     "code": "mc",
     "emoji": "🇲🇨",
     "keyCode": "mc-fr"
   },
   {
-    "value": "Romanian (Moldova)",
+    "lang": "Romanian",
+    "country": "Moldova",
     "filter": "Romanian Moldova",
     "code": "md",
     "emoji": "🇲🇩",
     "keyCode": "md-ro"
   },
   {
-    "value": "Bosnian (Montenegro)",
+    "lang": "Bosnian",
+    "country": "Montenegro",
     "filter": "Bosnian Montenegro",
     "code": "me",
     "emoji": "🇲🇪",
     "keyCode": "me-bs"
   },
   {
-    "value": "Croatian (Montenegro)",
+    "lang": "Croatian",
+    "country": "Montenegro",
     "filter": "Croatian Montenegro",
     "code": "me",
     "emoji": "🇲🇪",
     "keyCode": "me-hr"
   },
   {
-    "value": "Albanian (Montenegro)",
+    "lang": "Albanian",
+    "country": "Montenegro",
     "filter": "Albanian Montenegro",
     "code": "me",
     "emoji": "🇲🇪",
     "keyCode": "me-sq"
   },
   {
-    "value": "Serbian (Montenegro)",
+    "lang": "Serbian",
+    "country": "Montenegro",
     "filter": "Serbian Montenegro",
     "code": "me",
     "emoji": "🇲🇪",
     "keyCode": "me-sr"
   },
   {
-    "value": "English (Saint Martin)",
+    "lang": "English",
+    "country": "Saint Martin",
     "filter": "English Saint Martin",
     "code": "mf",
     "emoji": "🇲🇫",
     "keyCode": "mf-en"
   },
   {
-    "value": "French (Saint Martin)",
+    "lang": "French",
+    "country": "Saint Martin",
     "filter": "French Saint Martin",
     "code": "mf",
     "emoji": "🇲🇫",
     "keyCode": "mf-fr"
   },
   {
-    "value": "Dutch (Saint Martin)",
+    "lang": "Dutch",
+    "country": "Saint Martin",
     "filter": "Dutch Saint Martin",
     "code": "mf",
     "emoji": "🇲🇫",
     "keyCode": "mf-nl"
   },
   {
-    "value": "French (Madagascar)",
+    "lang": "French",
+    "country": "Madagascar",
     "filter": "French Madagascar",
     "code": "mg",
     "emoji": "🇲🇬",
     "keyCode": "mg-fr"
   },
   {
-    "value": "Malagasy (Madagascar)",
+    "lang": "Malagasy",
+    "country": "Madagascar",
     "filter": "Malagasy Madagascar",
     "code": "mg",
     "emoji": "🇲🇬",
     "keyCode": "mg-mg"
   },
   {
-    "value": "English (Marshall Islands)",
+    "lang": "English",
+    "country": "Marshall Islands",
     "filter": "English Marshall Islands",
     "code": "mh",
     "emoji": "🇲🇭",
     "keyCode": "mh-en"
   },
   {
-    "value": "Marshallese (Marshall Islands)",
+    "lang": "Marshallese",
+    "country": "Marshall Islands",
     "filter": "Marshallese Marshall Islands",
     "code": "mh",
     "emoji": "🇲🇭",
     "keyCode": "mh-mh"
   },
   {
-    "value": "Macedonian (North Macedonia)",
+    "lang": "Macedonian",
+    "country": "North Macedonia",
     "filter": "Macedonian North Macedonia",
     "code": "mk",
     "emoji": "🇲🇰",
     "keyCode": "mk-mk"
   },
   {
-    "value": "French (Mali)",
+    "lang": "French",
+    "country": "Mali",
     "filter": "French Mali",
     "code": "ml",
     "emoji": "🇲🇱",
     "keyCode": "ml-fr"
   },
   {
-    "value": "Burmese (Myanmar [Burma])",
+    "lang": "Burmese",
+    "country": "Myanmar [Burma]",
     "filter": "Burmese Myanmar [Burma]",
     "code": "mm",
     "emoji": "🇲🇲",
     "keyCode": "mm-my"
   },
   {
-    "value": "Mongolian (Mongolia)",
+    "lang": "Mongolian",
+    "country": "Mongolia",
     "filter": "Mongolian Mongolia",
     "code": "mn",
     "emoji": "🇲🇳",
     "keyCode": "mn-mn"
   },
   {
-    "value": "Portuguese (Macao)",
+    "lang": "Portuguese",
+    "country": "Macao",
     "filter": "Portuguese Macao",
     "code": "mo",
     "emoji": "🇲🇴",
     "keyCode": "mo-pt"
   },
   {
-    "value": "Chinese (Macao)",
+    "lang": "Chinese",
+    "country": "Macao",
     "filter": "Chinese Macao",
     "code": "mo",
     "emoji": "🇲🇴",
     "keyCode": "mo-zh"
   },
   {
-    "value": "Chamorro (Northern Mariana Islands)",
+    "lang": "Chamorro",
+    "country": "Northern Mariana Islands",
     "filter": "Chamorro Northern Mariana Islands",
     "code": "mp",
     "emoji": "🇲🇵",
     "keyCode": "mp-ch"
   },
   {
-    "value": "English (Northern Mariana Islands)",
+    "lang": "English",
+    "country": "Northern Mariana Islands",
     "filter": "English Northern Mariana Islands",
     "code": "mp",
     "emoji": "🇲🇵",
     "keyCode": "mp-en"
   },
   {
-    "value": "French (Martinique)",
+    "lang": "French",
+    "country": "Martinique",
     "filter": "French Martinique",
     "code": "mq",
     "emoji": "🇲🇶",
     "keyCode": "mq-fr"
   },
   {
-    "value": "Arabic (Mauritania)",
+    "lang": "Arabic",
+    "country": "Mauritania",
     "filter": "Arabic Mauritania",
     "code": "mr",
     "emoji": "🇲🇷",
     "keyCode": "mr-ar"
   },
   {
-    "value": "English (Montserrat)",
+    "lang": "English",
+    "country": "Montserrat",
     "filter": "English Montserrat",
     "code": "ms",
     "emoji": "🇲🇸",
     "keyCode": "ms-en"
   },
   {
-    "value": "English (Malta)",
+    "lang": "English",
+    "country": "Malta",
     "filter": "English Malta",
     "code": "mt",
     "emoji": "🇲🇹",
     "keyCode": "mt-en"
   },
   {
-    "value": "Maltese (Malta)",
+    "lang": "Maltese",
+    "country": "Malta",
     "filter": "Maltese Malta",
     "code": "mt",
     "emoji": "🇲🇹",
     "keyCode": "mt-mt"
   },
   {
-    "value": "English (Mauritius)",
+    "lang": "English",
+    "country": "Mauritius",
     "filter": "English Mauritius",
     "code": "mu",
     "emoji": "🇲🇺",
     "keyCode": "mu-en"
   },
   {
-    "value": "Divehi (Maldives)",
+    "lang": "Divehi",
+    "country": "Maldives",
     "filter": "Divehi Maldives",
     "code": "mv",
     "emoji": "🇲🇻",
     "keyCode": "mv-dv"
   },
   {
-    "value": "English (Malawi)",
+    "lang": "English",
+    "country": "Malawi",
     "filter": "English Malawi",
     "code": "mw",
     "emoji": "🇲🇼",
     "keyCode": "mw-en"
   },
   {
-    "value": "Chichewa (Malawi)",
+    "lang": "Chichewa",
+    "country": "Malawi",
     "filter": "Chichewa Malawi",
     "code": "mw",
     "emoji": "🇲🇼",
     "keyCode": "mw-ny"
   },
   {
-    "value": "Spanish (Mexico)",
+    "lang": "Spanish",
+    "country": "Mexico",
     "filter": "Spanish Mexico",
     "code": "mx",
     "emoji": "🇲🇽",
     "keyCode": "mx-es"
   },
   {
-    "value": "Malay (Malaysia)",
+    "lang": "Malay",
+    "country": "Malaysia",
     "filter": "Malay Malaysia",
     "code": "my",
     "emoji": "🇲🇾",
     "keyCode": "my-ms"
   },
   {
-    "value": "Portuguese (Mozambique)",
+    "lang": "Portuguese",
+    "country": "Mozambique",
     "filter": "Portuguese Mozambique",
     "code": "mz",
     "emoji": "🇲🇿",
     "keyCode": "mz-pt"
   },
   {
-    "value": "Afrikaans (Namibia)",
+    "lang": "Afrikaans",
+    "country": "Namibia",
     "filter": "Afrikaans Namibia",
     "code": "na",
     "emoji": "🇳🇦",
     "keyCode": "na-af"
   },
   {
-    "value": "English (Namibia)",
+    "lang": "English",
+    "country": "Namibia",
     "filter": "English Namibia",
     "code": "na",
     "emoji": "🇳🇦",
     "keyCode": "na-en"
   },
   {
-    "value": "French (New Caledonia)",
+    "lang": "French",
+    "country": "New Caledonia",
     "filter": "French New Caledonia",
     "code": "nc",
     "emoji": "🇳🇨",
     "keyCode": "nc-fr"
   },
   {
-    "value": "French (Niger)",
+    "lang": "French",
+    "country": "Niger",
     "filter": "French Niger",
     "code": "ne",
     "emoji": "🇳🇪",
     "keyCode": "ne-fr"
   },
   {
-    "value": "English (Norfolk Island)",
+    "lang": "English",
+    "country": "Norfolk Island",
     "filter": "English Norfolk Island",
     "code": "nf",
     "emoji": "🇳🇫",
     "keyCode": "nf-en"
   },
   {
-    "value": "English (Nigeria)",
+    "lang": "English",
+    "country": "Nigeria",
     "filter": "English Nigeria",
     "code": "ng",
     "emoji": "🇳🇬",
     "keyCode": "ng-en"
   },
   {
-    "value": "Spanish (Nicaragua)",
+    "lang": "Spanish",
+    "country": "Nicaragua",
     "filter": "Spanish Nicaragua",
     "code": "ni",
     "emoji": "🇳🇮",
     "keyCode": "ni-es"
   },
   {
-    "value": "Dutch (Netherlands)",
+    "lang": "Dutch",
+    "country": "Netherlands",
     "filter": "Dutch Netherlands",
     "code": "nl",
     "emoji": "🇳🇱",
     "keyCode": "nl-nl"
   },
   {
-    "value": "Norwegian Bokmål (Norway)",
+    "lang": "Norwegian Bokmål",
+    "country": "Norway",
     "filter": "Norwegian Bokmål Norway",
     "code": "no",
     "emoji": "🇳🇴",
     "keyCode": "no-nb"
   },
   {
-    "value": "Norwegian Nynorsk (Norway)",
+    "lang": "Norwegian Nynorsk",
+    "country": "Norway",
     "filter": "Norwegian Nynorsk Norway",
     "code": "no",
     "emoji": "🇳🇴",
     "keyCode": "no-nn"
   },
   {
-    "value": "Norwegian (Norway)",
+    "lang": "Norwegian",
+    "country": "Norway",
     "filter": "Norwegian Norway",
     "code": "no",
     "emoji": "🇳🇴",
     "keyCode": "no-no"
   },
   {
-    "value": "Nepali (Nepal)",
+    "lang": "Nepali",
+    "country": "Nepal",
     "filter": "Nepali Nepal",
     "code": "np",
     "emoji": "🇳🇵",
     "keyCode": "np-ne"
   },
   {
-    "value": "English (Nauru)",
+    "lang": "English",
+    "country": "Nauru",
     "filter": "English Nauru",
     "code": "nr",
     "emoji": "🇳🇷",
     "keyCode": "nr-en"
   },
   {
-    "value": "Nauruan (Nauru)",
+    "lang": "Nauruan",
+    "country": "Nauru",
     "filter": "Nauruan Nauru",
     "code": "nr",
     "emoji": "🇳🇷",
     "keyCode": "nr-na"
   },
   {
-    "value": "English (Niue)",
+    "lang": "English",
+    "country": "Niue",
     "filter": "English Niue",
     "code": "nu",
     "emoji": "🇳🇺",
     "keyCode": "nu-en"
   },
   {
-    "value": "English (New Zealand)",
+    "lang": "English",
+    "country": "New Zealand",
     "filter": "English New Zealand",
     "code": "nz",
     "emoji": "🇳🇿",
     "keyCode": "nz-en"
   },
   {
-    "value": "Maori (New Zealand)",
+    "lang": "Maori",
+    "country": "New Zealand",
     "filter": "Maori New Zealand",
     "code": "nz",
     "emoji": "🇳🇿",
     "keyCode": "nz-mi"
   },
   {
-    "value": "Arabic (Oman)",
+    "lang": "Arabic",
+    "country": "Oman",
     "filter": "Arabic Oman",
     "code": "om",
     "emoji": "🇴🇲",
     "keyCode": "om-ar"
   },
   {
-    "value": "Spanish (Panama)",
+    "lang": "Spanish",
+    "country": "Panama",
     "filter": "Spanish Panama",
     "code": "pa",
     "emoji": "🇵🇦",
     "keyCode": "pa-es"
   },
   {
-    "value": "Spanish (Peru)",
+    "lang": "Spanish",
+    "country": "Peru",
     "filter": "Spanish Peru",
     "code": "pe",
     "emoji": "🇵🇪",
     "keyCode": "pe-es"
   },
   {
-    "value": "French (French Polynesia)",
+    "lang": "French",
+    "country": "French Polynesia",
     "filter": "French French Polynesia",
     "code": "pf",
     "emoji": "🇵🇫",
     "keyCode": "pf-fr"
   },
   {
-    "value": "English (Papua New Guinea)",
+    "lang": "English",
+    "country": "Papua New Guinea",
     "filter": "English Papua New Guinea",
     "code": "pg",
     "emoji": "🇵🇬",
     "keyCode": "pg-en"
   },
   {
-    "value": "English (Philippines)",
+    "lang": "English",
+    "country": "Philippines",
     "filter": "English Philippines",
     "code": "ph",
     "emoji": "🇵🇭",
     "keyCode": "ph-en"
   },
   {
-    "value": "English (Pakistan)",
+    "lang": "English",
+    "country": "Pakistan",
     "filter": "English Pakistan",
     "code": "pk",
     "emoji": "🇵🇰",
     "keyCode": "pk-en"
   },
   {
-    "value": "Urdu (Pakistan)",
+    "lang": "Urdu",
+    "country": "Pakistan",
     "filter": "Urdu Pakistan",
     "code": "pk",
     "emoji": "🇵🇰",
     "keyCode": "pk-ur"
   },
   {
-    "value": "Polish (Poland)",
+    "lang": "Polish",
+    "country": "Poland",
     "filter": "Polish Poland",
     "code": "pl",
     "emoji": "🇵🇱",
     "keyCode": "pl-pl"
   },
   {
-    "value": "French (Saint Pierre and Miquelon)",
+    "lang": "French",
+    "country": "Saint Pierre and Miquelon",
     "filter": "French Saint Pierre and Miquelon",
     "code": "pm",
     "emoji": "🇵🇲",
     "keyCode": "pm-fr"
   },
   {
-    "value": "English (Pitcairn Islands)",
+    "lang": "English",
+    "country": "Pitcairn Islands",
     "filter": "English Pitcairn Islands",
     "code": "pn",
     "emoji": "🇵🇳",
     "keyCode": "pn-en"
   },
   {
-    "value": "English (Puerto Rico)",
+    "lang": "English",
+    "country": "Puerto Rico",
     "filter": "English Puerto Rico",
     "code": "pr",
     "emoji": "🇵🇷",
     "keyCode": "pr-en"
   },
   {
-    "value": "Spanish (Puerto Rico)",
+    "lang": "Spanish",
+    "country": "Puerto Rico",
     "filter": "Spanish Puerto Rico",
     "code": "pr",
     "emoji": "🇵🇷",
     "keyCode": "pr-es"
   },
   {
-    "value": "Arabic (Palestine)",
+    "lang": "Arabic",
+    "country": "Palestine",
     "filter": "Arabic Palestine",
     "code": "ps",
     "emoji": "🇵🇸",
     "keyCode": "ps-ar"
   },
   {
-    "value": "Portuguese (Portugal)",
+    "lang": "Portuguese",
+    "country": "Portugal",
     "filter": "Portuguese Portugal",
     "code": "pt",
     "emoji": "🇵🇹",
     "keyCode": "pt-pt"
   },
   {
-    "value": "English (Palau)",
+    "lang": "English",
+    "country": "Palau",
     "filter": "English Palau",
     "code": "pw",
     "emoji": "🇵🇼",
     "keyCode": "pw-en"
   },
   {
-    "value": "Spanish (Paraguay)",
+    "lang": "Spanish",
+    "country": "Paraguay",
     "filter": "Spanish Paraguay",
     "code": "py",
     "emoji": "🇵🇾",
     "keyCode": "py-es"
   },
   {
-    "value": "Guarani (Paraguay)",
+    "lang": "Guarani",
+    "country": "Paraguay",
     "filter": "Guarani Paraguay",
     "code": "py",
     "emoji": "🇵🇾",
     "keyCode": "py-gn"
   },
   {
-    "value": "Arabic (Qatar)",
+    "lang": "Arabic",
+    "country": "Qatar",
     "filter": "Arabic Qatar",
     "code": "qa",
     "emoji": "🇶🇦",
     "keyCode": "qa-ar"
   },
   {
-    "value": "French (Réunion)",
+    "lang": "French",
+    "country": "Réunion",
     "filter": "French Réunion",
     "code": "re",
     "emoji": "🇷🇪",
     "keyCode": "re-fr"
   },
   {
-    "value": "Romanian (Romania)",
+    "lang": "Romanian",
+    "country": "Romania",
     "filter": "Romanian Romania",
     "code": "ro",
     "emoji": "🇷🇴",
     "keyCode": "ro-ro"
   },
   {
-    "value": "Serbian (Serbia)",
+    "lang": "Serbian",
+    "country": "Serbia",
     "filter": "Serbian Serbia",
     "code": "rs",
     "emoji": "🇷🇸",
     "keyCode": "rs-sr"
   },
   {
-    "value": "Russian (Russia)",
+    "lang": "Russian",
+    "country": "Russia",
     "filter": "Russian Russia",
     "code": "ru",
     "emoji": "🇷🇺",
     "keyCode": "ru-ru"
   },
   {
-    "value": "English (Rwanda)",
+    "lang": "English",
+    "country": "Rwanda",
     "filter": "English Rwanda",
     "code": "rw",
     "emoji": "🇷🇼",
     "keyCode": "rw-en"
   },
   {
-    "value": "French (Rwanda)",
+    "lang": "French",
+    "country": "Rwanda",
     "filter": "French Rwanda",
     "code": "rw",
     "emoji": "🇷🇼",
     "keyCode": "rw-fr"
   },
   {
-    "value": "Rwandi (Rwanda)",
+    "lang": "Rwandi",
+    "country": "Rwanda",
     "filter": "Rwandi Rwanda",
     "code": "rw",
     "emoji": "🇷🇼",
     "keyCode": "rw-rw"
   },
   {
-    "value": "Arabic (Saudi Arabia)",
+    "lang": "Arabic",
+    "country": "Saudi Arabia",
     "filter": "Arabic Saudi Arabia",
     "code": "sa",
     "emoji": "🇸🇦",
     "keyCode": "sa-ar"
   },
   {
-    "value": "English (Solomon Islands)",
+    "lang": "English",
+    "country": "Solomon Islands",
     "filter": "English Solomon Islands",
     "code": "sb",
     "emoji": "🇸🇧",
     "keyCode": "sb-en"
   },
   {
-    "value": "English (Seychelles)",
+    "lang": "English",
+    "country": "Seychelles",
     "filter": "English Seychelles",
     "code": "sc",
     "emoji": "🇸🇨",
     "keyCode": "sc-en"
   },
   {
-    "value": "French (Seychelles)",
+    "lang": "French",
+    "country": "Seychelles",
     "filter": "French Seychelles",
     "code": "sc",
     "emoji": "🇸🇨",
     "keyCode": "sc-fr"
   },
   {
-    "value": "Arabic (Sudan)",
+    "lang": "Arabic",
+    "country": "Sudan",
     "filter": "Arabic Sudan",
     "code": "sd",
     "emoji": "🇸🇩",
     "keyCode": "sd-ar"
   },
   {
-    "value": "English (Sudan)",
+    "lang": "English",
+    "country": "Sudan",
     "filter": "English Sudan",
     "code": "sd",
     "emoji": "🇸🇩",
     "keyCode": "sd-en"
   },
   {
-    "value": "Swedish (Sweden)",
+    "lang": "Swedish",
+    "country": "Sweden",
     "filter": "Swedish Sweden",
     "code": "se",
     "emoji": "🇸🇪",
     "keyCode": "se-sv"
   },
   {
-    "value": "English (Singapore)",
+    "lang": "English",
+    "country": "Singapore",
     "filter": "English Singapore",
     "code": "sg",
     "emoji": "🇸🇬",
     "keyCode": "sg-en"
   },
   {
-    "value": "Malay (Singapore)",
+    "lang": "Malay",
+    "country": "Singapore",
     "filter": "Malay Singapore",
     "code": "sg",
     "emoji": "🇸🇬",
     "keyCode": "sg-ms"
   },
   {
-    "value": "Tamil (Singapore)",
+    "lang": "Tamil",
+    "country": "Singapore",
     "filter": "Tamil Singapore",
     "code": "sg",
     "emoji": "🇸🇬",
     "keyCode": "sg-ta"
   },
   {
-    "value": "Chinese (Singapore)",
+    "lang": "Chinese",
+    "country": "Singapore",
     "filter": "Chinese Singapore",
     "code": "sg",
     "emoji": "🇸🇬",
     "keyCode": "sg-zh"
   },
   {
-    "value": "English (Saint Helena)",
+    "lang": "English",
+    "country": "Saint Helena",
     "filter": "English Saint Helena",
     "code": "sh",
     "emoji": "🇸🇭",
     "keyCode": "sh-en"
   },
   {
-    "value": "Slovenian (Slovenia)",
+    "lang": "Slovenian",
+    "country": "Slovenia",
     "filter": "Slovenian Slovenia",
     "code": "si",
     "emoji": "🇸🇮",
     "keyCode": "si-sl"
   },
   {
-    "value": "Norwegian (Svalbard and Jan Mayen)",
+    "lang": "Norwegian",
+    "country": "Svalbard and Jan Mayen",
     "filter": "Norwegian Svalbard and Jan Mayen",
     "code": "sj",
     "emoji": "🇸🇯",
     "keyCode": "sj-no"
   },
   {
-    "value": "Slovak (Slovakia)",
+    "lang": "Slovak",
+    "country": "Slovakia",
     "filter": "Slovak Slovakia",
     "code": "sk",
     "emoji": "🇸🇰",
     "keyCode": "sk-sk"
   },
   {
-    "value": "English (Sierra Leone)",
+    "lang": "English",
+    "country": "Sierra Leone",
     "filter": "English Sierra Leone",
     "code": "sl",
     "emoji": "🇸🇱",
     "keyCode": "sl-en"
   },
   {
-    "value": "Italian (San Marino)",
+    "lang": "Italian",
+    "country": "San Marino",
     "filter": "Italian San Marino",
     "code": "sm",
     "emoji": "🇸🇲",
     "keyCode": "sm-it"
   },
   {
-    "value": "French (Senegal)",
+    "lang": "French",
+    "country": "Senegal",
     "filter": "French Senegal",
     "code": "sn",
     "emoji": "🇸🇳",
     "keyCode": "sn-fr"
   },
   {
-    "value": "Arabic (Somalia)",
+    "lang": "Arabic",
+    "country": "Somalia",
     "filter": "Arabic Somalia",
     "code": "so",
     "emoji": "🇸🇴",
     "keyCode": "so-ar"
   },
   {
-    "value": "Somalia (Somalia)",
+    "lang": "Somalia",
+    "country": "Somalia",
     "filter": "Somalia Somalia",
     "code": "so",
     "emoji": "🇸🇴",
     "keyCode": "so-so"
   },
   {
-    "value": "Dutch (Suriname)",
+    "lang": "Dutch",
+    "country": "Suriname",
     "filter": "Dutch Suriname",
     "code": "sr",
     "emoji": "🇸🇷",
     "keyCode": "sr-nl"
   },
   {
-    "value": "English (South Sudan)",
+    "lang": "English",
+    "country": "South Sudan",
     "filter": "English South Sudan",
     "code": "ss",
     "emoji": "🇸🇸",
     "keyCode": "ss-en"
   },
   {
-    "value": "Portuguese (São Tomé and Príncipe)",
+    "lang": "Portuguese",
+    "country": "São Tomé and Príncipe",
     "filter": "Portuguese São Tomé and Príncipe",
     "code": "st",
     "emoji": "🇸🇹",
     "keyCode": "st-pt"
   },
   {
-    "value": "Spanish (El Salvador)",
+    "lang": "Spanish",
+    "country": "El Salvador",
     "filter": "Spanish El Salvador",
     "code": "sv",
     "emoji": "🇸🇻",
     "keyCode": "sv-es"
   },
   {
-    "value": "English (Sint Maarten)",
+    "lang": "English",
+    "country": "Sint Maarten",
     "filter": "English Sint Maarten",
     "code": "sx",
     "emoji": "🇸🇽",
     "keyCode": "sx-en"
   },
   {
-    "value": "Dutch (Sint Maarten)",
+    "lang": "Dutch",
+    "country": "Sint Maarten",
     "filter": "Dutch Sint Maarten",
     "code": "sx",
     "emoji": "🇸🇽",
     "keyCode": "sx-nl"
   },
   {
-    "value": "Arabic (Syria)",
+    "lang": "Arabic",
+    "country": "Syria",
     "filter": "Arabic Syria",
     "code": "sy",
     "emoji": "🇸🇾",
     "keyCode": "sy-ar"
   },
   {
-    "value": "English (Swaziland)",
+    "lang": "English",
+    "country": "Swaziland",
     "filter": "English Swaziland",
     "code": "sz",
     "emoji": "🇸🇿",
     "keyCode": "sz-en"
   },
   {
-    "value": "Swati (Swaziland)",
+    "lang": "Swati",
+    "country": "Swaziland",
     "filter": "Swati Swaziland",
     "code": "sz",
     "emoji": "🇸🇿",
     "keyCode": "sz-ss"
   },
   {
-    "value": "English (Turks and Caicos Islands)",
+    "lang": "English",
+    "country": "Turks and Caicos Islands",
     "filter": "English Turks and Caicos Islands",
     "code": "tc",
     "emoji": "🇹🇨",
     "keyCode": "tc-en"
   },
   {
-    "value": "Arabic (Chad)",
+    "lang": "Arabic",
+    "country": "Chad",
     "filter": "Arabic Chad",
     "code": "td",
     "emoji": "🇹🇩",
     "keyCode": "td-ar"
   },
   {
-    "value": "French (Chad)",
+    "lang": "French",
+    "country": "Chad",
     "filter": "French Chad",
     "code": "td",
     "emoji": "🇹🇩",
     "keyCode": "td-fr"
   },
   {
-    "value": "French (French Southern Territories)",
+    "lang": "French",
+    "country": "French Southern Territories",
     "filter": "French French Southern Territories",
     "code": "tf",
     "emoji": "🇹🇫",
     "keyCode": "tf-fr"
   },
   {
-    "value": "French (Togo)",
+    "lang": "French",
+    "country": "Togo",
     "filter": "French Togo",
     "code": "tg",
     "emoji": "🇹🇬",
     "keyCode": "tg-fr"
   },
   {
-    "value": "Thai (Thailand)",
+    "lang": "Thai",
+    "country": "Thailand",
     "filter": "Thai Thailand",
     "code": "th",
     "emoji": "🇹🇭",
     "keyCode": "th-th"
   },
   {
-    "value": "Russian (Tajikistan)",
+    "lang": "Russian",
+    "country": "Tajikistan",
     "filter": "Russian Tajikistan",
     "code": "tj",
     "emoji": "🇹🇯",
     "keyCode": "tj-ru"
   },
   {
-    "value": "Tajik (Tajikistan)",
+    "lang": "Tajik",
+    "country": "Tajikistan",
     "filter": "Tajik Tajikistan",
     "code": "tj",
     "emoji": "🇹🇯",
     "keyCode": "tj-tg"
   },
   {
-    "value": "English (Tokelau)",
+    "lang": "English",
+    "country": "Tokelau",
     "filter": "English Tokelau",
     "code": "tk",
     "emoji": "🇹🇰",
     "keyCode": "tk-en"
   },
   {
-    "value": "Portuguese (East Timor)",
+    "lang": "Portuguese",
+    "country": "East Timor",
     "filter": "Portuguese East Timor",
     "code": "tl",
     "emoji": "🇹🇱",
     "keyCode": "tl-pt"
   },
   {
-    "value": "Russian (Turkmenistan)",
+    "lang": "Russian",
+    "country": "Turkmenistan",
     "filter": "Russian Turkmenistan",
     "code": "tm",
     "emoji": "🇹🇲",
     "keyCode": "tm-ru"
   },
   {
-    "value": "Turkmen (Turkmenistan)",
+    "lang": "Turkmen",
+    "country": "Turkmenistan",
     "filter": "Turkmen Turkmenistan",
     "code": "tm",
     "emoji": "🇹🇲",
     "keyCode": "tm-tk"
   },
   {
-    "value": "Arabic (Tunisia)",
+    "lang": "Arabic",
+    "country": "Tunisia",
     "filter": "Arabic Tunisia",
     "code": "tn",
     "emoji": "🇹🇳",
     "keyCode": "tn-ar"
   },
   {
-    "value": "English (Tonga)",
+    "lang": "English",
+    "country": "Tonga",
     "filter": "English Tonga",
     "code": "to",
     "emoji": "🇹🇴",
     "keyCode": "to-en"
   },
   {
-    "value": "Tonga (Tonga)",
+    "lang": "Tonga",
+    "country": "Tonga",
     "filter": "Tonga Tonga",
     "code": "to",
     "emoji": "🇹🇴",
     "keyCode": "to-to"
   },
   {
-    "value": "Turkish (Turkey)",
+    "lang": "Turkish",
+    "country": "Turkey",
     "filter": "Turkish Turkey",
     "code": "tr",
     "emoji": "🇹🇷",
     "keyCode": "tr-tr"
   },
   {
-    "value": "English (Trinidad and Tobago)",
+    "lang": "English",
+    "country": "Trinidad and Tobago",
     "filter": "English Trinidad and Tobago",
     "code": "tt",
     "emoji": "🇹🇹",
     "keyCode": "tt-en"
   },
   {
-    "value": "English (Tuvalu)",
+    "lang": "English",
+    "country": "Tuvalu",
     "filter": "English Tuvalu",
     "code": "tv",
     "emoji": "🇹🇻",
     "keyCode": "tv-en"
   },
   {
-    "value": "Chinese (Taiwan)",
+    "lang": "Chinese",
+    "country": "Taiwan",
     "filter": "Chinese Taiwan",
     "code": "tw",
     "emoji": "🇹🇼",
     "keyCode": "tw-zh"
   },
   {
-    "value": "English (Tanzania)",
+    "lang": "English",
+    "country": "Tanzania",
     "filter": "English Tanzania",
     "code": "tz",
     "emoji": "🇹🇿",
     "keyCode": "tz-en"
   },
   {
-    "value": "Swahili (Tanzania)",
+    "lang": "Swahili",
+    "country": "Tanzania",
     "filter": "Swahili Tanzania",
     "code": "tz",
     "emoji": "🇹🇿",
     "keyCode": "tz-sw"
   },
   {
-    "value": "Ukrainian (Ukraine)",
+    "lang": "Ukrainian",
+    "country": "Ukraine",
     "filter": "Ukrainian Ukraine",
     "code": "ua",
     "emoji": "🇺🇦",
     "keyCode": "ua-uk"
   },
   {
-    "value": "English (Uganda)",
+    "lang": "English",
+    "country": "Uganda",
     "filter": "English Uganda",
     "code": "ug",
     "emoji": "🇺🇬",
     "keyCode": "ug-en"
   },
   {
-    "value": "Swahili (Uganda)",
+    "lang": "Swahili",
+    "country": "Uganda",
     "filter": "Swahili Uganda",
     "code": "ug",
     "emoji": "🇺🇬",
     "keyCode": "ug-sw"
   },
   {
-    "value": "English (U.S. Minor Outlying Islands)",
+    "lang": "English",
+    "country": "U.S. Minor Outlying Islands",
     "filter": "English U.S. Minor Outlying Islands",
     "code": "um",
     "emoji": "🇺🇲",
     "keyCode": "um-en"
   },
   {
-    "value": "English (United States)",
+    "lang": "English",
+    "country": "United States",
     "filter": "English United States",
     "code": "us",
     "emoji": "🇺🇸",
     "keyCode": "us-en"
   },
   {
-    "value": "Spanish (Uruguay)",
+    "lang": "Spanish",
+    "country": "Uruguay",
     "filter": "Spanish Uruguay",
     "code": "uy",
     "emoji": "🇺🇾",
     "keyCode": "uy-es"
   },
   {
-    "value": "Russian (Uzbekistan)",
+    "lang": "Russian",
+    "country": "Uzbekistan",
     "filter": "Russian Uzbekistan",
     "code": "uz",
     "emoji": "🇺🇿",
     "keyCode": "uz-ru"
   },
   {
-    "value": "Uzbek (Uzbekistan)",
+    "lang": "Uzbek",
+    "country": "Uzbekistan",
     "filter": "Uzbek Uzbekistan",
     "code": "uz",
     "emoji": "🇺🇿",
     "keyCode": "uz-uz"
   },
   {
-    "value": "Italian (Vatican City)",
+    "lang": "Italian",
+    "country": "Vatican City",
     "filter": "Italian Vatican City",
     "code": "va",
     "emoji": "🇻🇦",
     "keyCode": "va-it"
   },
   {
-    "value": "Latin (Vatican City)",
+    "lang": "Latin",
+    "country": "Vatican City",
     "filter": "Latin Vatican City",
     "code": "va",
     "emoji": "🇻🇦",
     "keyCode": "va-la"
   },
   {
-    "value": "English (Saint Vincent and the Grenadines)",
+    "lang": "English",
+    "country": "Saint Vincent and the Grenadines",
     "filter": "English Saint Vincent and the Grenadines",
     "code": "vc",
     "emoji": "🇻🇨",
     "keyCode": "vc-en"
   },
   {
-    "value": "Spanish (Venezuela)",
+    "lang": "Spanish",
+    "country": "Venezuela",
     "filter": "Spanish Venezuela",
     "code": "ve",
     "emoji": "🇻🇪",
     "keyCode": "ve-es"
   },
   {
-    "value": "English (British Virgin Islands)",
+    "lang": "English",
+    "country": "British Virgin Islands",
     "filter": "English British Virgin Islands",
     "code": "vg",
     "emoji": "🇻🇬",
     "keyCode": "vg-en"
   },
   {
-    "value": "English (U.S. Virgin Islands)",
+    "lang": "English",
+    "country": "U.S. Virgin Islands",
     "filter": "English U.S. Virgin Islands",
     "code": "vi",
     "emoji": "🇻🇮",
     "keyCode": "vi-en"
   },
   {
-    "value": "Vietnamese (Vietnam)",
+    "lang": "Vietnamese",
+    "country": "Vietnam",
     "filter": "Vietnamese Vietnam",
     "code": "vn",
     "emoji": "🇻🇳",
     "keyCode": "vn-vi"
   },
   {
-    "value": "Bislama (Vanuatu)",
+    "lang": "Bislama",
+    "country": "Vanuatu",
     "filter": "Bislama Vanuatu",
     "code": "vu",
     "emoji": "🇻🇺",
     "keyCode": "vu-bi"
   },
   {
-    "value": "English (Vanuatu)",
+    "lang": "English",
+    "country": "Vanuatu",
     "filter": "English Vanuatu",
     "code": "vu",
     "emoji": "🇻🇺",
     "keyCode": "vu-en"
   },
   {
-    "value": "French (Vanuatu)",
+    "lang": "French",
+    "country": "Vanuatu",
     "filter": "French Vanuatu",
     "code": "vu",
     "emoji": "🇻🇺",
     "keyCode": "vu-fr"
   },
   {
-    "value": "French (Wallis and Futuna)",
+    "lang": "French",
+    "country": "Wallis and Futuna",
     "filter": "French Wallis and Futuna",
     "code": "wf",
     "emoji": "🇼🇫",
     "keyCode": "wf-fr"
   },
   {
-    "value": "English (Samoa)",
+    "lang": "English",
+    "country": "Samoa",
     "filter": "English Samoa",
     "code": "ws",
     "emoji": "🇼🇸",
     "keyCode": "ws-en"
   },
   {
-    "value": "Samoan (Samoa)",
+    "lang": "Samoan",
+    "country": "Samoa",
     "filter": "Samoan Samoa",
     "code": "ws",
     "emoji": "🇼🇸",
     "keyCode": "ws-sm"
   },
   {
-    "value": "Albanian (Kosovo)",
+    "lang": "Albanian",
+    "country": "Kosovo",
     "filter": "Albanian Kosovo",
     "code": "xk",
     "emoji": "🇽🇰",
     "keyCode": "xk-sq"
   },
   {
-    "value": "Serbian (Kosovo)",
+    "lang": "Serbian",
+    "country": "Kosovo",
     "filter": "Serbian Kosovo",
     "code": "xk",
     "emoji": "🇽🇰",
     "keyCode": "xk-sr"
   },
   {
-    "value": "Arabic (Yemen)",
+    "lang": "Arabic",
+    "country": "Yemen",
     "filter": "Arabic Yemen",
     "code": "ye",
     "emoji": "🇾🇪",
     "keyCode": "ye-ar"
   },
   {
-    "value": "French (Mayotte)",
+    "lang": "French",
+    "country": "Mayotte",
     "filter": "French Mayotte",
     "code": "yt",
     "emoji": "🇾🇹",
     "keyCode": "yt-fr"
   },
   {
-    "value": "Afrikaans (South Africa)",
+    "lang": "Afrikaans",
+    "country": "South Africa",
     "filter": "Afrikaans South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-af"
   },
   {
-    "value": "English (South Africa)",
+    "lang": "English",
+    "country": "South Africa",
     "filter": "English South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-en"
   },
   {
-    "value": "South Ndebele (South Africa)",
+    "lang": "South Ndebele",
+    "country": "South Africa",
     "filter": "South Ndebele South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-nr"
   },
   {
-    "value": "Swati (South Africa)",
+    "lang": "Swati",
+    "country": "South Africa",
     "filter": "Swati South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-ss"
   },
   {
-    "value": "Southern Sotho (South Africa)",
+    "lang": "Southern Sotho",
+    "country": "South Africa",
     "filter": "Southern Sotho South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-st"
   },
   {
-    "value": "Tswana (South Africa)",
+    "lang": "Tswana",
+    "country": "South Africa",
     "filter": "Tswana South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-tn"
   },
   {
-    "value": "Tsonga (South Africa)",
+    "lang": "Tsonga",
+    "country": "South Africa",
     "filter": "Tsonga South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-ts"
   },
   {
-    "value": "Venda (South Africa)",
+    "lang": "Venda",
+    "country": "South Africa",
     "filter": "Venda South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-ve"
   },
   {
-    "value": "Xhosa (South Africa)",
+    "lang": "Xhosa",
+    "country": "South Africa",
     "filter": "Xhosa South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-xh"
   },
   {
-    "value": "Zulu (South Africa)",
+    "lang": "Zulu",
+    "country": "South Africa",
     "filter": "Zulu South Africa",
     "code": "za",
     "emoji": "🇿🇦",
     "keyCode": "za-zu"
   },
   {
-    "value": "English (Zambia)",
+    "lang": "English",
+    "country": "Zambia",
     "filter": "English Zambia",
     "code": "zm",
     "emoji": "🇿🇲",
     "keyCode": "zm-en"
   },
   {
-    "value": "English (Zimbabwe)",
+    "lang": "English",
+    "country": "Zimbabwe",
     "filter": "English Zimbabwe",
     "code": "zw",
     "emoji": "🇿🇼",
     "keyCode": "zw-en"
   },
   {
-    "value": "North Ndebele (Zimbabwe)",
+    "lang": "North Ndebele",
+    "country": "Zimbabwe",
     "filter": "North Ndebele Zimbabwe",
     "code": "zw",
     "emoji": "🇿🇼",
     "keyCode": "zw-nd"
   },
   {
-    "value": "Shona (Zimbabwe)",
+    "lang": "Shona",
+    "country": "Zimbabwe",
     "filter": "Shona Zimbabwe",
     "code": "zw",
     "emoji": "🇿🇼",

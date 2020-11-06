@@ -15,7 +15,7 @@ export class GetLanguages {
   }
 
   private async loadLanguages(): Promise<LanguageModel[]> {
-    return await this.loadJson('src/data/languages.json');
+    return await this.loadJson('src/data/languages-formatted.json');
   }
 
   private async _getLanguages(): Promise<LanguageModel[]> {
