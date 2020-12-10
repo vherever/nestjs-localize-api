@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsOptional, Validate } from 'class-validator';
 import { LanguageValidatorObject } from '../../shared/validators/language-validator-object';
 
-export class CreateTranslationDTO {
-  @IsNotEmpty()
+export class UpdateTranslationDTO {
+  @IsOptional()
   @Validate(LanguageValidatorObject, {message: 'Unsupported translation locale key'})
   translations: string;
 
@@ -10,7 +10,10 @@ export class CreateTranslationDTO {
   assetCode: string;
 
   @IsOptional()
-  labels: string;
+  context: string;
+
+  @IsOptional()
+  tags: string;
 
   @IsOptional()
   notes: string;

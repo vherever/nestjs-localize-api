@@ -14,7 +14,6 @@ export class TranslationRO {
     this.translations = JSON.parse(translation.translations);
     this.assetCode = translation.assetCode;
     this.assetProjectCode = translation.assetProjectCode;
-    this.context = translation.context;
     this.notes = translation.notes;
     this.status = translation.status;
     this.projectId = translation.projectId;
@@ -30,7 +29,6 @@ export class TranslationRO {
   private translations: Translations;
   private assetCode: string;
   private assetProjectCode: string;
-  private context: string;
   private notes: string;
   private status: string;
   private projectId: number;

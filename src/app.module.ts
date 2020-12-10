@@ -11,6 +11,7 @@ import { TranslationModule } from './translation-item/translation.module';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { UserModule } from './user/user.module';
 import { SharedProjectModule } from './shared-project/shared-project.module';
+import { LabelModule } from './label/label.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { SharedProjectModule } from './shared-project/shared-project.module';
     TranslationModule,
     UserModule,
     SharedProjectModule,
+    LabelModule,
   ],
   controllers: [AppController],
   providers: [

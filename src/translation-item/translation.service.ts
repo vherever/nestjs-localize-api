@@ -10,6 +10,7 @@ import { ProjectEntity } from '../project/project.entity';
 
 import * as uuidv1 from 'uuid/v1';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
+import { UpdateTranslationDTO } from './dto/update-translation-settings.dto';
 
 @Injectable()
 export class TranslationService {
@@ -121,7 +122,8 @@ export class TranslationService {
   }
 
   async updateTranslation(
-    updateTranslationDTO: CreateTranslationDTO,
+    updateTranslationDTO: UpdateTranslationDTO,
+    isAssetSettings: boolean,
     user: UserEntity,
     projectUuid: string,
     translationUuid: string,
@@ -148,16 +150,28 @@ export class TranslationService {
       throw new NotFoundException(`Translation with id "${translationUuid}" not found.`);
     }
     try {
-      await this.projectRepository.update({ uuid: projectUuid }, {});
-      await this.translationRepository.update({ uuid: translationUuid }, {
-        assetCode: updateTranslationDTO.assetCode,
-        translations: updateTranslationDTO.translations,
-        assetProjectCode: `${projectUuid}-${updateTranslationDTO.assetCode}`,
-        userLastUpdatedId: user,
-      });
+      if (!isAssetSettings) {
+        await this.projectRepository.update({ uuid: projectUuid }, {});
+        await this.translationRepository.update({ uuid: translationUuid }, {
+          assetCode: updateTranslationDTO.assetCode,
+          translations: updateTranslationDTO.translations,
+          assetProjectCode: `${projectUuid}-${updateTranslationDTO.assetCode}`,
+          userLastUpdatedId: user,
+        });
+      } else {
+        await this.translationRepository.update({ uuid: translationUuid }, {
+          assetProjectCode: `${projectUuid}-${updateTranslationDTO.assetCode}`,
+          assetCode: updateTranslationDTO.assetCode,
+        });
+      }
     } catch (error) {
-      this.logger.error(`Failed to update translation for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateTranslationDTO)}.`, error.stack);
-      throw new InternalServerErrorException();
+      if (error.code === '23505') {
+        this.logger.error(`${error.detail}`);
+        throw new ConflictException(`${error.detail}`);
+      } else {
+        this.logger.error(`Failed to update translation for user "${user.email}", projectId: "${project.id}". Data: ${JSON.stringify(updateTranslationDTO)}.`, error.stack);
+        throw new InternalServerErrorException();
+      }
     }
 
     translation = await this.translationRepository.findOne({ where: { uuid: translationUuid, targetId: user.id }, relations: ['user', 'userLastUpdatedId'] });

@@ -13,6 +13,7 @@ import {
 import { UserEntity } from '../auth/user.entity';
 import { TranslationEntity } from '../translation-item/translation.entity';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
+import { LabelEntity } from '../label/label.entity';
 
 @Entity('project')
 export class ProjectEntity extends BaseEntity {
@@ -46,6 +47,9 @@ export class ProjectEntity extends BaseEntity {
 
   @OneToMany(type => TranslationEntity, translation => translation.project, { cascade: true })
   translations: TranslationEntity[];
+
+  @OneToMany(() => LabelEntity, label => label.project, { cascade: true })
+  labels: LabelEntity[];
 
   @Column()
   userId: number;

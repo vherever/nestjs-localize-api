@@ -4,9 +4,11 @@ import { ProjectEntity } from '../project.entity';
 import { RoleEnum } from '../../shared/enums/role.enum';
 import { SharedProjectEntity } from '../../shared-project/shared-project.entity';
 import { UserEntity } from '../../auth/user.entity';
+import { LabelEntity } from '../../label/label.entity';
 
 export class GetProjectResponse {
   constructor(project: ProjectEntity, role: RoleEnum, availableTranslationLocales?: string) {
+    console.log('project', project);
     this.id = project.id;
     this.uuid = project.uuid;
     this.title = project.title;
@@ -19,6 +21,7 @@ export class GetProjectResponse {
     this.sharedWith = project.shares;
     this.updated = project.updated;
     this.created = project.created;
+    this.labels = project.labels;
   }
   id: number;
   uuid: string;
@@ -33,6 +36,7 @@ export class GetProjectResponse {
   sharedWith: SharedWithInterface[];
   updated: Date;
   created: Date;
+  labels: LabelEntity[];
 }
 
 interface SharedWithInterface {

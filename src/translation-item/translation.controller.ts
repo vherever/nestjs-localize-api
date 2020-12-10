@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 // app imports
 import { TranslationService } from './translation.service';
@@ -6,6 +6,7 @@ import { GetUser } from '../auth/get-user.decorator';
 import { UserEntity } from '../auth/user.entity';
 import { CreateTranslationDTO } from './dto/create-translation.dto';
 import { TranslationRO } from './dto/translation-ro';
+import { UpdateTranslationDTO } from './dto/update-translation-settings.dto';
 
 @Controller('projects/:id')
 @UseGuards(AuthGuard())
@@ -47,13 +48,14 @@ export class TranslationController {
   @Put('translations/:translationId')
   @UsePipes(ValidationPipe)
   updateTranslation(
-    @Body() updateTranslationDTO: CreateTranslationDTO,
+    @Body() updateTranslationDTO: UpdateTranslationDTO,
+    @Query() query: { isAssetSettings: boolean },
     @Param('id') projectUuid: string,
     @Param('translationId') translationUuid: string,
     @GetUser() user: UserEntity,
   ): Promise<TranslationRO[]> {
     this.logger.verbose(`User "${user.email}" is updating translation. Data: ${JSON.stringify(updateTranslationDTO)}.`);
-    return this.translationItemService.updateTranslation(updateTranslationDTO, user, projectUuid, translationUuid);
+    return this.translationItemService.updateTranslation(updateTranslationDTO, JSON.parse(query.isAssetSettings.toString()), user, projectUuid, translationUuid);
   }
 
   @Delete('translations/:translationId')

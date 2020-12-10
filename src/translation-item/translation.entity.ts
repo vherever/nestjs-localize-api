@@ -31,9 +31,6 @@ export class TranslationEntity extends BaseEntity {
   assetProjectCode: string;
 
   @Column({ nullable: true })
-  context: string;
-
-  @Column({ nullable: true })
   labels: string;
 
   @Column({ nullable: true })

@@ -79,7 +79,7 @@ export class ProjectService extends SortingHelper {
     id: string,
     user: UserEntity,
   ): Promise<GetProjectResponse> {
-    const project = await this.projectRepository.findOne({ where: { uuid: id, userId: user.id }, relations: ['shares'] });
+    const project = await this.projectRepository.findOne({ where: { uuid: id, userId: user.id }, relations: ['shares', 'labels'] });
     const shared = await SharedProjectEntity.findOne({ where: { uuid: id, targetId: user.id }, relations: ['project'] });
 
     if (!project && !shared) {
