@@ -8,7 +8,6 @@ import { LabelEntity } from '../../label/label.entity';
 
 export class GetProjectResponse {
   constructor(project: ProjectEntity, role: RoleEnum, availableTranslationLocales?: string) {
-    console.log('project', project);
     this.id = project.id;
     this.uuid = project.uuid;
     this.title = project.title;
