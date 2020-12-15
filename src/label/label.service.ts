@@ -6,6 +6,7 @@ import { LabelEntity } from './label.entity';
 import { ProjectEntity } from '../project/project.entity';
 import { UserEntity } from '../auth/user.entity';
 import { CreateLabelDTO } from './dto/create-label.dto';
+import { GetLabelsResponse } from './dto/get-labels-response';
 import { GetLabelResponse } from './dto/get-label-response';
 
 @Injectable()
@@ -33,7 +34,7 @@ export class LabelService {
   public async getProjectLabels(
     user: UserEntity,
     projectUuid: string,
-  ): Promise<LabelEntity[]> {
+  ): Promise<any> {
     const project = await this.getProject(user, projectUuid, 'labels');
 
     if (!project) {
@@ -42,7 +43,7 @@ export class LabelService {
     }
 
     try {
-      return project.labels;
+      return new GetLabelsResponse(project.labels);
     } catch (error) {
       const message: string = 'Can not load labels.';
       this.logger.error(message);
@@ -83,7 +84,7 @@ export class LabelService {
     updateLabelDTO: CreateLabelDTO,
   ): Promise<any> {
     const project = await this.getProject(user, projectUuid, 'labels');
-    let label = project.labels.find((l) => l.uuid === labelUuid);
+    const label = project.labels.find((l) => l.uuid === labelUuid);
 
     if (!project) {
       const message: string = `Project with id "${projectUuid}" not found.`;
@@ -105,7 +106,8 @@ export class LabelService {
       throw new InternalServerErrorException(message);
     }
 
-    return this.labelRepository.findOne({ where: { uuid: labelUuid } });
+    const foundLabel = await this.labelRepository.findOne({ where: { uuid: labelUuid } });
+    return new GetLabelResponse(foundLabel);
   }
 
   public async removeLabel(

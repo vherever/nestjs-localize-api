@@ -33,7 +33,7 @@ export class TranslationRO {
   private status: string;
   private projectId: number;
   private authorId?: number;
-  private labels: string;
+  private labels: any;
   private author: string;
   private updatedBy: GetUserResponse;
 

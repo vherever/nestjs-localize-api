@@ -11,6 +11,7 @@ import { ProjectEntity } from '../project/project.entity';
 import * as uuidv1 from 'uuid/v1';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 import { UpdateTranslationDTO } from './dto/update-translation-settings.dto';
+import { LabelEntity } from '../label/label.entity';
 
 @Injectable()
 export class TranslationService {
@@ -19,6 +20,9 @@ export class TranslationService {
   constructor(
     @InjectRepository(TranslationEntity)
     private translationRepository: Repository<TranslationEntity>,
+
+    @InjectRepository(LabelEntity)
+    private labelRepository: Repository<LabelEntity>,
 
     @InjectRepository(ProjectEntity)
     private projectRepository: Repository<ProjectEntity>,

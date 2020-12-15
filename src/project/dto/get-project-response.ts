@@ -5,6 +5,7 @@ import { RoleEnum } from '../../shared/enums/role.enum';
 import { SharedProjectEntity } from '../../shared-project/shared-project.entity';
 import { UserEntity } from '../../auth/user.entity';
 import { LabelEntity } from '../../label/label.entity';
+import { GetLabelsResponse } from '../../label/dto/get-labels-response';
 
 export class GetProjectResponse {
   constructor(project: ProjectEntity, role: RoleEnum, availableTranslationLocales?: string) {
