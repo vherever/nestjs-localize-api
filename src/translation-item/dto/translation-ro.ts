@@ -18,7 +18,7 @@ export class TranslationRO {
     this.status = translation.status;
     this.projectId = translation.projectId;
     this.authorId = translation.userId;
-    this.labels = translation.labels;
+    // this.labels = translation.labels;
     this.author = this.getAuthorName(translation.user);
     this.updatedBy = translation.userLastUpdatedId ? new GetUserResponse(translation.userLastUpdatedId) : null;
   }

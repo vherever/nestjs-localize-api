@@ -4,12 +4,14 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
-  ManyToOne,
+  ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { ProjectEntity } from '../project/project.entity';
 import { UserEntity } from '../auth/user.entity';
+import { TranslationLabelEntity } from '../translation-label/translation-label.entity';
+import { LabelEntity } from '../label/label.entity';
 
 @Entity('translation')
 export class TranslationEntity extends BaseEntity {
@@ -40,9 +42,6 @@ export class TranslationEntity extends BaseEntity {
   assetProjectCode: string;
 
   @Column({ nullable: true })
-  labels: string;
-
-  @Column({ nullable: true })
   notes: string;
 
   @Column({ nullable: true })
@@ -62,4 +61,7 @@ export class TranslationEntity extends BaseEntity {
 
   @ManyToOne(type => UserEntity, user => user.id)
   userLastUpdatedId: UserEntity;
+
+  // @OneToMany(() => TranslationLabelEntity, sharedLabel => sharedLabel.targetTranslation)
+  // translationLabels: LabelEntity[];
 }

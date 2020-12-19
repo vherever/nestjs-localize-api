@@ -8,7 +8,6 @@ import { TranslationRO } from './dto/translation-ro';
 import { Repository } from 'typeorm';
 import { ProjectEntity } from '../project/project.entity';
 
-import * as uuidv1 from 'uuid/v1';
 import { SharedProjectEntity } from '../shared-project/shared-project.entity';
 import { UpdateTranslationDTO } from './dto/update-translation-settings.dto';
 import { LabelEntity } from '../label/label.entity';
@@ -73,6 +72,7 @@ export class TranslationService {
     }
 
     if (project) {
+      // const translations = await this.translationRepository.find({ where: { projectId: project.id }, relations: ['labelsSharedWithYou'] });
       translations = project.translations;
       defaultLocale = project.defaultLocale;
     }

@@ -59,6 +59,7 @@ export class LabelService {
     const project = await this.getProject(user, projectUuid, 'labels');
     const label: LabelEntity = await this.labelRepository.create({
       project,
+      projectUuid,
       ...createLabelDTO,
     });
 
@@ -99,14 +100,17 @@ export class LabelService {
     }
 
     try {
-      await this.labelRepository.update({ uuid: labelUuid }, updateLabelDTO);
+      const found = await this.labelRepository.findOne({ where: { projectUuid, uuid: labelUuid }, relations: ['shares'] });
+      console.log('found12', found);
+      await this.labelRepository.update({ projectUuid, uuid: labelUuid }, updateLabelDTO);
+      await this.labelRepository.save(found);
     } catch (error) {
       const message: string = `Failed to update label for project: ${projectUuid}. Data: ${JSON.stringify(updateLabelDTO)}`;
       this.logger.error(message, error.stack);
       throw new InternalServerErrorException(message);
     }
 
-    const foundLabel = await this.labelRepository.findOne({ where: { uuid: labelUuid } });
+    const foundLabel = await this.labelRepository.findOne({ where: { projectUuid, uuid: labelUuid }, relations: ['shares'] });
     return new GetLabelResponse(foundLabel);
   }
 
