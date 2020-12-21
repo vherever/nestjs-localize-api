@@ -4,6 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { TranslationLabelService } from './translation-label.service';
 import { GetUser } from '../auth/get-user.decorator';
 import { UserEntity } from '../auth/user.entity';
+import { GetLabelsResponse } from '../label/dto/get-labels-response';
 
 @Controller('/projects/:projectUuid/translations/:translationUuid/labels')
 @UseGuards(AuthGuard())
@@ -21,7 +22,7 @@ export class TranslationLabelController {
     @GetUser() user: UserEntity,
     @Param('projectUuid') projectUuid: string,
     @Param('translationUuid') translationUuid: string,
-  ): Promise<any> {
+  ): Promise<GetLabelsResponse> {
     return this.translationSharedLabelService.GetTranslationLabels(user, projectUuid, translationUuid);
   }
 
@@ -31,8 +32,8 @@ export class TranslationLabelController {
     @GetUser() user: UserEntity,
     @Param('projectUuid') projectUuid: string,
     @Param('translationUuid') translationUuid: string,
-    @Body() body: { labelsIds: string },
+    @Body() body: { tagsUuids: string },
   ): Promise<any> {
-    return this.translationSharedLabelService.AddLabelsToTranslation(user, projectUuid, translationUuid, body.labelsIds);
+    return this.translationSharedLabelService.AddLabelsToTranslation(user, projectUuid, translationUuid, body.tagsUuids);
   }
 }

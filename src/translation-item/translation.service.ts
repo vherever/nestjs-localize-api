@@ -72,7 +72,7 @@ export class TranslationService {
     }
 
     if (project) {
-      // const translations = await this.translationRepository.find({ where: { projectId: project.id }, relations: ['labelsSharedWithYou'] });
+      // translations = await this.translationRepository.find({ where: { projectId: project.id }, relations: ['user'] });
       translations = project.translations;
       defaultLocale = project.defaultLocale;
     }

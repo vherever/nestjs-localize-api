@@ -7,6 +7,7 @@ import { UserEntity } from '../auth/user.entity';
 import { ProjectEntity } from '../project/project.entity';
 import { TranslationEntity } from '../translation-item/translation.entity';
 import { TranslationLabelEntity } from './translation-label.entity';
+import { GetLabelsResponse } from '../label/dto/get-labels-response';
 
 @Injectable()
 export class TranslationLabelService {
@@ -28,7 +29,7 @@ export class TranslationLabelService {
     user: UserEntity,
     projectUuid: string,
     translationUuid: string,
-  ): Promise<any> {
+  ): Promise<GetLabelsResponse> {
     const project = await this.projectRepository.findOne({ where: { uuid: projectUuid }, relations: ['translations'] });
     const translation = await this.translationRepository.findOne({ where: { uuid: translationUuid, projectId: project.id } });
 
@@ -45,14 +46,14 @@ export class TranslationLabelService {
 
     const sharedLabels = await this.translationSharedLabelRepository.find({ where: { projectUuid, translationUuid } });
     const labelsIdsArr = await sharedLabels.map((sharedLabel) => sharedLabel.labelId);
-    return await this.labelRepository.findByIds(labelsIdsArr);
+    return new GetLabelsResponse(await this.labelRepository.findByIds(labelsIdsArr));
   }
 
   public async AddLabelsToTranslation(
     user: UserEntity,
     projectUuid: string,
     translationUuid: string,
-    labelIds: string,
+    labelsUuids: string,
   ): Promise<any> {
     const project = await this.projectRepository.findOne({ where: { uuid: projectUuid }, relations: ['translations'] });
     const translation = await this.translationRepository.findOne({ where: { uuid: translationUuid, projectId: project.id } });
@@ -71,7 +72,7 @@ export class TranslationLabelService {
     }
 
     const possibleLabelsToAdd = await labelsRelatedToProject.reduce((acc: any[], label: LabelEntity) => {
-      labelIds.split(',').forEach((labelUuid: string) => {
+      labelsUuids.split(',').forEach((labelUuid: string) => {
         if (label.uuid === labelUuid) {
           const translationLabel = new TranslationLabelEntity();
           translationLabel.translationUuid = translationUuid;
@@ -86,7 +87,11 @@ export class TranslationLabelService {
     }, []);
 
     try {
+      const translationLabel = (await this.translationSharedLabelRepository.find({ where: { projectUuid, translationUuid } }));
+      await this.translationSharedLabelRepository.remove(translationLabel);
       await this.translationSharedLabelRepository.save(possibleLabelsToAdd);
+      const possibleLabelsToAddIds = possibleLabelsToAdd.map((l) => l.labelId);
+      return await this.labelRepository.findByIds(possibleLabelsToAddIds);
     } catch (error) {
       throw new InternalServerErrorException();
     }
