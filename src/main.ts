@@ -7,6 +7,7 @@ import { Logger } from '@nestjs/common';
 
 import { AppModule } from './app.module';
 import * as config from 'config';
+import * as path from 'path';
 
 async function bootstrap() {
   const serverConfig = config.get('server');

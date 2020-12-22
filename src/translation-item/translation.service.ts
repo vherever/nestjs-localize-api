@@ -104,6 +104,7 @@ export class TranslationService {
     const translation: TranslationEntity = await this.translationRepository.create({
       project: projectToUse,
       ...createTranslationDTO,
+      projectUuid: project.uuid,
       user,
     });
 

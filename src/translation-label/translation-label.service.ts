@@ -11,7 +11,7 @@ import { GetLabelsResponse } from '../label/dto/get-labels-response';
 
 @Injectable()
 export class TranslationLabelService {
-  private logger = new Logger('TranslationSharedLabelService');
+  private logger = new Logger('TranslationLabelService');
 
   constructor(
     @InjectRepository(LabelEntity)
@@ -21,7 +21,7 @@ export class TranslationLabelService {
     @InjectRepository(TranslationEntity)
     private translationRepository: Repository<TranslationEntity>,
     @InjectRepository(TranslationLabelEntity)
-    private translationSharedLabelRepository: Repository<TranslationLabelEntity>,
+    private translationLabelRepository: Repository<TranslationLabelEntity>,
   ) {
   }
 
@@ -44,7 +44,7 @@ export class TranslationLabelService {
       throw new NotFoundException(message);
     }
 
-    const sharedLabels = await this.translationSharedLabelRepository.find({ where: { projectUuid, translationUuid } });
+    const sharedLabels = await this.translationLabelRepository.find({ where: { projectUuid, translationUuid } });
     const labelsIdsArr = await sharedLabels.map((sharedLabel) => sharedLabel.labelId);
     return new GetLabelsResponse(await this.labelRepository.findByIds(labelsIdsArr));
   }
@@ -87,9 +87,9 @@ export class TranslationLabelService {
     }, []);
 
     try {
-      const translationLabel = (await this.translationSharedLabelRepository.find({ where: { projectUuid, translationUuid } }));
-      await this.translationSharedLabelRepository.remove(translationLabel);
-      await this.translationSharedLabelRepository.save(possibleLabelsToAdd);
+      const translationLabel = (await this.translationLabelRepository.find({ where: { projectUuid, translationUuid } }));
+      await this.translationLabelRepository.remove(translationLabel);
+      await this.translationLabelRepository.save(possibleLabelsToAdd);
       const possibleLabelsToAddIds = possibleLabelsToAdd.map((l) => l.labelId);
       return await this.labelRepository.findByIds(possibleLabelsToAddIds);
     } catch (error) {

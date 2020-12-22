@@ -9,10 +9,10 @@ import { GetLabelsResponse } from '../label/dto/get-labels-response';
 @Controller('/projects/:projectUuid/translations/:translationUuid/labels')
 @UseGuards(AuthGuard())
 export class TranslationLabelController {
-  private logger = new Logger('TranslationSharedLabelController');
+  private logger = new Logger('TranslationLabelController');
 
   constructor(
-    private translationSharedLabelService: TranslationLabelService,
+    private translationLabelService: TranslationLabelService,
   ) {
   }
 
@@ -23,7 +23,7 @@ export class TranslationLabelController {
     @Param('projectUuid') projectUuid: string,
     @Param('translationUuid') translationUuid: string,
   ): Promise<GetLabelsResponse> {
-    return this.translationSharedLabelService.GetTranslationLabels(user, projectUuid, translationUuid);
+    return this.translationLabelService.GetTranslationLabels(user, projectUuid, translationUuid);
   }
 
   @Post()
@@ -34,6 +34,6 @@ export class TranslationLabelController {
     @Param('translationUuid') translationUuid: string,
     @Body() body: { tagsUuids: string },
   ): Promise<any> {
-    return this.translationSharedLabelService.AddLabelsToTranslation(user, projectUuid, translationUuid, body.tagsUuids);
+    return this.translationLabelService.AddLabelsToTranslation(user, projectUuid, translationUuid, body.tagsUuids);
   }
 }

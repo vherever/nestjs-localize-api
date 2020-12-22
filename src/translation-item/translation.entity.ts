@@ -59,6 +59,9 @@ export class TranslationEntity extends BaseEntity {
   @Column()
   projectId: number;
 
+  @Column({ type: 'uuid' })
+  projectUuid: string;
+
   @ManyToOne(type => UserEntity, user => user.id)
   userLastUpdatedId: UserEntity;
 
