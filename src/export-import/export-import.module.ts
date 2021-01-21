@@ -5,10 +5,11 @@ import { AuthModule } from '../auth/auth.module';
 import { ExportImportController } from './export-import.controller';
 import { ExportImportService } from './export-import.service';
 import { TranslationEntity } from '../translation-item/translation.entity';
+import { ProjectEntity } from '../project/project.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([TranslationEntity]),
+    TypeOrmModule.forFeature([ProjectEntity, TranslationEntity]),
     AuthModule,
   ],
   controllers: [ExportImportController],
