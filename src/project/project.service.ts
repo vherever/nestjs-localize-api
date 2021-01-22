@@ -76,25 +76,37 @@ export class ProjectService extends SortingHelper {
   }
 
   async getProjectById(
-    id: string,
+    projectUuid: string,
     user: UserEntity,
   ): Promise<GetProjectResponse> {
-    const project = await this.projectRepository.findOne({ where: { uuid: id, userId: user.id }, relations: ['shares', 'labels'] });
-    const shared = await SharedProjectEntity.findOne({ where: { uuid: id, targetId: user.id }, relations: ['project'] });
+    const project = await this.projectRepository
+      .findOne({ where: { uuid: projectUuid, userId: user.id }, relations: ['shares', 'labels'] });
+
+    const shared = await SharedProjectEntity
+      .findOne({ where: { projectUuid, targetId: user.id }, relations: ['project'] });
 
     if (!project && !shared) {
-      throw new NotFoundException(`Project with ID "${id}" not found.`);
+      throw new NotFoundException(`Project with ID "${projectUuid}" not found.`);
     }
 
     let projectsAndUsersBelongsToProject;
 
     if (shared) {
-      const projectShared = await this.projectRepository.findOne({ where: { id: shared.projectId }, relations: ['shares'] });
-      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(projectShared.shares, user.id), availableTranslationLocales: shared.availableTranslationLocales, isShared: true}, new GetProjectResponse(projectShared, shared.role));
+      const projectShared = await this.projectRepository
+        .findOne({ where: { id: shared.projectId }, relations: ['shares'] });
+
+      projectsAndUsersBelongsToProject = await Object.assign({
+        sharedUsers: await this.getSharedUsers(projectShared.shares, user.id),
+        availableTranslationLocales: shared.availableTranslationLocales,
+        isShared: true,
+      }, new GetProjectResponse(projectShared, shared.role));
     }
 
     if (project) {
-      projectsAndUsersBelongsToProject = await Object.assign({sharedUsers: await this.getSharedUsers(project.shares, user.id)}, new GetProjectResponse(project, RoleEnum.ADMINISTRATOR));
+      projectsAndUsersBelongsToProject = await Object.assign({
+        sharedUsers: await this.getSharedUsers(project.shares, user.id),
+        availableTranslationLocales: project.translationsLocales || '',
+      }, new GetProjectResponse(project, RoleEnum.ADMINISTRATOR));
     }
 
     return await projectsAndUsersBelongsToProject;

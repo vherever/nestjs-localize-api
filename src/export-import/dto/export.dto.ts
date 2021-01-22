@@ -2,8 +2,8 @@ import { IsOptional } from 'class-validator';
 
 export class ExportDTO {
   @IsOptional()
-  type: string;
+  t: string; // type (json | php)
 
   @IsOptional()
-  lang: string;
+  l: string; // languages
 }

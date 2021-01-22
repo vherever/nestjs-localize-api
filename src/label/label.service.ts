@@ -24,7 +24,7 @@ export class LabelService {
   private getProject(user: UserEntity, projectUuid: string, relations?: string): Promise<ProjectEntity> {
     return this.projectRepository.findOne({
       where: {
-        userId: user.id,
+        // userId: user.id,
         uuid: projectUuid,
       },
       relations: [relations],
@@ -36,6 +36,7 @@ export class LabelService {
     projectUuid: string,
   ): Promise<any> {
     const project = await this.getProject(user, projectUuid, 'labels');
+    console.log('project1231', project);
 
     if (!project) {
       this.logger.error(`Project with id "${projectUuid}" not found.`);

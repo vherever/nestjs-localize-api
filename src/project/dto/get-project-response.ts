@@ -2,19 +2,17 @@ import * as moment from 'moment';
 // app imports
 import { ProjectEntity } from '../project.entity';
 import { RoleEnum } from '../../shared/enums/role.enum';
-import { SharedProjectEntity } from '../../shared-project/shared-project.entity';
 import { UserEntity } from '../../auth/user.entity';
 import { LabelEntity } from '../../label/label.entity';
-import { GetLabelsResponse } from '../../label/dto/get-labels-response';
 
 export class GetProjectResponse {
-  constructor(project: ProjectEntity, role: RoleEnum, availableTranslationLocales?: string) {
+  constructor(project: ProjectEntity, role: RoleEnum) {
     this.id = project.id;
     this.uuid = project.uuid;
     this.title = project.title;
     this.description = project.description;
     this.defaultLocale = project.defaultLocale;
-    this.translationsLocales = project.translationsLocales ? project.translationsLocales : '';
+    this.translationsLocales = project.translationsLocales || '';
     this.ownerId = project.ownerId;
     this.latestUpdatedAtFormatted = moment(project.updated).fromNow();
     this.role = role;
@@ -29,7 +27,6 @@ export class GetProjectResponse {
   description: string;
   defaultLocale: string;
   translationsLocales: string;
-  availableTranslationLocales?: string;
   ownerId: number;
   latestUpdatedAtFormatted: string;
   role: string;

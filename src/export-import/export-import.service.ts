@@ -25,9 +25,10 @@ export class ExportImportService {
     queryDTO: ExportDTO,
     res: any,
   ): Promise<any> {
-    const lang = queryDTO.lang || 'gb-en';
-    const project = await this.projectRepository.findOne({ where: { projectUuid } });
+    const languages = queryDTO.l || 'gb-en';
+    console.log('languages', languages);
+    // const project = await this.projectRepository.findOne({ where: { projectUuid } });
     const foundAllTranslations = await this.translationRepository.find({ where: { projectUuid } });
-    await FileSaver.saveFile(foundAllTranslations, res, project.translationsLocales, lang);
+    await FileSaver.saveFile(foundAllTranslations, res, languages);
   }
 }
