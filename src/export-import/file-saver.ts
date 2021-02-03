@@ -1,19 +1,21 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { InternalServerErrorException } from '@nestjs/common';
 
 const util = require('util');
 const admZip = require('adm-zip');
 const contentDisposition = require('content-disposition');
-
 const readdir = util.promisify(fs.readdir);
 const folderPath = path.join(__dirname, '..', '..', 'export');
-const zip = new admZip();
 
 export class FileSaver {
   public static async saveFile(
     dataset: any[],
     res: any,
     languagesToTranslate: string): Promise<any> {
+    if (!languagesToTranslate) {
+      throw new InternalServerErrorException('No languages to translate selected. Please select at least one language.');
+    }
     await FileSaver.getDatasetByLanguage(dataset, res, languagesToTranslate);
   }
 
@@ -26,6 +28,7 @@ export class FileSaver {
     const archiveName = 'assets-json.zip';
 
     if (languagesArr.length > 1) {
+      const zip = new admZip();
       for (const lang of languagesArr) {
         const fileDataByLanguage = this.getFileDataByLanguage(dataset, lang);
 
@@ -87,7 +90,8 @@ export class FileSaver {
   private static getFileDataByLanguage(dataset: any[], lang: string): any {
     return dataset.reduce((acc: any, curr) => {
       const emptyObj = {};
-      emptyObj[curr.assetCode] = JSON.parse(curr.translations)[lang];
+      const translationValue = JSON.parse(curr.translations)[lang];
+      emptyObj[curr.assetCode] = translationValue ? translationValue : '';
       acc = { ...acc, ...emptyObj };
       return acc;
     }, {});
