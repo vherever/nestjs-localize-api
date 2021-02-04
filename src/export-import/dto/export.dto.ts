@@ -1,9 +1,12 @@
-import { IsOptional } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class ExportDTO {
-  @IsOptional()
-  t: string; // type (json | php)
+  @IsNotEmpty()
+  f: string; // file format (json | php)
 
-  @IsOptional()
+  @IsNotEmpty()
+  t: string; // asset type
+
+  @IsNotEmpty()
   l: string; // languages
 }

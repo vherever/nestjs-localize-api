@@ -25,8 +25,13 @@ export class ExportImportService {
     queryDTO: ExportDTO,
     res: any,
   ): Promise<any> {
-    // const project = await this.projectRepository.findOne({ where: { projectUuid } });
-    const foundAllTranslations = await this.translationRepository.find({ where: { projectUuid } });
-    await FileSaver.saveFile(foundAllTranslations, res, queryDTO.l);
+    const foundAllTranslations: Array<{assetCode: string, translations: string}> = (await this.translationRepository.find({ where: { projectUuid } }))
+      .map((translationEntity) => {
+        return {
+          assetCode: translationEntity.assetCode,
+          translations: translationEntity.translations,
+        };
+      });
+    await FileSaver.saveFile(foundAllTranslations, res, queryDTO);
   }
 }
