@@ -36,7 +36,6 @@ export class LabelService {
     projectUuid: string,
   ): Promise<any> {
     const project = await this.getProject(user, projectUuid, 'labels');
-    console.log('project1231', project);
 
     if (!project) {
       this.logger.error(`Project with id "${projectUuid}" not found.`);

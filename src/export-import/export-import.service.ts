@@ -7,6 +7,7 @@ import { UserEntity } from '../auth/user.entity';
 import { ExportDTO } from './dto/export.dto';
 import { FileSaver } from './file-saver';
 import { ProjectEntity } from '../project/project.entity';
+import { TranslationModel } from './models/translation.model';
 
 @Injectable()
 export class ExportImportService {
@@ -25,7 +26,7 @@ export class ExportImportService {
     queryDTO: ExportDTO,
     res: any,
   ): Promise<any> {
-    const foundAllTranslations: Array<{assetCode: string, translations: string}> = (await this.translationRepository.find({ where: { projectUuid } }))
+    const foundAllTranslations: TranslationModel[] = (await this.translationRepository.find({ where: { projectUuid } }))
       .map((translationEntity) => {
         return {
           assetCode: translationEntity.assetCode,

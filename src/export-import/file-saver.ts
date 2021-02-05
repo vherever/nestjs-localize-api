@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { InternalServerErrorException } from '@nestjs/common';
 import { ExportDTO } from './dto/export.dto';
+import { TranslationModel } from './models/translation.model';
 
 const util = require('util');
 const admZip = require('adm-zip');
@@ -12,7 +13,7 @@ const folderPath = path.join(__dirname, '..', '..', 'export');
 
 export class FileSaver {
   public static async saveFile(
-    dataset: Array<{ assetCode: string, translations: string }>,
+    dataset: TranslationModel[],
     res: any,
     queryDTO: ExportDTO,
   ): Promise<any> {
@@ -35,7 +36,7 @@ export class FileSaver {
   }
 
   private static async getDatasetByLanguage(
-    dataset: Array<{ assetCode: string, translations: string }>,
+    dataset: TranslationModel[],
     languagesToTranslate: string,
     fileFormat: string,
     assetType: string,
@@ -44,19 +45,31 @@ export class FileSaver {
     res.set('Access-Control-Expose-Headers', 'Content-Disposition');
     const languagesArr = languagesToTranslate.split(',');
 
-    // switch (fileFormat) {
-    //   case 'json':
-    //     return ;
-    //   case 'php':
-    //     return ;
-    // }
+    if (fileFormat === 'json' && assetType === 'multi_language_nesting') {
+      res.set('Content-Type', 'application/json');
+      res.set('Content-Disposition', contentDisposition(`json-multi-language.${fileFormat}`));
+
+      const dataJSON = languagesArr.reduce((acc, lang) => {
+        acc[lang] = this.getAssetDataByLanguageAndFileType(dataset, lang, fileFormat);
+        return acc;
+      }, {});
+
+      const filepath = path.join(folderPath, `json-multi-language.${fileFormat}`);
+      fs.writeFileSync(`${filepath}`, JSON.stringify(dataJSON));
+
+      const file = await this.getFileFromFilePath(filepath);
+      res.set('Content-Length', file.length);
+      res.send(file);
+
+      await this.clearFiles(folderPath);
+      return false;
+    }
 
     if (languagesArr.length > 1) {
       const archiveName = `assets-${fileFormat}.zip`;
       const zip = new admZip();
       for (const lang of languagesArr) {
-        const fileDataByLanguage = this.getAssetDataByLanguageAndFileType(dataset, lang);
-
+        const fileDataByLanguage = this.getAssetDataByLanguageAndFileType(dataset, lang, fileFormat);
         const filepath = path.join(folderPath, `${lang}.${fileFormat}`);
 
         fs.writeFileSync(`${filepath}`, JSON.stringify(fileDataByLanguage));
@@ -73,22 +86,17 @@ export class FileSaver {
       await this.clearFiles(folderPath);
     } else {
       const lang = languagesArr[0];
-      const fileDataByLanguage = this.getAssetDataByLanguageAndFileType(dataset, lang);
 
-      const filepath = path.join(folderPath, `${lang}.${fileFormat}`);
-      fs.writeFileSync(`${filepath}`, JSON.stringify(fileDataByLanguage));
-
+      res.set('Content-Type', 'application/json');
       res.set('Content-Disposition', contentDisposition(`${lang}.${fileFormat}`));
 
-      const file = await new Promise<Buffer>((resolve, reject) => {
-        fs.readFile(filepath, {}, (err, data) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(data);
-          }
-        });
-      });
+      const fileDataByLanguage = this.getAssetDataByLanguageAndFileType(dataset, lang, fileFormat);
+      const filepath = path.join(folderPath, `${lang}.${fileFormat}`);
+
+      fs.writeFileSync(`${filepath}`, JSON.stringify(fileDataByLanguage));
+
+      const file = await this.getFileFromFilePath(filepath);
+      res.set('Content-Length', file.length);
       res.send(file);
 
       await this.clearFiles(folderPath);
@@ -109,13 +117,36 @@ export class FileSaver {
     }
   }
 
-  private static getAssetDataByLanguageAndFileType(dataset: Array<{ assetCode: string, translations: string }>, lang: string): any {
+  private static getAssetDataByLanguageAndFileType(
+    dataset: TranslationModel[],
+    lang: string,
+    fileFormat: string,
+  ): any {
     return dataset.reduce((acc: any, curr) => {
       const emptyObj = {};
       const translationValue = JSON.parse(curr.translations)[lang];
-      emptyObj[curr.assetCode] = translationValue ? translationValue : '';
-      acc = { ...acc, ...emptyObj };
-      return acc;
+
+      switch (fileFormat) {
+        case 'json':
+          emptyObj[curr.assetCode] = translationValue ? translationValue : '';
+          acc = { ...acc, ...emptyObj };
+          return acc;
+        case 'php':
+          // TODO: continue...
+          return;
+      }
     }, {});
+  }
+
+  private static async getFileFromFilePath(filepath: string): Promise<any> {
+    return await new Promise<Buffer>((resolve, reject) => {
+      fs.readFile(filepath, {}, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    });
   }
 }
